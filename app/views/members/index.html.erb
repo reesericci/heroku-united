@@ -1,0 +1,40 @@
+<div style="display: inline-flex; gap: 1rem">
+  <h2><%= Config.organization %> —</h2>
+  <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
+    <a href="/" style="text-decoration: underline">Home</a>
+    <a href="/broadcasts">Broadcasts</a>
+    <a href="/">API</a>
+    <a href="/configuration">Config</a>
+  </nav>
+</div>
+<h1>Here's the members:</h1>
+<%= turbo_stream_from "members" %>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Expires on</th>
+    <th>Member since</th>
+    <th>Status</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @members.each do |m| %>
+      <%= turbo_stream_from m %>
+      <tr>
+        <td><%= m.name %></td>
+        <td><%= m.username %></td>  
+        <td><%= m.email %></td>
+        <td><%= local_relative_time(m.expires_at, type: "time-or-date") %></td>
+        <td><%= local_relative_time(m.created_at, type: "time-or-date") %></td>
+        <td><span class="<%= m.status %>-chip"><%= m.status %></span></td>
+        <td>
+          <%= link_to edit_member_path(m) do %>
+            <button>Edit</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

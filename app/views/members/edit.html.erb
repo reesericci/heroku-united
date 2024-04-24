@@ -1,0 +1,27 @@
+<a href="/"><h2>← Back to Home</h2></a>
+<h1>Edit <%= @member.name %></h1>
+<%= turbo_stream_from @member %>
+<%= form_with model: @member do |form| %>
+  <div>
+    <%= form.label :name, "Full name" %>
+    <%= form.text_field :name, placeholder: "Fionah United" %>
+  </div>
+  <div>
+    <%= form.label :name, "Username" %>
+    <%= form.text_field :username, placeholder: "fionahu" %>
+  </div>
+  <div>
+    <%= form.label :email, "Email" %>
+    <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
+  </div>
+  <div>
+    <%= form.label :expires_at, "Expires on" %>
+    <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year %>
+  </div>
+  <div>
+    <%= form.label :banned, "Banned?" %>
+    <%= form.check_box :banned %>
+  </div>
+  <%= form.submit %>
+  <%= form.submit "Delete Member", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete #{@member.name}?" } %>
+<% end %>

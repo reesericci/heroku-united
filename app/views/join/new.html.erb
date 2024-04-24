@@ -1,0 +1,18 @@
+<% content_for :title do "Join #{Config.organization}" end %>
+
+<h1>Join <%= Config.organization %></h1>
+<%= form_with model: @member, scope: :member, url: "/join", method: :post do |form| %>
+  <div>
+    <%= form.label :name, "Full name" %>
+    <%= form.text_field :name, placeholder: "Fionah United" %>
+  </div>
+  <div>
+    <%= form.label :username, "Username" %>
+    <%= form.text_field :username, placeholder: "fionahu" %>
+  </div>
+  <div>
+    <%= form.label :email, "Email" %>
+    <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
+  </div>
+  <%= form.submit  "Join!" %>
+<% end %>

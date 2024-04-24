@@ -1,0 +1,63 @@
+<div style="display: inline-flex; gap: 1rem">
+  <h2><%= Config.organization %> —</h2>
+  <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
+    <a href="/">Home</a>
+    <a href="/broadcasts">Broadcasts</a>
+    <a href="/">API</a>
+    <a href="/configuration" style="text-decoration: underline">Config</a>
+  </nav>
+</div>
+<h1>Edit Configuration</h1>
+<%= turbo_stream_from Config.first %>
+<%= form_with model: Config.first, scope: :config, url: "/configuration", method: :patch do |form| %>
+  <div>
+    <%= form.label :organization, "Organization name" %>
+    <%= form.text_field :organization, placeholder: "United Workers" %>
+  </div>
+  <div>
+    <%= form.label :membership_length, "Membership length (in days)" %>
+    <%= form.number_field :membership_length, placeholder: "365" %>
+  </div>
+
+  <br>
+  <h3 style="margin: 0">Email server (SMTP) information</h3>
+
+  <%= form.fields_for :smtp do |smtp_form| %>
+
+  <div style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div style="flex-grow: 1">
+      <%= smtp_form.label :server, "Server" %>
+      <%= smtp_form.text_field :server, placeholder: "smtp.gmail.com", value: Config.first.smtp[:server], style: "display: flex;" %>
+    </div>
+
+    <div>
+      <%= smtp_form.label :port, "Port" %>
+      <%= smtp_form.number_field :port, value: Config.first.smtp[:port], placeholder: "587", style: "display: flex;" %>
+    </div>
+  </div>
+
+  <div>
+    <%= smtp_form.label :username, "Username" %>
+    <%= smtp_form.text_field :username, value: Config.first.smtp[:username], placeholder: "fionahu" %>
+  </div>
+
+  <div>
+    <%= smtp_form.label :password, "Password" %>
+    <%= smtp_form.password_field :password, value: Config.first.smtp[:password], placeholder: "password123" %>
+  </div>
+
+  <div style="display: flex; flex-direction: row; justify-content: space-between;">
+    <div>
+      <%= smtp_form.label :box, "Box" %>
+      <%= smtp_form.text_field :box, value: Config.first.smtp[:box], placeholder: "united", style: "display: flex;min-width: 0;" %>
+    </div>
+    <p style="margin-top: 30px;margin-bottom: 0;">@</p>
+    <div style="flex-grow: 1">
+      <%= smtp_form.label :domain, "Domain" %>
+      <%= smtp_form.text_field :domain, value: Config.first.smtp[:domain], placeholder: "obl.ong", style: "display: flex;min-width: 0;" %>
+    </div>
+  </div>
+  <% end %>
+
+  <%= form.submit %>
+<% end %>
