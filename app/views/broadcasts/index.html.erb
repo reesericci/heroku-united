@@ -14,8 +14,8 @@
 
 <%= form_with model: Broadcast do |form| %>
   <%= form.text_field :subject, { placeholder: "Subject", "aria-label": "Content" } %>
-  <div style="display: block; width: fit-content;">
-    <%= form.rich_text_area :content, { "data-turbo-permanent": "", "aria-label": "Content", placeholder: "Content" } %>
+  <div style="display: block; width: fit-content;" data-turbo-permanent="">
+    <%= form.rich_text_area :content, { "aria-label": "Content", placeholder: "Content" } %>
   </div>
 
   <%= form.submit "Send", data: { "turbo-confirm": "Are you sure?"} %>
