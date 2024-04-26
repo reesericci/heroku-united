@@ -9,6 +9,16 @@
     <%= form.number_field :membership_length, placeholder: "365" %>
   </div>
 
+  <div>
+    <%= form.label :email, "Your email" %>
+    <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
+  </div>
+
+  <div>
+    <%= form.label :password, "Your password" %>
+    <%= form.password_field :password, placeholder: "password123" %>
+  </div>
+
   <br>
   <h3 style="margin: 0">Email server (SMTP) information</h3>
 

@@ -1,10 +1,18 @@
 class ConfigurationController < ApplicationController
-  skip_before_action :ensure_configured, only: [:new, :create]
+  include Authenticatable
+  skip_before_action :ensure_configured, :ensure_authenticated, only: [:new, :create]
 
   def new
+    if Config.first
+      redirect_to root_path, flash: { error: "This instance is already configured" }
+    end
   end
 
   def create
+    if Config.first
+      redirect_to root_path, flash: { error: "This instance is already configured" }
+      return
+    end
     c = Config.new(config_params)
     c.save!
     redirect_to root_path
@@ -33,6 +41,6 @@ class ConfigurationController < ApplicationController
   private
 
   def config_params
-    params.require(:config).permit(:organization, :membership_length, smtp: [ :server, :port, :username, :password, :box, :domain ])
+    params.require(:config).permit(:organization, :membership_length, :email, :password, smtp: [ :server, :port, :username, :password, :box, :domain ])
   end
 end

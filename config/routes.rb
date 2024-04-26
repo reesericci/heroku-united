@@ -24,4 +24,8 @@ Rails.application.routes.draw do
   post "/configuration", to: "configuration#create"
   patch "/configuration", to: "configuration#update"
   get "/configuration", to: "configuration#edit"
+
+  get "/login", to: "logins#new"
+  post "/login", to: "logins#create"
+  get "/logout", to: "logins#destroy"
 end

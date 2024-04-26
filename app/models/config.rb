@@ -2,6 +2,8 @@ class Config < ApplicationRecord
   before_create :check_for_existing
   before_destroy :check_for_existing
   self.table_name = :configurations
+  
+  has_secure_password
 
   store :smtp, accessors: [:server, :port, :username, :password, :box, :domain], prefix: true
 
@@ -11,6 +13,10 @@ class Config < ApplicationRecord
 
   def self.membership_length
     Config.first.membership_length
+  end
+
+  def self.email
+    Config.first.email
   end
 
   private
