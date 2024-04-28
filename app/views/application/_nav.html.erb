@@ -1,0 +1,15 @@
+<%
+  def underlined?(path)
+    current_page?(path) ? "text-decoration: underline" : nil
+  end
+%>
+
+<div style="display: inline-flex; gap: 1rem">
+  <h2><%= Config.organization %> —</h2>
+  <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
+    <%= link_to "Home", root_path, style: underlined?(root_path) %>
+    <%= link_to "Broadcasts", broadcasts_path, style: underlined?(broadcasts_path) %>
+    <%= link_to "API Keys", api_keys_path, style: underlined?(api_keys_path) %>
+    <%= link_to "Config", configuration_path, style: underlined?(configuration_path)  %>
+  </nav>
+</div>

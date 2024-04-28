@@ -11,7 +11,7 @@ Rails.application.config.middleware.use Warden::Manager do |manager|
   end
 
   manager.failure_app = ->(env) do
-    env['REQUEST_METHOD'] = 'GET'
+    env["REQUEST_METHOD"] = "GET"
     LoginsController.action(:new).call(env)
   end
 end
@@ -22,10 +22,10 @@ Rails.application.config.to_prepare do
     def valid?
       login_params.permitted?
     end
-  
+
     def authenticate!
       c = Config.find_by(email: login_params[:email])&.authenticate(login_params[:password])
-      if c == false || c == nil
+      if c == false || c.nil?
         fail!("Could not log in")
       else
         success!(c)
@@ -34,7 +34,7 @@ Rails.application.config.to_prepare do
 
     private
 
-    def login_params 
+    def login_params
       ActionController::Parameters.new(params).require(:login).permit(:email, :password)
     end
   end

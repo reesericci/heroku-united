@@ -1,6 +1,6 @@
 class BroadcastsController < ApplicationController
   include Authenticatable
-  
+
   def new
   end
 

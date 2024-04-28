@@ -4,4 +4,4 @@
 Rails.application.config.assets.version = "1.2"
 
 # Add additional assets to the asset load path.
-#Rails.application.config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")
+# Rails.application.config.assets.excluded_paths << Rails.root.join("app/assets/stylesheets")

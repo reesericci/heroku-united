@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
 
   before_action :ensure_configured
 
-
   private
 
   def ensure_configured

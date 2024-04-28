@@ -24,8 +24,9 @@ module United
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.action_mailer.delivery_method = :smtp    
-    config.session_store :active_record_store, :key => '_united_session'
+    config.action_mailer.delivery_method = :smtp
+    config.session_store :active_record_store, key: "_united_session"
 
+    config.hosts << /.*\.underpass\.clb\.li/
   end
 end

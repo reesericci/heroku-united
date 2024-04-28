@@ -1,12 +1,12 @@
 module Bannable
   extend ActiveSupport::Concern
-  
+
   def ban
     self.banned = true
   end
 
   def ban!
-    self.update(banned: true)
+    update(banned: true)
   end
 
   def unban
@@ -14,6 +14,6 @@ module Bannable
   end
 
   def unban!
-    self.update(banned: false)
+    update(banned: false)
   end
 end

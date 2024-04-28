@@ -2,7 +2,7 @@ class Config < ApplicationRecord
   before_create :check_for_existing
   before_destroy :check_for_existing
   self.table_name = :configurations
-  
+
   has_secure_password
 
   store :smtp, accessors: [:server, :port, :username, :password, :box, :domain], prefix: true

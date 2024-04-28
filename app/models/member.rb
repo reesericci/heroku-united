@@ -8,20 +8,20 @@ class Member < ApplicationRecord
   end
 
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :name, presence: true
 
   self.primary_key = "username"
 
-  store :auxillary, accessors: [ :mxid ], coder: JSON, prefix: false
+  store :auxillary, accessors: [:mxid], coder: JSON, prefix: false
 
   def status
     if banned?
-      return "banned"
+      "banned"
     elsif expired?
-      return "expired"
+      "expired"
     else
-      return "active"
+      "active"
     end
   end
 
@@ -30,5 +30,4 @@ class Member < ApplicationRecord
       !m.expired? && !m.banned?
     end
   end
-
 end

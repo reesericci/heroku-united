@@ -1,0 +1,6 @@
+fix: true
+ignore:
+  - 'vendor/**/*'
+
+plugins:
+  - standard-rails

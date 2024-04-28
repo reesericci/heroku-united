@@ -1,12 +1,5 @@
-<div style="display: inline-flex; gap: 1rem">
-  <h2><%= Config.organization %> —</h2>
-  <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
-    <a href="/">Home</a>
-    <a href="/broadcasts" style="text-decoration: underline">Broadcasts</a>
-    <a href="/">API</a>
-    <a href="/configuration">Config</a>
-  </nav>
-</div>
+<%= render "nav" %>
+
 <h1>Broadcasts</h1>
 <%= turbo_stream_from "broadcasts" %>
 
@@ -24,12 +17,12 @@
 <h3>Sent Broadcasts</h3>
 
 <div style="display: flex; gap: 2rem; flex-direction:column;">
-<% Broadcast.all.reverse.each do |b| %>
-  <div style="max-width: 500px; display: flex; flex-direction: column; gap: 1rem; background: white; border: 1px solid #bbb; border-radius: 3px; padding: 1.5rem;">
-    <p style="margin: 0; line-height: 175%;">Subject: <b><%= b.subject %></b><br>Sent: <b><%= local_time_ago(b.created_at) %></b></p>
-    <div style="display: block; width: fit-content;">
-      <%= b.content %>
+  <% Broadcast.all.reverse.each do |b| %>
+    <div style="max-width: 500px; display: flex; flex-direction: column; gap: 1rem; background: white; border: 1px solid #bbb; border-radius: 3px; padding: 1.5rem;">
+      <p style="margin: 0; line-height: 175%;">Subject: <b><%= b.subject %></b><br>Sent: <b><%= local_time_ago(b.created_at) %></b></p>
+      <div style="display: block; width: fit-content;">
+        <%= b.content %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
 </div>

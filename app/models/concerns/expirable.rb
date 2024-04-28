@@ -1,9 +1,9 @@
 module Expirable
   extend ActiveSupport::Concern
-  
+
   def expired?
-    if self.expires_at != nil
-      self.expires_at < DateTime.now
+    if !expires_at.nil?
+      expires_at < DateTime.now
     else
       false
     end
@@ -12,7 +12,7 @@ module Expirable
   class_methods do
     def unexpired
       select do |m|
-        if m.expires_at != nil
+        if !m.expires_at.nil?
           m.expires_at.future?
         else
           true
@@ -22,7 +22,7 @@ module Expirable
 
     def expired
       select do |m|
-        if m.expires_at != nil
+        if !m.expires_at.nil?
           m.expires_at.past?
         else
           false

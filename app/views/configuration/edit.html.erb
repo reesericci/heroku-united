@@ -1,12 +1,5 @@
-<div style="display: inline-flex; gap: 1rem">
-  <h2><%= Config.organization %> —</h2>
-  <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
-    <a href="/">Home</a>
-    <a href="/broadcasts">Broadcasts</a>
-    <a href="/">API</a>
-    <a href="/configuration" style="text-decoration: underline">Config</a>
-  </nav>
-</div>
+<%= render "nav" %>
+
 <h1>Edit Configuration</h1>
 <%= turbo_stream_from Config.first %>
 <%= form_with model: Config.first, scope: :config, url: "/configuration", method: :patch do |form| %>

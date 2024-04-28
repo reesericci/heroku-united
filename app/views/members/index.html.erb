@@ -1,13 +1,8 @@
-<div style="display: inline-flex; gap: 1rem">
-  <h2><%= Config.organization %> —</h2>
-  <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
-    <a href="/" style="text-decoration: underline">Home</a>
-    <a href="/broadcasts">Broadcasts</a>
-    <a href="/">API</a>
-    <a href="/configuration">Config</a>
-  </nav>
-</div>
-<h1>Here's the members:</h1>
+<%= render "nav" %>
+
+<h1 style="margin-bottom: 8px">Here's the members:</h1>
+<button id="share" class="subheading-button">Share join link</button>
+
 <%= turbo_stream_from "members" %>
 <table>
   <thead>
@@ -38,3 +33,26 @@
     <% end %>
   </tbody>
 </table>
+
+<script type="module">
+  const shareBtn = document.querySelector("button#share")
+
+  if (!navigator.share) {
+    shareBtn.textContent = "Copy join link"  
+  }
+
+  shareBtn.addEventListener("click", async (event) => {
+    if (navigator.share) {
+      // Use Web Share API
+      await navigator.share({
+        title: "Join <%= Config.organization %>",
+        text: "Become a member of <%= Config.organization %>!",
+        url: "<%= join_url %>",
+      })
+    } else {
+      // Copy to clipboard if Web Share is unavailable
+      await navigator.clipboard.writeText("<%= join_url %>");
+      alert("Copied join link to clipboard!")
+    }
+  })
+</script>

@@ -6,8 +6,8 @@ module Authenticatable
   end
 
   def ensure_authenticated
-    if !request.env['warden'].authenticated?
-      redirect_to "/login", flash: { error: "You need to sign in to access that page", redirect_back: request.env['PATH_INFO'] }
+    if !request.env["warden"].authenticated?
+      redirect_to "/login", flash: {error: (request.env["PATH_INFO"] == root_path) ? nil : "You need to sign in to access that page", redirect_back: request.env["PATH_INFO"]}
     end
   end
 end

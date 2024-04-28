@@ -4,13 +4,13 @@ class ConfigurationController < ApplicationController
 
   def new
     if Config.first
-      redirect_to root_path, flash: { error: "This instance is already configured" }
+      redirect_to root_path, flash: {error: "This instance is already configured"}
     end
   end
 
   def create
     if Config.first
-      redirect_to root_path, flash: { error: "This instance is already configured" }
+      redirect_to root_path, flash: {error: "This instance is already configured"}
       return
     end
     c = Config.new(config_params)
@@ -27,9 +27,9 @@ class ConfigurationController < ApplicationController
     if c.invalid?
       errors = "<ul>"
       m.errors.full_messages.each do |e|
-        errors = errors + "<li>#{e}</li>"
+        errors += "<li>#{e}</li>"
       end
-      errors = errors + "</ul>"
+      errors += "</ul>"
       flash.now[:error] = errors
       render :edit, status: :unprocessable_entity
       return
@@ -41,6 +41,6 @@ class ConfigurationController < ApplicationController
   private
 
   def config_params
-    params.require(:config).permit(:organization, :membership_length, :email, :password, smtp: [ :server, :port, :username, :password, :box, :domain ])
+    params.require(:config).permit(:organization, :membership_length, :email, :password, smtp: [:server, :port, :username, :password, :box, :domain])
   end
 end
