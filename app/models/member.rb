@@ -8,8 +8,12 @@ class Member < ApplicationRecord
   end
 
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}, uniqueness: {case_sensitive: false}
   validates :name, presence: true
+
+  before_validation do 
+    self.email = self.email.downcase
+  end
 
   self.primary_key = "username"
 

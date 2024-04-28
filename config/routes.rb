@@ -12,26 +12,28 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", :as => :pwa_manifest
 
   # Defines the root path route ("/")
-  root "members#index"
-
-  resources :members, param: :username, except: [:show, :delete]
+  root "join#new"
 
   get "/join", to: "join#new"
   post "/join", to: "join#create"
   get "/join/confirmation", to: "join#confirmation"
 
-  resources :broadcasts, except: [:show]
+  resolve('Configuration') { [:configuration] }
 
-  get "/configuration/new", to: "configuration#new"
-  post "/configuration", to: "configuration#create"
-  patch "/configuration", to: "configuration#update"
-  get "/configuration", to: "configuration#edit"
+  scope "/admin" do
+    resources :members, param: :username, except: [:show, :delete]
+    get "/", to: redirect("/admin/members")
 
-  get "/login", to: "logins#new"
-  post "/login", to: "logins#create"
-  get "/logout", to: "logins#destroy"
+    resources :broadcasts, except: [:show]
+    
+    resource :configuration, except: [:edit, :destroy]
 
-  resources :api_keys, only: [:index, :create, :destroy]
+    get "/login", to: "logins#new"
+    post "/login", to: "logins#create"
+    get "/logout", to: "logins#destroy"
+
+    resources :api_keys, only: [:index, :create, :destroy]
+  end
 
   scope "/api", module: "api" do
     resources :members, param: :username, except: [:new, :edit, :delete]

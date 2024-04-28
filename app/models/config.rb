@@ -7,16 +7,20 @@ class Config < ApplicationRecord
 
   store :smtp, accessors: [:server, :port, :username, :password, :box, :domain], prefix: true
 
+  before_validation do 
+    self.email = self.email.downcase
+  end
+
   def self.organization
-    Config.first.organization
+    Config.first&.organization
   end
 
   def self.membership_length
-    Config.first.membership_length
+    Config.first&.membership_length
   end
 
   def self.email
-    Config.first.email
+    Config.first&.email
   end
 
   private

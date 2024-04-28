@@ -1,24 +1,24 @@
-class ConfigurationController < ApplicationController
+class ConfigurationsController < ApplicationController
   include Authenticatable
   skip_before_action :ensure_configured, :ensure_authenticated, only: [:new, :create]
 
   def new
     if Config.first
-      redirect_to root_path, flash: {error: "This instance is already configured"}
+      redirect_to members_path, flash: {error: "This instance is already configured"}
     end
   end
 
   def create
     if Config.first
-      redirect_to root_path, flash: {error: "This instance is already configured"}
+      redirect_to members_path, flash: {error: "This instance is already configured"}
       return
     end
     c = Config.new(config_params)
     c.save!
-    redirect_to root_path
+    redirect_to members_path
   end
 
-  def edit
+  def show
   end
 
   def update
@@ -35,7 +35,7 @@ class ConfigurationController < ApplicationController
       return
     end
     c.save!
-    redirect_back fallback_location: "/confguration"
+    redirect_back fallback_location: configuration_path
   end
 
   private

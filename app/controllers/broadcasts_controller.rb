@@ -6,7 +6,7 @@ class BroadcastsController < ApplicationController
 
   def create
     b = Broadcast.create! broadcast_params
-    redirect_back fallback_location: "/broadcasts"
+    redirect_back fallback_location: broadcasts_path
   end
 
   private

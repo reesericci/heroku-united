@@ -80,4 +80,4 @@ gem "warden", "~> 1.2"
 
 gem "rswag", "~> 2.13"
 
-gem "pg", "~> 1.5"
+gem "dockerfile-rails", ">= 1.6", :group => :development

@@ -24,7 +24,7 @@ Rails.application.config.to_prepare do
     end
 
     def authenticate!
-      c = Config.find_by(email: login_params[:email])&.authenticate(login_params[:password])
+      c = Config.find_by(email: login_params[:email].downcase)&.authenticate(login_params[:password])
       if c == false || c.nil?
         fail!("Could not log in")
       else

@@ -17,7 +17,7 @@ class JoinController < ApplicationController
       return
     end
     m.save!
-    redirect_to "/join/confirmation"
+    redirect_to join_confirmation_path
   end
 
   private

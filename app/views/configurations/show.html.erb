@@ -1,5 +1,8 @@
-<h1>Welcome to United!</h1>
-<%= form_with scope: :config, url: "/configuration", method: :post do |form| %>
+<%= render "nav" %>
+
+<h1>Edit Configuration</h1>
+<%= turbo_stream_from Config.first %>
+<%= form_with model: Config.first, scope: :config, url: configuration_path, method: :patch do |form| %>
   <div>
     <%= form.label :organization, "Organization name" %>
     <%= form.text_field :organization, placeholder: "United Workers" %>
@@ -8,12 +11,10 @@
     <%= form.label :membership_length, "Membership length (in days)" %>
     <%= form.number_field :membership_length, placeholder: "365" %>
   </div>
-
   <div>
     <%= form.label :email, "Your email" %>
     <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
   </div>
-
   <div>
     <%= form.label :password, "Your password" %>
     <%= form.password_field :password, placeholder: "password123" %>
@@ -27,37 +28,37 @@
   <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <div style="flex-grow: 1">
       <%= smtp_form.label :server, "Server" %>
-      <%= smtp_form.text_field :server, placeholder: "smtp.gmail.com", style: "display: flex;" %>
+      <%= smtp_form.text_field :server, placeholder: "smtp.gmail.com", value: Config.first.smtp[:server], style: "display: flex;" %>
     </div>
 
     <div>
       <%= smtp_form.label :port, "Port" %>
-      <%= smtp_form.number_field :port, placeholder: "587", style: "display: flex;" %>
+      <%= smtp_form.number_field :port, value: Config.first.smtp[:port], placeholder: "587", style: "display: flex;" %>
     </div>
   </div>
 
   <div>
     <%= smtp_form.label :username, "Username" %>
-    <%= smtp_form.text_field :username, placeholder: "fionahu" %>
+    <%= smtp_form.text_field :username, value: Config.first.smtp[:username], placeholder: "fionahu" %>
   </div>
 
   <div>
     <%= smtp_form.label :password, "Password" %>
-    <%= smtp_form.password_field :password, placeholder: "password123" %>
+    <%= smtp_form.password_field :password, value: Config.first.smtp[:password], placeholder: "password123" %>
   </div>
 
   <div style="display: flex; flex-direction: row; justify-content: space-between;">
     <div>
       <%= smtp_form.label :box, "Box" %>
-      <%= smtp_form.text_field :box, placeholder: "united", style: "display: flex;min-width: 0;" %>
+      <%= smtp_form.text_field :box, value: Config.first.smtp[:box], placeholder: "united", style: "display: flex;min-width: 0;" %>
     </div>
     <p style="margin-top: 30px;margin-bottom: 0;">@</p>
     <div style="flex-grow: 1">
       <%= smtp_form.label :domain, "Domain" %>
-      <%= smtp_form.text_field :domain, placeholder: "obl.ong", style: "display: flex;min-width: 0;" %>
+      <%= smtp_form.text_field :domain, value: Config.first.smtp[:domain], placeholder: "obl.ong", style: "display: flex;min-width: 0;" %>
     </div>
   </div>
   <% end %>
 
-  <%= form.submit "Get started →" %>
+  <%= form.submit %>
 <% end %>

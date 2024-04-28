@@ -1,0 +1,75 @@
+# fly.toml app configuration file generated for aged-waterfall-4360 on 2024-04-28T08:00:47-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'aged-waterfall-4360'
+primary_region = 'dfw'
+kill_signal = 'SIGINT'
+kill_timeout = '5s'
+console_command = '/rails/bin/rails console'
+
+[build]
+
+[deploy]
+
+[env]
+  DATABASE_URL = 'sqlite3:///mnt/db/production.sqlite'
+  PORT = '3000'
+  RAILS_ENV = 'production'
+  SERVER_COMMAND = 'bundle exec rails db:migrate && bundle exec puma -C config/puma.rb -e production'
+
+[[mounts]]
+  source = 'db'
+  destination = '/mnt/db'
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[services]]
+  protocol = 'tcp'
+  internal_port = 3000
+  processes = ['app']
+
+  [[services.ports]]
+    port = 80
+    handlers = ['http']
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ['tls', 'http']
+
+  [services.concurrency]
+    type = 'connections'
+    hard_limit = 25
+    soft_limit = 20
+
+[checks]
+  [checks.status]
+    port = 3000
+    type = 'http'
+    interval = '10s'
+    timeout = '2s'
+    grace_period = '5s'
+    method = 'GET'
+    path = '/up'
+    protocol = 'http'
+    tls_skip_verify = false
+
+    [checks.status.headers]
+      X-Forwarded-Proto = 'https'
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[[statics]]
+  guest_path = '/app/public'
+  url_prefix = '/'

@@ -1,7 +1,7 @@
 <% content_for :title do "Join #{Config.organization}" end %>
 
 <h1>Join <%= Config.organization %></h1>
-<%= form_with model: @member, scope: :member, url: "/join", method: :post do |form| %>
+<%= form_with model: @member, scope: :member, url: join_path, method: :post do |form| %>
   <div>
     <%= form.label :name, "Full name" %>
     <%= form.text_field :name, placeholder: "Fionah United" %>
