@@ -79,3 +79,5 @@ gem "activerecord-session_store", "~> 2.1"
 gem "warden", "~> 1.2"
 
 gem "rswag", "~> 2.13"
+
+gem "pg", "~> 1.5"
