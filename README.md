@@ -4,8 +4,6 @@
 
 Free and open membership software for collective organizations
 
-TODO: Deploy to Heroku & Render buttons
-
 ## Deploying with Fly.io
 
 1. Clone this repository to your computer
@@ -26,6 +24,8 @@ TODO: Deploy to Heroku & Render buttons
 
 
 ## TODOS (Roadmap-ish)
+
+TODO: Deploy to Heroku & Render buttons
 
 TODO: Automated update system
 
