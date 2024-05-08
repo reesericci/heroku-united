@@ -1,24 +1,32 @@
-# README
+![United! A free and open system for collective organizations](<United.png>)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# United
 
-Things you may want to cover:
+Free and open membership software for collective organizations
 
-* Ruby version
+TODO: Deploy to Heroku & Render buttons
 
-* System dependencies
+## Deploying with Fly.io
 
-* Configuration
+1. Clone this repository to your computer
+2. Make an account with [fly.io](https://fly.io)
+3. Install the fly.io CLI
+4. Run `fly login` in the terminal
+5. Run `rails credentials:edit` then press (CTRL/CMD)+X to exit the nano editor
+6. Run `fly launch
+7. Enjoy!
 
-* Database creation
+## Details
 
-* Database initialization
+- SQLite Database (No external DB needed)
 
-* How to run the test suite
+- Ruby 3.3.0
 
-* Services (job queues, cache servers, search engines, etc.)
+- Site configuration handled through initial wizard
 
-* Deployment instructions
 
-* ...
+## TODOS (Roadmap-ish)
+
+TODO: Automated update system
+
+TODO: Self-hosted deployment instructions
