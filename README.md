@@ -30,3 +30,5 @@ TODO: Deploy to Heroku & Render buttons
 TODO: Automated update system
 
 TODO: Self-hosted deployment instructions
+
+TODO: OIDC provider
