@@ -109,6 +109,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_30_001853) do
     t.boolean "used", default: false
   end
 
+  create_table "couriers", force: :cascade do |t|
+    t.string "subject"
+    t.string "to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hooks", force: :cascade do |t|
+    t.string "name"
+    t.string "trigger_id"
+    t.string "hookable_type"
+    t.integer "hookable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trigger_id"], name: "index_hooks_on_trigger_id"
+  end
+
   create_table "members", id: false, force: :cascade do |t|
     t.string "username"
     t.string "email"

@@ -20,6 +20,8 @@
   </head>
 
   <body>
+    <%= render "nav" unless request.controller_class == JoinController %>
+    
     <%= yield %>
 
     <div class="bottom-container">
@@ -29,7 +31,7 @@
         </div>
       <% end %>
 
-      <a href="https://codeberg.org/United" target="_blank"><p>This site is powered by <span style="text-decoration: underline">United</span> — free, open software for membership in collective organizations</p></a>
+      <a href="https://codeberg.org/reesericci/united" target="_blank"><p>This site is powered by <span style="text-decoration: underline">United</span> — free and open membership software for collective organizations</p></a>
     </div>
   </body>
 </html>

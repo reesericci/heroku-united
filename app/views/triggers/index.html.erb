@@ -1,0 +1,36 @@
+
+<h1>Triggers</h1>
+
+<p class="desc">
+  Triggers allow you to add custom hooks to events in the app. 
+  <br>
+  For example, send an email when a new member joins <%= Config.organization %>!
+</p>
+
+<% @triggers.each do |m| %>
+  <details>
+    <summary><%= m.second.first.instigator.name %></summary>
+  <% m.second.each do |t| %>
+    <%= link_to trigger_hooks_path(t.id) do %>
+      <h3>On <%= t.name.capitalize %> →</h3>
+    <% end %>
+  <% end %>
+  </details>
+<% end %>
+
+<style>
+  summary {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  p.desc {
+    font-size: 24px;
+    line-height: 2.5rem;
+  }
+
+  a:has(> h3) {
+    color: var(--red-11);
+    font-weight: 600;
+  }
+</style>

@@ -89,3 +89,5 @@ gem "rotp", "~> 6.3"
 gem "doorkeeper-openid_connect", "~> 1.8"
 
 gem "shell", "~> 0.8.1"
+
+gem "httparty", "~> 0.22.0"

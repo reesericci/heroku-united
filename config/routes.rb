@@ -35,6 +35,10 @@ Rails.application.routes.draw do
     get "/logout", to: "logins#destroy"
 
     resources :api_keys, only: [:index, :create, :destroy]
+
+    resources :triggers, only: [:index] do
+      resources :hooks, shallow: true
+    end
   end
 
   scope "/api", module: "api" do

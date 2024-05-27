@@ -129,6 +129,7 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.2)
       irb (~> 1.10)
@@ -147,6 +148,10 @@ GEM
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    httparty (0.22.0)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -186,6 +191,8 @@ GEM
     minitest (5.21.2)
     msgpack (1.7.2)
     multi_json (1.15.0)
+    multi_xml (0.7.0)
+      bigdecimal (~> 3.1)
     net-imap (0.4.10)
       date
       net-protocol
@@ -411,6 +418,7 @@ DEPENDENCIES
   dockerfile-rails (>= 1.6)
   doorkeeper (~> 5.7)
   doorkeeper-openid_connect (~> 1.8)
+  httparty (~> 0.22.0)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

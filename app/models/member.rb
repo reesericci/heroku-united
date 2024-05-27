@@ -2,6 +2,8 @@ class Member < ApplicationRecord
   include Bannable
   include Expirable
   include Imprintable
+  extend Instigative
+
   broadcasts_refreshes
 
   after_destroy_commit do
@@ -31,6 +33,12 @@ class Member < ApplicationRecord
     class_name: "Doorkeeper::AccessToken",
     foreign_key: :resource_owner_id,
     dependent: :delete_all # or :destroy if you need callbacks
+  trigger :join, "Join"
+  # TODO: expiry cleanup job which fires trigger each day
+
+  after_create_commit do
+    fire_join!
+  end
 
   def status
     if banned?
