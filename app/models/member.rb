@@ -1,6 +1,7 @@
 class Member < ApplicationRecord
   include Bannable
   include Expirable
+  include Imprintable
   broadcasts_refreshes
 
   after_destroy_commit do
@@ -11,13 +12,25 @@ class Member < ApplicationRecord
   validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}, uniqueness: {case_sensitive: false}
   validates :name, presence: true
 
-  before_validation do 
-    self.email = self.email.downcase
+  before_validation do
+    self.email = email.downcase
   end
 
   self.primary_key = "username"
 
+  # TODO: proper auxillary fields
+
   store :auxillary, accessors: [:mxid], coder: JSON, prefix: false
+
+  has_many :access_grants,
+    class_name: "Doorkeeper::AccessGrant",
+    foreign_key: :resource_owner_id,
+    dependent: :delete_all # or :destroy if you need callbacks
+
+  has_many :access_tokens,
+    class_name: "Doorkeeper::AccessToken",
+    foreign_key: :resource_owner_id,
+    dependent: :delete_all # or :destroy if you need callbacks
 
   def status
     if banned?
@@ -33,5 +46,9 @@ class Member < ApplicationRecord
     select do |m|
       !m.expired? && !m.banned?
     end
+  end
+
+  def id
+    username
   end
 end

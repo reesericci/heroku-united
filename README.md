@@ -11,7 +11,7 @@ Free and open membership software for collective organizations
 3. Install the fly.io CLI
 4. Run `fly login` in the terminal
 5. Run `rails credentials:edit` then press (CTRL/CMD)+X to exit the nano editor
-6. Run `fly launch
+6. Run `fly launch`
 7. Enjoy!
 
 ## Details
@@ -25,10 +25,14 @@ Free and open membership software for collective organizations
 
 ## TODOS (Roadmap-ish)
 
-TODO: Deploy to Heroku & Render buttons
+TODO: Deploy to Heroku & Render buttons [ ]
 
-TODO: Automated update system
+TODO: Automated update system [ ]
 
-TODO: Self-hosted deployment instructions
+TODO: Self-hosted deployment instructions [ ]
 
-TODO: OIDC provider
+TODO: OIDC provider [X]
+
+TODO: Verify emails [ ]
+
+TODO: Unlimited membership length option [ ]

@@ -1,0 +1,63 @@
+<a href="<%= oauth_applications_path %>"><h2>← Back to Identity</h2></a>
+
+<div class="border-bottom mb-4">
+  <h1><%= @application.name %></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <h3><%= t('.application_id') %>:</h3>
+    <p><code class="bg-light" id="application_id"><%= @application.uid %></code></p>
+
+    <h3><%= t('.secret') %>:</h3>
+    <p>
+      <code class="bg-light" id="secret">
+        <% secret = flash[:application_secret].presence || @application.plaintext_secret %>
+        <% if secret.blank? && Doorkeeper.config.application_secret_hashed? %>
+          <span class="bg-light font-italic text-uppercase text-muted"><%= t('.secret_hashed') %></span>
+        <% else %>
+          <%= secret %>
+        <% end %>
+      </code>
+    </p>
+
+    <h3><%= t('.scopes') %>:</h3>
+    <p>
+      <code class="bg-light" id="scopes">
+        <% if @application.scopes.present? %>
+          <%= @application.scopes %>
+        <% else %>
+          <span class="bg-light font-italic text-uppercase text-muted"><%= t('.not_defined') %></span>
+        <% end %>
+      </code>
+    </p>
+
+    <h3><%= t('.confidential') %>:</h3>
+    <p><code class="bg-light" id="confidential"><%= @application.confidential? %></code></p>
+
+    <h3><%= t('.callback_urls') %>:</h3>
+
+    <% if @application.redirect_uri.present? %>
+        <% @application.redirect_uri.split.each do |uri| %>
+          <p><%= uri %>   —   <button><%= link_to t('doorkeeper.applications.buttons.authorize'), oauth_authorization_path(client_id: @application.uid, redirect_uri: uri, response_type: 'code', scope: @application.scopes), class: 'btn btn-success', target: '_blank' %></button></p>
+        <% end %>
+    <% else %>
+      <span class="bg-light font-italic text-uppercase text-muted"><%= t('.not_defined') %></span>
+    <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <h3><%= t('.actions') %></h3>
+
+    <button style="width: 150px;background: var(--amber-10);border-color: var(--amber-10);padding: 0.5rem;"><%= link_to t('doorkeeper.applications.buttons.edit'), edit_oauth_application_path(@application), class: 'btn btn-primary' %></button>
+
+    <p><%= render 'delete_form', application: @application, submit_btn_css: 'btn btn-danger'%></p>
+
+    <style>
+      .btn-danger {
+        background: var(--red-10) !important;
+        border-color: var(--red-10) !important;
+      }
+    </style>
+  </div>
+</div>

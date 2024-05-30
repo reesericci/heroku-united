@@ -118,9 +118,9 @@ thead th:nth-child(7) {
 
 button, a[type=button], input[type=submit] {
   border-radius: 4px;
-  background-color: var(--yellow-9);
+  background-color: var(--amber-9);
   font-weight: 600;
-  border: 2px solid var(--yellow-9);
+  border: 2px solid var(--amber-9);
   color: var(--sand-12);
   padding: 5px 10px;
   cursor: pointer;
@@ -128,8 +128,8 @@ button, a[type=button], input[type=submit] {
 }
 
 button:hover, a[type=button]:hover, input[type=submit]:hover {
-  background-color: var(--yellow-10);
-  border: 2px solid var(--yellow-10);
+  background-color: var(--amber-10);
+  border: 2px solid var(--amber-10);
 }
 
 input[type=submit] {

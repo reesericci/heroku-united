@@ -1,0 +1,64 @@
+<%= render "application/nav" %>
+<div>
+  <h1 style="margin-bottom: 8px"><%= t('.title') %></h1>
+</div>
+
+<button class="subheading-button"><%= link_to t('.new'), new_oauth_application_path, class: 'btn btn-success' %></button>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th><%= t('.name') %></th>
+    <th><%= t('.callback_url') %></th>
+    <th><%= t('.confidential') %></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @applications.each do |application| %>
+    <tr id="application_<%= application.id %>">
+      <td class="align-middle">
+        <%= link_to application.name, oauth_application_path(application) %>
+      </td>
+      <td class="align-middle">
+        <%= simple_format(application.redirect_uri) %>
+      </td>
+      <td class="align-middle">
+        <%= application.confidential? ? t('doorkeeper.applications.index.confidentiality.yes') : t('doorkeeper.applications.index.confidentiality.no') %>
+      </td>
+      <td class="align-middle" style="display: inline-flex; gap: 0.5rem">
+        <button><%= link_to t('doorkeeper.applications.buttons.edit'), edit_oauth_application_path(application), class: 'btn btn-link' %></button>
+        <%= render 'delete_form', application: application %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<style>
+  input[value="Destroy"] {
+    background: var(--red-9);
+    border-color: var(--red-9);
+  }
+
+  input:hover[value="Destroy"] {
+    background: var(--red-10);
+    border-color: var(--red-10);
+  }
+
+  thead th:nth-child(3) {
+    width: 3cqmax;
+  }
+
+  thead th:nth-child(1) {
+    width: 4cqmax;
+  }
+
+  thead th:nth-child(2) {
+    width: 6cqmax;
+  }
+
+  thead th:nth-child(4) {
+    width: 2cqmax;
+  }
+</style>

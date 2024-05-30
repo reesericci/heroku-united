@@ -23,6 +23,10 @@ class Config < ApplicationRecord
     Config.first&.email
   end
 
+  def self.external_url
+    Config.first&.external_url
+  end
+
   private
 
   def check_for_existing

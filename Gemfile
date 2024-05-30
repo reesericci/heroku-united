@@ -81,3 +81,11 @@ gem "warden", "~> 1.2"
 gem "rswag", "~> 2.13"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "doorkeeper", "~> 5.7"
+
+gem "rotp", "~> 6.3"
+
+gem "doorkeeper-openid_connect", "~> 1.8"
+
+gem "shell", "~> 0.8.1"

@@ -2,12 +2,14 @@
 Rails.application.config.middleware.use Warden::Manager do |manager|
   manager.default_strategies :password
 
-  manager.serialize_into_session do |config|
-    config.id
+  manager.serialize_into_session do |obj|
+    obj.class.name + "_" + obj[obj.class.primary_key.to_sym].to_s
   end
 
   manager.serialize_from_session do |id|
-    Config.find_by(id: id)
+    split = id.split "_"
+
+    Object.const_get(split[0]).find(split[1])
   end
 
   manager.failure_app = ->(env) do
@@ -36,6 +38,28 @@ Rails.application.config.to_prepare do
 
     def login_params
       ActionController::Parameters.new(params).require(:login).permit(:email, :password)
+    end
+  end
+
+  # Postmark strategy
+  Warden::Strategies.add(:postmark) do
+    def valid?
+      login_params.permitted?
+    end
+
+    def authenticate!
+      m = Member.find_by(username: login_params[:username])
+      if m&.imprint&.code&.authenticate!(login_params[:code])
+        success!(m)
+      else
+        fail!("Could not log in")
+      end
+    end
+
+    private
+
+    def login_params
+      ActionController::Parameters.new(params).require(:login).permit(:username, :code)
     end
   end
 end

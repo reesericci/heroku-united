@@ -41,6 +41,6 @@ class ConfigurationsController < ApplicationController
   private
 
   def config_params
-    params.require(:config).permit(:organization, :membership_length, :email, :password, smtp: [:server, :port, :username, :password, :box, :domain])
+    params.require(:config).permit(:organization, :external_url, :membership_length, :email, :password, smtp: [:server, :port, :username, :password, :box, :domain])
   end
 end

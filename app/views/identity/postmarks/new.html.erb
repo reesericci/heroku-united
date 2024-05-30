@@ -1,0 +1,9 @@
+<h1>Continue with <%= Config.organization %></h1>
+<%= form_with scope: :member, url: identity_postmarks_path, method: :post do |form| %>
+  <div>
+    <%= form.label :username, "Username" %>
+    <%= form.text_field :username, placeholder: "fionahu" %>
+  </div>
+
+  <%= form.submit "Continue →" %>
+<% end %>

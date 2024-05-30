@@ -1,0 +1,11 @@
+<h1>Continue with <%= Config.organization %></h1>
+<%= form_with scope: :login, url: identity_login_index_path, method: :post do |form| %>
+  <div>
+    <%= form.label :code, "Enter your login code" %>
+    <%= form.number_field :code, placeholder: "123456", step: 1 %>
+  </div>
+
+  <%= form.hidden_field :username, value: @username %>
+
+  <%= form.submit "Continue →" %>
+<% end %>

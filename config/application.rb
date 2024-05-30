@@ -27,5 +27,6 @@ module United
     config.action_mailer.delivery_method = :smtp
     config.session_store :active_record_store, key: "_united_session"
     config.active_record.sqlite3_production_warning= false
+    config.hosts << /.*\.underpass\.clb\.li/
   end
 end

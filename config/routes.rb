@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  use_doorkeeper_openid_connect
+  use_doorkeeper
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -18,14 +20,14 @@ Rails.application.routes.draw do
   post "/join", to: "join#create"
   get "/join/confirmation", to: "join#confirmation"
 
-  resolve('Configuration') { [:configuration] }
+  resolve("Configuration") { [:configuration] }
 
   scope "/admin" do
     resources :members, param: :username, except: [:show, :delete]
     get "/", to: redirect("/admin/members")
 
     resources :broadcasts, except: [:show]
-    
+
     resource :configuration, except: [:edit, :destroy]
 
     get "/login", to: "logins#new"
@@ -39,4 +41,14 @@ Rails.application.routes.draw do
     resources :members, param: :username, except: [:new, :edit, :delete]
     resources :broadcasts, except: [:new, :edit, :delete, :update]
   end
+
+  namespace :identity do
+    resources :login, only: [:new, :create] do
+      collection do
+        resources :postmarks, only: [:new, :create]
+        get "/destroy", to: "login#destroy"
+      end
+    end
+  end
+  resolve("Login") { [:login] }
 end

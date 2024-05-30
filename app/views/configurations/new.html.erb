@@ -4,6 +4,12 @@
     <%= form.label :organization, "Organization name" %>
     <%= form.text_field :organization, placeholder: "United Workers" %>
   </div>
+
+  <div>
+    <%= form.label :external_url, "External URL" %>
+    <%= form.url_field :external_url, placeholder: "https://united.obl.ong" %>
+  </div>
+
   <div>
     <%= form.label :membership_length, "Membership length (in days)" %>
     <%= form.number_field :membership_length, placeholder: "365" %>
