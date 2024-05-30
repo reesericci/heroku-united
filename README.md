@@ -31,7 +31,7 @@ TODO: Automated update system [ ]
 
 TODO: Self-hosted deployment instructions [ ]
 
-TODO: OIDC provider [X]
+~~TODO: OIDC provider [X]~~
 
 TODO: Verify emails [ ]
 
