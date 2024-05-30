@@ -43,6 +43,8 @@ TODO: Warning emails for upcoming expirations, and allow for renewing of members
 
 TODO: CSV export of membership (HIGH PRIORITY) [ ]
 
+TODO: Triggers & Hooks [ ]
+
 ## Screenshot
 
 ![Screenshot of the United dashboard](screenshot.png)
