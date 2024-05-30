@@ -36,3 +36,7 @@ TODO: Self-hosted deployment instructions [ ]
 TODO: Verify emails [ ]
 
 TODO: Unlimited membership length option [ ]
+
+## Screenshot
+
+![Screenshot of the United dashboard](screenshot.png)
