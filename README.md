@@ -39,6 +39,10 @@ TODO: Unlimited membership length option [ ]
 
 TODO: Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API [ ]
 
+TODO: Warning emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY) [ ]
+
+TODO: CSV export of membership (HIGH PRIORITY) [ ]
+
 ## Screenshot
 
 ![Screenshot of the United dashboard](screenshot.png)
