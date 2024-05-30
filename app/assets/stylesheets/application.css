@@ -167,7 +167,7 @@ form {
   max-width: 500px;
 }
 
-input[type=text], input[type=date], input[type=email], input[type=number], input[type=password] {
+input[type=text], input[type=date], input[type=email], input[type=number], input[type=password], input[type=url] {
   border: 1px solid #bbb;
   border-radius: 3px;
   font-weight: 500;

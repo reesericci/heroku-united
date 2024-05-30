@@ -7,8 +7,21 @@ class Config < ApplicationRecord
 
   store :smtp, accessors: [:server, :port, :username, :password, :box, :domain], prefix: true
 
-  before_validation do 
-    self.email = self.email.downcase
+  before_validation do
+    self.email = email.downcase
+  end
+
+  after_save_commit do
+    if oidc_key.blank?
+      update!(oidc_key: OpenSSL::PKey::RSA.new(2048))
+    end
+    Doorkeeper::OpenidConnect.configuration.instance_variable_set(:@signing_key, oidc_key)
+  end
+
+  after_initialize do
+    if Rails.application.credentials&.oidc&.[](:key) != oidc_key
+      update!(oidc_key: Rails.application.credentials&.oidc&.[](:key))
+    end
   end
 
   def self.organization
@@ -25,6 +38,10 @@ class Config < ApplicationRecord
 
   def self.external_url
     Config.first&.external_url
+  end
+
+  def self.oidc_key
+    Config.first&.oidc_key
   end
 
   private

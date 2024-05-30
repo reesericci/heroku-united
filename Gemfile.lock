@@ -208,6 +208,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
+    openssl (3.2.0)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -415,6 +416,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   local_time (~> 3.0)
+  openssl (~> 3.2)
   propshaft
   puma (>= 5.0)
   rails!
