@@ -37,6 +37,8 @@ TODO: Verify emails [ ]
 
 TODO: Unlimited membership length option [ ]
 
+TODO: Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API [ ]
+
 ## Screenshot
 
 ![Screenshot of the United dashboard](screenshot.png)
