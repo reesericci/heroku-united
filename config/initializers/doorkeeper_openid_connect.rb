@@ -2,10 +2,10 @@
 
 Doorkeeper::OpenidConnect.configure do
   issuer do
-    Config.external_url
+    Config.external_url || "http://localhost:3000"
   end
 
-  signing_key Rails.application.credentials.oidc[:key]
+  signing_key Rails.application.credentials&.oidc&.[](:key) || "A signing key has not been provided"
 
   subject_types_supported [:public]
 
@@ -55,7 +55,7 @@ Doorkeeper::OpenidConnect.configure do
 
   # Example claims:
   claims do
-    claim :email do |resource_owner|
+    claim :email, scope: :openid do |resource_owner|
       resource_owner.email
     end
 

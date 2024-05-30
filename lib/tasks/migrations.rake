@@ -62,6 +62,10 @@ Please enter it and then push [ENTER]
 
       Config.first.update!(external_url: external)
 
+      Member.establish_connection
+
+      Member.all.find_each { |m| m.create_imprint }
+
       puts "
 ###########################################
 
