@@ -19,6 +19,7 @@ class Member < ApplicationRecord
 
   before_validation do
     self.email = email.downcase
+    self.username = username.downcase
   end
 
   self.primary_key = "username"
