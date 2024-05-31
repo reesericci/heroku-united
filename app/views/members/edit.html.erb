@@ -14,6 +14,37 @@
     <%= form.label :email, "Email" %>
     <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
   </div>
+  <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
+  <%= form.fields_for :address, @member.address || Address.new(addressable_id: @member, addressable_type: Member) do |address_form| %>
+    <div>
+      <%= address_form.label :line1, "Number and Street" %>
+      <%= address_form.text_field :line1 %>
+    </div>
+    <div>
+      <%= address_form.label :line2, "Line 2" %>
+      <%= address_form.text_field :line2 %>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div style="max-width: 50%;">
+        <%= address_form.label :city %>
+        <%= address_form.text_field :city %>
+      </div>
+      <div style="max-width: 50%;">
+        <%= address_form.label :province %>
+        <%= address_form.text_field :province %>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div style="width: 50%">
+        <%= address_form.label :code, "Postal Code" %>
+        <%= address_form.text_field :code %>
+      </div>
+      <div style="width: 50%">
+        <%= address_form.label :country %>
+        <%= address_form.select :country, Domesticable::Country.all.prepend(nil) %>
+      </div>
+    </div>
+  <% end %>
   <div>
     <%= form.label :expires_at, "Expires on" %>
     <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year %>

@@ -4,6 +4,7 @@ class JoinController < ApplicationController
 
   def create
     m = Member.new(member_params)
+    m.build_address(address_params)
     m.expires_at = DateTime.now + Config.membership_length.days
     if m.invalid?
       errors = "<ul>"
@@ -22,11 +23,11 @@ class JoinController < ApplicationController
 
   private
 
-  # Using a private method to encapsulate the permissible parameters
-  # is just a good pattern since you'll be able to reuse the same
-  # permit list between create and update. Also, you can specialize
-  # this method with per-user checking of permissible attributes.
   def member_params
     params.require(:member).permit(:name, :username, :email)
+  end
+
+  def address_params
+    params.require(:member).permit(address: [:line1, :line2, :city, :province, :code, :country])[:address]
   end
 end

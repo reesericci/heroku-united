@@ -10,8 +10,13 @@ class MembersController < ApplicationController
   end
 
   def update
-    member = Member.find_or_create_by(username: params[:username])
+    member = Member.find_or_create_by!(username: params[:username])
     member.update!(member_params)
+    if member.address
+      member.address.update!(address_params)
+    elsif Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})).valid?
+      member.update!(address: Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})))
+    end
     redirect_to members_path
   end
 
@@ -23,11 +28,11 @@ class MembersController < ApplicationController
 
   private
 
-  # Using a private method to encapsulate the permissible parameters
-  # is just a good pattern since you'll be able to reuse the same
-  # permit list between create and update. Also, you can specialize
-  # this method with per-user checking of permissible attributes.
   def member_params
     params.require(:member).permit(:name, :username, :email, :expires_at, :banned)
+  end
+
+  def address_params
+    params.require(:member).permit(address_attributes: [:line1, :line2, :city, :province, :code, :country])[:address_attributes]
   end
 end

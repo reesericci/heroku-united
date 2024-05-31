@@ -167,7 +167,7 @@ form {
   max-width: 500px;
 }
 
-input[type=text], input[type=date], input[type=email], input[type=number], input[type=password], input[type=url] {
+input[type=text], input[type=date], input[type=email], input[type=number], input[type=password], input[type=url], select {
   border: 1px solid #bbb;
   border-radius: 3px;
   font-weight: 500;
@@ -178,6 +178,11 @@ input[type=text], input[type=date], input[type=email], input[type=number], input
   width: stretch;
   transition: 0.1s ease-in-out;
   background: white;
+}
+
+select {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .trix-content {

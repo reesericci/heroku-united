@@ -2,6 +2,11 @@ class Member < ApplicationRecord
   include Bannable
   include Expirable
   include Imprintable
+
+  # Addressable concern wasn't working
+  has_one :address, dependent: :destroy, autosave: true, as: :addressable
+  accepts_nested_attributes_for :address, allow_destroy: true, reject_if: :all_blank
+
   broadcasts_refreshes
 
   after_destroy_commit do
@@ -9,7 +14,7 @@ class Member < ApplicationRecord
   end
 
   validates :username, presence: true, uniqueness: true
-  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}, uniqueness: {case_sensitive: false}
+  validates :email, presence: true, format: {with: ::URI::MailTo::EMAIL_REGEXP}, uniqueness: {case_sensitive: false}
   validates :name, presence: true
 
   before_validation do

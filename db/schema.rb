@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_05_30_153204) do
+ActiveRecord::Schema[7.2].define(version: 2024_05_31_101207) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -47,6 +47,19 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_30_153204) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.text "line1"
+    t.text "line2"
+    t.text "city"
+    t.text "province"
+    t.text "code"
+    t.text "country"
+    t.string "addressable_type"
+    t.string "addressable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "api_keys", id: false, force: :cascade do |t|
@@ -122,6 +135,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_30_153204) do
     t.datetime "updated_at", null: false
     t.integer "imprint_id"
     t.datetime "last_logged_in_at"
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_members_on_address_id"
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["imprint_id"], name: "index_members_on_imprint_id"
     t.index ["username"], name: "index_members_on_username", unique: true
@@ -186,6 +201,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_30_153204) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "members", "addresses"
   add_foreign_key "members", "imprints"
   add_foreign_key "oauth_access_grants", "members", column: "resource_owner_id", primary_key: "username"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
