@@ -628,7 +628,7 @@ the exclusion of warranty; and each file should have at least the
 "copyright" line and a pointer to where the full notice is found.
 
         United, free and open membership software for collective organizations
-        Copyright (C) 2024 Reese Armstrong and United contributors
+        Copyright (C) 2024 [Software Freedom Conservancy](https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/) and United contributors
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU Affero General Public License as
