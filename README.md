@@ -1,4 +1,4 @@
-![United! A free and open system for collective organizations](<United.png>)
+<img src="https://codeberg.org/reesericci/united/media/branch/main/United.png" alt="United! A free and open system for collective organizations" width="674">
 
 # United
 
