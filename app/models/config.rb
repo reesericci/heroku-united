@@ -24,24 +24,11 @@ class Config < ApplicationRecord
     end
   end
 
-  def self.organization
-    Config.first&.organization
-  end
-
-  def self.membership_length
-    Config.first&.membership_length
-  end
-
-  def self.email
-    Config.first&.email
-  end
-
-  def self.external_url
-    Config.first&.external_url
-  end
-
-  def self.oidc_key
-    Config.first&.oidc_key
+  class << self
+    Config.connection
+    Config.first.attributes.keys.each do |k|
+      delegate k, to: :first
+    end
   end
 
   private
