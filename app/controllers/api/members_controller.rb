@@ -1,6 +1,4 @@
 class Api::MembersController < Api::BaseController
-  include Api::Authenticatable
-
   def index
     @members = Member.all.sort_by(&:created_at).reverse
   end

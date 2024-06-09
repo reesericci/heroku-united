@@ -1,6 +1,4 @@
 class Api::BroadcastsController < Api::BaseController
-  include Api::Authenticatable
-
   def index
     @broadcasts = Broadcast.all.sort_by(&:created_at).reverse
   end
