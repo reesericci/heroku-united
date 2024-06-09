@@ -5,6 +5,10 @@
 @import url("radix/yellow.css");
 @import url("https://overpass-30e2.kxcdn.com/overpass.css");
 
+:root {
+  color-scheme: light dark;
+}
+
 html {
   padding: 0;
   margin: 0;
@@ -40,7 +44,7 @@ table {
 }
 
 th {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--sand-8);
 }
 
 th:nth-last-child(1),td:nth-last-child(1) {
@@ -48,7 +52,7 @@ th:nth-last-child(1),td:nth-last-child(1) {
 }
 
 th, td {
-  border-right: 1px solid black;
+  border-right: 1px solid var(--sand-8);
   box-sizing: border-box;
   padding: 0.5rem;
 }
@@ -121,7 +125,7 @@ button, a[type=button], input[type=submit] {
   background-color: var(--amber-9);
   font-weight: 600;
   border: 2px solid var(--amber-9);
-  color: var(--sand-12);
+  color: light-dark(black,var(--sand-3));
   padding: 5px 10px;
   cursor: pointer;
   transition: 0.2s ease-in-out;
@@ -168,7 +172,7 @@ form {
 }
 
 input[type=text], input[type=date], input[type=email], input[type=number], input[type=password], input[type=url], select {
-  border: 1px solid #bbb;
+  border: 1px solid var(--sand-8);
   border-radius: 3px;
   font-weight: 500;
   font-size: 16px;
@@ -177,7 +181,7 @@ input[type=text], input[type=date], input[type=email], input[type=number], input
   width: -webkit-fill-available;
   width: stretch;
   transition: 0.1s ease-in-out;
-  background: white;
+  background: var(--sand-1);
 }
 
 select {
@@ -186,7 +190,7 @@ select {
 }
 
 .trix-content {
-  background: white !important;
+  background: var(--sand-1) !important;
 }
 
 input[type=text]:focus, input[type=date]:focus, input[type=email]:focus, input[type=number]:focus, input[type=password]:focus {
@@ -264,4 +268,8 @@ form > div {
 
 a[type=button].subheading-button {
   display: inline-block;
+}
+
+.trix-button {
+  background: light-dark(transparent, var(--sand-12)) !important;
 }
