@@ -1,4 +1,4 @@
-class Api::BroadcastsController < Api::ApiController
+class Api::BroadcastsController < Api::BaseController
   include Api::Authenticatable
 
   def index

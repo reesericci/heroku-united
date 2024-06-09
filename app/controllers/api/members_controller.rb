@@ -1,4 +1,4 @@
-class Api::MembersController < Api::ApiController
+class Api::MembersController < Api::BaseController
   include Api::Authenticatable
 
   def index
