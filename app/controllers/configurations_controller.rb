@@ -1,5 +1,5 @@
 class ConfigurationsController < ApplicationController
-  include Authenticatable
+  include Authenticate
   skip_before_action :ensure_configured, :ensure_authenticated, only: [:new, :create]
 
   def new

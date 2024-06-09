@@ -1,5 +1,5 @@
 class MembersController < ApplicationController
-  include Authenticatable
+  include Authenticate
 
   def index
     @members = Member.all.sort_by(&:created_at).reverse

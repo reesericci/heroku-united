@@ -1,5 +1,5 @@
 class ApiKeysController < ApplicationController
-  include Authenticatable
+  include Authenticate
 
   def index
   end
