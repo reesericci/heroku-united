@@ -48,7 +48,11 @@ Rails.application.config.to_prepare do
     end
 
     def authenticate!
-      m = Member.find_by(username: login_params[:username])
+      m = begin
+        Member.find(login_params[:username])
+      rescue ActiveRecord::RecordNotFound
+        nil
+      end
       if m&.imprint&.code&.authenticate!(login_params[:code])
         success!(m)
       else
