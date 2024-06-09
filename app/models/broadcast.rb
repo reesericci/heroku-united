@@ -5,7 +5,7 @@ class Broadcast < ApplicationRecord
 
   after_create_commit do |b|
     Member.where_active.each do |m|
-      e = BroadcastMailer.with(broadcast: self, member: m).broadcast_email
+      e = BroadcastMailer.with(broadcast: self, member: m).new
       e.deliver_later
     end
   end

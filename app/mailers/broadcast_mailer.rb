@@ -1,5 +1,5 @@
 class BroadcastMailer < ApplicationMailer
-  def broadcast_email
+  def new
     delivery_options = {
       user_name: Config.first.smtp[:username],
       password: Config.first.smtp[:password],
