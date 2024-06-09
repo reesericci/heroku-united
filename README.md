@@ -33,27 +33,27 @@ You should have received a copy of the GNU Affero General Public License along w
 
 ## TODOS (Roadmap-ish)
 
-TODO: Deploy to Heroku & Render buttons [ ]
+- [ ] Deploy to Heroku & Render buttons
 
-TODO: Automated update system [ ]
+- [ ] Automated update system
 
-TODO: Self-hosted deployment instructions [ ]
+- [ ] Self-hosted deployment instructions
 
-TODO: OIDC provider [X]
+- [X] OIDC provider
 
-TODO: Verify emails [ ]
+- [ ] Verify emails
 
-TODO: Unlimited membership length option [ ]
+- [ ] Unlimited membership length option
 
-TODO: Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API [ ]
+- [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
 
-TODO: Warning emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY) [ ]
+- [ ] Warning emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
 
-TODO: CSV export of membership (HIGH PRIORITY) [ ]
+- [ ] CSV export of membership (HIGH PRIORITY)
 
-TODO: Triggers & Hooks [ ]
+- [ ] Triggers & Hooks
 
-TODO: Automated testing (RSpec) [ ]
+- [ ] Automated testing (RSpec)
 
 ## Screenshot
 
