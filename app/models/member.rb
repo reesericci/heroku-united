@@ -1,5 +1,4 @@
 class Member < ApplicationRecord
-  include Bannable
   include Expirable
   include Imprintable
 
