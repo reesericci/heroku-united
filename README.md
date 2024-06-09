@@ -39,7 +39,7 @@ TODO: Automated update system [ ]
 
 TODO: Self-hosted deployment instructions [ ]
 
-~~TODO: OIDC provider [X]~~
+TODO: OIDC provider [X]
 
 TODO: Verify emails [ ]
 
@@ -52,6 +52,8 @@ TODO: Warning emails for upcoming expirations, and allow for renewing of members
 TODO: CSV export of membership (HIGH PRIORITY) [ ]
 
 TODO: Triggers & Hooks [ ]
+
+TODO: Automated testing (RSpec) [ ]
 
 ## Screenshot
 
