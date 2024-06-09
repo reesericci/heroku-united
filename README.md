@@ -1,4 +1,4 @@
-<img src="https://codeberg.org/reesericci/united/media/branch/main/United.png" alt="United! A free and open system for collective organizations" width="674">
+<img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/United.png" alt="United! A free and open system for collective organizations" width="674">
 
 # United
 
@@ -55,6 +55,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 - [ ] Automated testing (RSpec)
 
-## Screenshot
+## Screenshots
 
-![Screenshot of the United dashboard](screenshot.png)
+![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
+![Screenshot of the United dashboard in dark mode](pictures/admin-members-dark.png)
+![Screenshot of the United join page in light mode](pictures/join.png)
