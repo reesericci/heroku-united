@@ -11,7 +11,7 @@ class ApiKeysController < ApplicationController
   end
 
   def destroy
-    a = Api::Key.find_by(id: params[:id]).destroy!
+    Api::Key.find_by(id: params[:id]).destroy!
     redirect_back fallback_location: api_keys_path
   end
 
