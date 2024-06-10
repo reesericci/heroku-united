@@ -229,6 +229,7 @@ form > div {
 .flash-error {
   display: flex;
   padding: 1rem 2rem;
+  align-items: center;
   background: var(--red-9);
   width: fit-content;
   color: var(--sand-1);

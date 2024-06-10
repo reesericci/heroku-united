@@ -95,7 +95,12 @@
     pad.fromData(data)
 
     window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-      canvas.style.backgroundColor = bgColor;
+      let currentData = pad.toData();
+      pad.clear()
+      currentData.forEach((p) => {
+        p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+      })
+      pad.fromData(currentData)
     })
   })
 </script>

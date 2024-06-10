@@ -1,4 +1,4 @@
-module Identity::Authenticatable
+module Identity::Authenticate
   extend ActiveSupport::Concern
 
   included do
@@ -7,7 +7,8 @@ module Identity::Authenticatable
 
   def ensure_authenticated
     if !request.env["warden"].authenticated?(:identity)
-      redirect_to login_path, flash: {redirect_back: request.env["PATH_INFO"]}
+      session[:redirect] = request.env["PATH_INFO"]
+      redirect_to new_identity_postmark_path
     end
   end
 end

@@ -59,6 +59,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 - [ ] Automated testing (RSpec)
 
+- [X] Self-serve portal for editing membership data 
+
 ## Screenshots
 
 ![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
