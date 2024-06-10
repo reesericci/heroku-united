@@ -1,0 +1,7 @@
+{
+  "name": "United",
+  "description": "Free and open membership software for collective organizations",
+  "repository": "https://codeberg.org/reesericci/united",
+  "logo": "https://codeberg.org/reesericci/united/media/branch/main/pictures/icon.png",
+  "keywords": ["united", "membership", "rails"]
+}
