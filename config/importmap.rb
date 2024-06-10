@@ -8,3 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "local-time" # @3.0.2
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
+pin "signature_pad" # @5.0.1

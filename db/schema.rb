@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_05_31_101207) do
+ActiveRecord::Schema[7.2].define(version: 2024_06_09_191944) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -136,6 +136,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_31_101207) do
     t.integer "imprint_id"
     t.datetime "last_logged_in_at"
     t.integer "address_id"
+    t.text "signature"
     t.index ["address_id"], name: "index_members_on_address_id"
     t.index ["email"], name: "index_members_on_email", unique: true
     t.index ["imprint_id"], name: "index_members_on_imprint_id"

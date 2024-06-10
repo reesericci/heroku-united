@@ -24,7 +24,7 @@ class JoinController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :username, :email)
+    params.require(:member).permit(:name, :username, :email, :signature)
   end
 
   def address_params

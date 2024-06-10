@@ -45,6 +45,14 @@
       </div>
     </div>
   <% end %>
+  <div style="height: 100%; width: 100%;">
+    <%= form.label :signature, "Signature" %>
+    <%= form.hidden_field :signature %>
+    <div style="position: relative; width: 100%;">
+      <canvas class="signature">
+      </canvas>
+    </div>
+  </div>
   <div>
     <%= form.label :expires_at, "Expires on" %>
     <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year %>
@@ -56,3 +64,37 @@
   <%= form.submit %>
   <%= form.submit "Delete Member", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete #{@member.name}?" } %>
 <% end %>
+
+<script>
+  import("signature_pad").then((mod) => {
+    const canvas = document.querySelector("canvas")
+    const SignaturePad = mod.default;
+    const bgColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#111110": "#fdfdfc";
+
+    const pad = new SignaturePad(canvas, {
+      penColor: window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+    });
+
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = 150 * ratio;
+      canvas.getContext("2d").scale(ratio, ratio);
+      pad.clear(); // otherwise isEmpty() might return incorrect value
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const data = JSON.parse(document.querySelector("#member_signature").value)
+    data.forEach((p) => {
+      p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+    })
+    pad.fromData(data)
+    pad.off();
+
+    window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+      canvas.style.backgroundColor = bgColor;
+    })
+  })
+</script>
