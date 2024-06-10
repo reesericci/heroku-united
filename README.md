@@ -61,6 +61,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 - [X] Self-serve portal for editing membership data 
 
+- [ ] Allow for fetching of identity login codes via TOTP app instead of email
+
 ## Screenshots
 
 ![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
