@@ -6,7 +6,9 @@
 ![Last Commit](https://img.shields.io/gitea/last-commit/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-brightgreen)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
+[<img src="https://render.com/images/deploy-to-render-button.svg" height="32" style="border-radius: 4px" alt="Deploy to Render">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
+[<img src="https://railway.app/button.svg" height="32" style="border-radius: 4px" alt="Deploy to Railway">](https://railway.app/template/UrEjLl)
 
 United is free and open membership software for collective organizations, allowing robust tracking of membership, expirations, email broadcast tools, providing single-sign-on for your members, and more.
 
@@ -40,9 +42,9 @@ You should have received a copy of the GNU Affero General Public License along w
 
 ## TODOS (Roadmap-ish)
 
-- [ ] Deploy to Heroku & Render buttons
+- [X] Deploy to Heroku & Render buttons
   - [X] Heroku
-  - [ ] Render
+  - [X] Render
 
 - [ ] Automated update system
 
