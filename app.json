@@ -3,5 +3,17 @@
   "description": "Free and open membership software for collective organizations",
   "repository": "https://codeberg.org/reesericci/united",
   "logo": "https://codeberg.org/reesericci/united/media/branch/main/pictures/icon.png",
-  "keywords": ["united", "membership", "rails"]
+  "keywords": ["united", "membership", "rails"],
+  "success_url": "/configuration/new",
+  "addons": ["heroku-postgresql:essential-0"],
+  "env": {
+    "RAILS_ENV": "production",
+    "COOKIE_SECRET": {
+      "description": "This gets generated",
+      "generator": "secret"
+    }
+  },
+  "scripts": {
+    "postdeploy": "bundle exec rails db:migrate && bundle exec rails assets:precompile"
+  }
 }
