@@ -31,7 +31,7 @@ You should have received a copy of the GNU Affero General Public License along w
 ## Details
 
 - SQLite Database by default (No external DB required)
-  - Optional Postgres support available
+  - Optional PostgreSQL support available by setting the `DATABASE_URL` environment variable
 
 - Ruby 3.3.2
 
