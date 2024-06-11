@@ -213,6 +213,7 @@ GEM
     parser (3.3.0.5)
       ast (~> 2.4.1)
       racc
+    pg (1.5.6)
     propshaft (0.8.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -417,6 +418,7 @@ DEPENDENCIES
   jbuilder
   local_time (~> 3.0)
   openssl (~> 3.2)
+  pg (~> 1.5)
   propshaft
   puma (>= 5.0)
   rails!

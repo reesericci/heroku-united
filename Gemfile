@@ -93,3 +93,5 @@ gem "openssl", "~> 3.2"
 gem "standard"
 
 gem "standard-rails"
+
+gem "pg", "~> 1.5"
