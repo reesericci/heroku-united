@@ -27,5 +27,6 @@ module United
     config.action_mailer.delivery_method = :smtp
     config.session_store :active_record_store, key: "_united_session", expire_after: 30.minutes
     config.active_record.sqlite3_production_warning = false
+    config.cache_store = :solid_cache_store
   end
 end
