@@ -1,10 +1,10 @@
 {
   "name": "United",
-  "description": "Free and open membership software for collective organizations (Source at codeberg)",
+  "description": "Free and open membership software for collective organizations (source at Codeberg)",
   "repository": "https://github.com/reesericci/heroku-united",
   "logo": "https://codeberg.org/reesericci/united/media/branch/main/pictures/icon.png",
   "keywords": ["united", "membership", "rails"],
-  "success_url": "/configuration/new",
+  "success_url": "/admin/configuration/new",
   "addons": ["heroku-postgresql:essential-0"],
   "env": {
     "RAILS_ENV": "production",

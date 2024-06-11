@@ -6,6 +6,8 @@
 ![Last Commit](https://img.shields.io/gitea/last-commit/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-brightgreen)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
+
 United is free and open membership software for collective organizations, allowing robust tracking of membership, expirations, email broadcast tools, providing single-sign-on for your members, and more.
 
 Copyright (C) 2024 [Software Freedom Conservancy](https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/) and United contributors
@@ -28,9 +30,10 @@ You should have received a copy of the GNU Affero General Public License along w
 
 ## Details
 
-- SQLite Database (No external DB needed)
+- SQLite Database by default (No external DB required)
+  - Optional Postgres support available
 
-- Ruby 3.3.0
+- Ruby 3.3.2
 
 - Site configuration handled through initial wizard
 
@@ -38,6 +41,8 @@ You should have received a copy of the GNU Affero General Public License along w
 ## TODOS (Roadmap-ish)
 
 - [ ] Deploy to Heroku & Render buttons
+  - [X] Heroku
+  - [ ] Render
 
 - [ ] Automated update system
 

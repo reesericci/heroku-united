@@ -9,7 +9,7 @@ WORKDIR /rails
 
 # Install base packages
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libsqlite3-0 libvips libpq-devel
+    apt-get install --no-install-recommends -y curl libjemalloc2 libsqlite3-0 libvips libpq-dev
 
 # Set production environment
 ENV RAILS_ENV="production" \
