@@ -49,10 +49,6 @@ group :development, :test do
   gem "rspec"
 
   gem "rspec-rails"
-
-  gem "standard"
-
-  gem "standard-rails"
 end
 
 group :development do
@@ -93,3 +89,7 @@ gem "doorkeeper-openid_connect", "~> 1.8"
 gem "shell", "~> 0.8.1"
 
 gem "openssl", "~> 3.2"
+
+gem "standard"
+
+gem "standard-rails"
