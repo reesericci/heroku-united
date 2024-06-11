@@ -26,7 +26,7 @@ class Config < ApplicationRecord
 
   class << self
     Config.connection
-    Config.first.attributes.keys.each do |k|
+    Config.column_names.each do |k|
       delegate k, to: :first
     end
   end
