@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp .env.example .env
+cp example.env .env
 if command -v docker &> /dev/null; then
   sed -i "sSECRET_KEY_BASE=.*$SECRET_KEY_BASE=$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)" .env
   sed -i "sRAILS_MASTER_KEY=.*$RAILS_MASTER_KEY=$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)" .env
