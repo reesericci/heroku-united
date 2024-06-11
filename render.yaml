@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: web
-    name: mysite
+    name: united
     runtime: ruby
     plan: free
     buildCommand: "./render.sh"
@@ -17,6 +17,8 @@ services:
           name: united
           property: connectionString
       - key: RAILS_MASTER_KEY
+        sync: false
+      - key: SECRET_KEY_BASE
         sync: false
       - key: WEB_CONCURRENCY
         value: 2 # sensible default
