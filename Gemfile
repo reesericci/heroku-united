@@ -1,3 +1,5 @@
+ruby "3.3.0"
+
 source "https://rubygems.org"
 
 # Use main development branch of Rails
