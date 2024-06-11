@@ -27,7 +27,7 @@ class Config < ApplicationRecord
   class << self
     Config.connection
     Config.column_names.each do |k|
-      delegate k, to: :first
+      delegate k, to: :first, allow_nil: true
     end
   end
 
