@@ -39,12 +39,15 @@ If you don't want to use Railway, here are some other options for cloud deployme
 
 If you'd like, please feel free to take a task on here and send in a PR!
 
-- [X] Deploy to [service] buttons
+- Deploy to [service] buttons
   - [X] Heroku
   - [X] Render
   - [X] Railway
   - [ ] [Digital Ocean](https://docs.digitalocean.com/products/app-platform/how-to/add-deploy-do-button/)
   - [ ] Nest
+  - [ ] [AWS Amplify](https://docs.aws.amazon.com/amplify/latest/userguide/one-click.html)
+  - [ ] [GCP](https://cloud.google.com/blog/products/serverless/introducing-cloud-run-button-click-to-deploy-your-git-repos-to-google-cloud)
+  - [ ] [Azure](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-azure-button)
 
 - [ ] Automated update system
 
