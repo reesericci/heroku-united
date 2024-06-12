@@ -70,6 +70,10 @@ You should have received a copy of the GNU Affero General Public License along w
 
 - [ ] Allow for fetching of identity login codes via TOTP app instead of email
 
+- [ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
+
+- [ ] Approval queue for new members instead of automatic acceptance
+
 ## Screenshots
 
 ![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
