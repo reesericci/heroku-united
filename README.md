@@ -35,11 +35,16 @@ If you don't want to use Railway, here are some other options for cloud deployme
 - Site configuration handled through initial wizard
 
 
-## TODOS (Roadmap-ish)
+## TODOS (Roadmap-ish, no particular order)
 
-- [X] Deploy to Heroku & Render buttons
+If you'd like, please feel free to take a task on here and send in a PR!
+
+- [X] Deploy to [service] buttons
   - [X] Heroku
   - [X] Render
+  - [X] Railway
+  - [ ] [Digital Ocean](https://docs.digitalocean.com/products/app-platform/how-to/add-deploy-do-button/)
+  - [ ] Nest
 
 - [ ] Automated update system
 
