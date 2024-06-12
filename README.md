@@ -6,29 +6,23 @@
 ![Last Commit](https://img.shields.io/gitea/last-commit/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-brightgreen)
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
-[<img src="https://render.com/images/deploy-to-render-button.svg" height="32" style="border-radius: 4px" alt="Deploy to Render">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
-[<img src="https://railway.app/button.svg" height="32" style="border-radius: 4px" alt="Deploy to Railway">](https://railway.app/template/UrEjLl)
-
 United is free and open membership software for collective organizations, allowing robust tracking of membership, expirations, email broadcast tools, providing single-sign-on for your members, and more.
-
-Copyright (C) 2024 [Software Freedom Conservancy](https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/) and United contributors
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+## Deploying
 
-You should have received a copy of the GNU Affero General Public License along with this program. If not, see https://www.gnu.org/licenses/.
+I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
 
-## Deploying with Fly.io
+[<img src="https://railway.app/button.svg" height="32" alt="Deploy on Railway">](https://railway.app/template/UrEjLl?referralCode=_0Cj0x)
+---
 
-1. Clone this repository to your computer
-2. Make an account with [fly.io](https://fly.io)
-3. Install the fly.io CLI
-4. Run `fly login` in the terminal
-5. Run `rails credentials:edit` then press (CTRL/CMD)+X to exit the nano editor
-6. Run `fly launch`
-7. Enjoy!
+If you don't want to use Railway, here are some other options for cloud deployments:
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
+[<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
+[<img src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io">](https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io)
+
 
 ## Details
 
@@ -75,6 +69,16 @@ You should have received a copy of the GNU Affero General Public License along w
 - [ ] Approval queue for new members instead of automatic acceptance
 
 - [ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)
+
+## Copyright
+
+Copyright (C) 2024 [Software Freedom Conservancy](https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/) and United contributors
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 
 ## Screenshots
 
