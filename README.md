@@ -15,6 +15,7 @@ This program is free software: you can redistribute it and/or modify it under th
 I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
 
 [<img src="https://railway.app/button.svg" height="32" alt="Deploy on Railway">](https://railway.app/template/UrEjLl?referralCode=_0Cj0x)
+
 ---
 
 If you don't want to use Railway, here are some other options for cloud deployments:
