@@ -74,6 +74,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 - [ ] Approval queue for new members instead of automatic acceptance
 
+- [ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)
+
 ## Screenshots
 
 ![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
