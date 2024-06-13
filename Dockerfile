@@ -74,4 +74,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 80
-CMD ["bundle", "exec", "thrust", "./bin/rails", "server"]
+CMD HTTP_PORT=${PORT:-80} bundle exec thrust ./bin/rails server
