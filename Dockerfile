@@ -20,15 +20,12 @@ RUN gem update --system --no-document && \
     gem install -N bundler
 
 
-# Throw-away build stages to reduce size of final image
-FROM base as prebuild
+# Throw-away build stage to reduce size of final image
+FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential curl git libpq-dev libvips pkg-config unzip
-
-
-FROM prebuild as bun
 
 # Install Bun
 ARG BUN_VERSION=1.0.4
@@ -36,23 +33,15 @@ ENV BUN_INSTALL=/usr/local/bun
 ENV PATH=/usr/local/bun/bin:$PATH
 RUN curl -fsSL https://bun.sh/install | bash -s -- "bun-v${BUN_VERSION}"
 
-# Install node modules
-COPY --link bun.lockb ./
-RUN bun install --frozen-lockfile
-
-
-FROM prebuild as build
-
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
 RUN bundle install && \
     bundle exec bootsnap precompile --gemfile && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
-# Copy bun modules
-COPY --from=bun /rails/node_modules /rails/node_modules
-COPY --from=bun /usr/local/bun /usr/local/bun
-ENV PATH=/usr/local/bun/bin:$PATH
+# Install node modules
+COPY --link bun.lockb ./
+RUN bun install --frozen-lockfile
 
 # Copy application code
 COPY --link . .
