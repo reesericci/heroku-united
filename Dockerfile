@@ -65,18 +65,17 @@ RUN groupadd -f -g $GID rails && \
 USER rails:rails
 
 # Deployment options
-ARG PORT=3000 \
-    THRUSTER_TARGET_PORT=3001
+ARG PORT
 
 ENV LD_PRELOAD="libjemalloc.so.2" \
     MALLOC_CONF="dirty_decay_ms:1000,narenas:2,background_thread:true" \
     RUBY_YJIT_ENABLE="1" \
-    THRUSTER_HTTP_PORT=${PORT} \
-    THRUSTER_TARGET_PORT=${THRUSTER_TARGET_PORT}
+    THRUSTER_HTTP_PORT=${PORT:-3000} \
+    THRUSTER_TARGET_PORT=3001
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE ${PORT}
+EXPOSE ${PORT:-3000}
 CMD ["bundle", "exec", "thrust", "./bin/rails", "server"]
