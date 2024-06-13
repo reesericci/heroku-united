@@ -2,10 +2,12 @@
 
 ---
 options:
+  cache: true
   compose: true
   jemalloc: true
   label:
     fly_launch_runtime: rails
+  lock: false
   parallel: true
   postgresql: true
   sqlite3: true
