@@ -2,5 +2,13 @@
 
 ---
 options:
+  compose: true
+  jemalloc: true
   label:
     fly_launch_runtime: rails
+  parallel: true
+  postgresql: true
+  sqlite3: true
+  sudo: true
+  thruster: true
+  yjit: true

@@ -97,3 +97,5 @@ gem "standard-rails"
 gem "pg", "~> 1.5"
 
 gem "solid_cache", "~> 0.6.0"
+
+gem "thruster", "~> 0.1.4"
