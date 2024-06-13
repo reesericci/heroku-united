@@ -77,5 +77,5 @@ ENV LD_PRELOAD="libjemalloc.so.2" \
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE ${PORT:-3000}
+EXPOSE $PORT
 CMD ["bundle", "exec", "thrust", "./bin/rails", "server"]
