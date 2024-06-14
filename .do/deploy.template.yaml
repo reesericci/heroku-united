@@ -16,11 +16,11 @@ spec:
      value: production
    - key: DATABASE_URL
      scope: RUN_TIME
-     value: ${united-db.DATABASE_URL}
+     value: "${united-db.DATABASE_URL}"
     health_check:
       http_path: /up
   databases:
   - name: united-db
-    engine: "PG"
+    engine: PG
     db_name: united
     db_user: united
