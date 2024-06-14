@@ -7,9 +7,11 @@ options:
   jemalloc: true
   label:
     fly_launch_runtime: rails
+  link: false
   lock: false
   parallel: true
   postgresql: true
+  procfile:
   sqlite3: true
   sudo: true
   thruster: true

@@ -78,8 +78,6 @@ gem "warden", "~> 1.2"
 
 gem "rswag", "~> 2.13"
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
-
 gem "doorkeeper", "~> 5.7"
 
 gem "rotp", "~> 6.3"
@@ -99,3 +97,5 @@ gem "pg", "~> 1.5"
 gem "solid_cache", "~> 0.6.0"
 
 gem "thruster", "~> 0.1.4"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
