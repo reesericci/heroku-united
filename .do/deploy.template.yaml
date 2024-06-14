@@ -8,8 +8,6 @@ spec:
      branch: main
      repo_clone_url: "https://github.com/reesericci/heroku-united.git"
    envs:
-   - key: DB_UNITED_1
-     type: SECRET
    - key: SECRET_KEY_BASE
      type: secret
    - key: RAILS_MASTER_KEY
@@ -18,11 +16,11 @@ spec:
      value: production
    - key: DATABASE_URL
      scope: RUN_TIME
-     value: ${db.DATABASE_URL}
+     value: ${united-db.DATABASE_URL}
     health_check:
       http_path: /up
   databases:
-  - name: db
+  - name: united-db
     engine: "PG"
     db_name: united
     db_user: united
