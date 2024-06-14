@@ -5,7 +5,7 @@ if [ "${*}" == "bundle exec thrust ./bin/rails server" ]; then
   ./bin/rails db:prepare
 fi
 
-if [[ -z "${RAILWAY_PROJECT_ID}" ]]; then
+if [[ -n "${RAILWAY_SERVICE_ID}" ]]; then
   echo "Detected railway environment with port ${PORT}"
   exec env HTTP_PORT="${PORT}" "${@}"
 else
