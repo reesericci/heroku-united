@@ -14,13 +14,14 @@ spec:
      type: secret
    - key: RAILS_ENV
      value: production
-   - key: DATABASE_URL
-     scope: RUN_TIME
-     value: "${united-db.DATABASE_URL}"
-    health_check:
-      http_path: /up
+  health_check:
+     http_path: /up
   databases:
   - name: united-db
     engine: PG
     db_name: united
     db_user: united
+  envs:
+  - key: DATABASE_URL
+    scope: RUN_TIME
+    value: "${united-db.DATABASE_URL}"
