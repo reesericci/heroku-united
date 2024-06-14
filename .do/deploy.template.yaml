@@ -1,22 +1,22 @@
 spec:
  name: united
  services:
- - name: web
-   http_port: 80
-   dockerfile_path: Dockerfile
-   git:
-     branch: main
-     repo_clone_url: https://github.com/reesericci/heroku-united.git
-  envs:
-    - key: SECRET_KEY_BASE
-      type: secret
-    - key: RAILS_MASTER_KEY
-      type: secret
-    - key: RAILS_ENV
-      value: production
-    - key: DATABASE_URL
-      scope: RUN_TIME
-      value: ${db.DATABASE_URL}
+   - name: web
+     http_port: 80
+     dockerfile_path: Dockerfile
+     git:
+       branch: main
+       repo_clone_url: "https://github.com/reesericci/heroku-united.git"
+     envs:
+       - key: SECRET_KEY_BASE
+         type: secret
+       - key: RAILS_MASTER_KEY
+         type: secret
+       - key: RAILS_ENV
+         value: production
+       - key: DATABASE_URL
+         scope: RUN_TIME
+         value: ${db.DATABASE_URL}
   databases:
-  - name: db
-    engine: "PG"
+    - name: db
+      engine: "PG"
