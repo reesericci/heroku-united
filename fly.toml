@@ -10,21 +10,20 @@ kill_timeout = '5s'
 console_command = '/rails/bin/rails console'
 
 [build]
+  dockerfile = "Containerfile"
 
 [deploy]
 
 [env]
   DATABASE_URL = 'sqlite3:///mnt/db/production.sqlite'
-  PORT = '3000'
   RAILS_ENV = 'production'
-  SERVER_COMMAND = 'bundle exec rails db:migrate && bundle exec puma -C config/puma.rb -e production'
 
 [[mounts]]
   source = 'db'
   destination = '/mnt/db'
 
 [http_service]
-  internal_port = 3000
+  internal_port = 80
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -33,7 +32,7 @@ console_command = '/rails/bin/rails console'
 
 [[services]]
   protocol = 'tcp'
-  internal_port = 3000
+  internal_port = 80
   processes = ['app']
 
   [[services.ports]]
@@ -52,7 +51,7 @@ console_command = '/rails/bin/rails console'
 
 [checks]
   [checks.status]
-    port = 3000
+    port = 80
     type = 'http'
     interval = '10s'
     timeout = '2s'

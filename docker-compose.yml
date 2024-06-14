@@ -1,17 +1,19 @@
-version: "3.8"
 services:
   web:
     build:
       context: .
+      dockerfile: Containerfile
       args:
         UID: ${UID:-1000}
         GID: ${GID:-${UID:-1000}}
     ports:
-      - "3000:3000"
+      - "3000:80"
+      - "4000:443"
     environment:
-      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
-      - DATABASE_URL=sqlite3:///db/production.sqlite3
+      - RAILS_ENV=production
+      # To enable HTTPS & automatic TLS w/Let's Encrypt
+      # - TLS_DOMAIN=your.external.domain
+    env_file: .env
+    # To generate .env secrets, run gen_secrets.sh
     volumes:
-      - db:/db/
-volumes:
-  db: {}
+      - "./storage/:/rails/storage"
