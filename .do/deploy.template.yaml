@@ -19,8 +19,6 @@ spec:
   databases:
   - name: united-db
     engine: PG
-    db_name: united
-    db_user: united
   envs:
   - key: DATABASE_URL
     scope: RUN_TIME
