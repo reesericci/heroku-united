@@ -6,6 +6,7 @@ if [ "${*}" == "bundle exec thrust ./bin/rails server" ]; then
 fi
 
 if [[ -z "${RAILWAY_PROJECT_ID}" ]]; then
+  echo "Detected railway environment with port ${PORT}"
   exec env HTTP_PORT="${PORT}" "${@}"
 else
   exec "${@}"
