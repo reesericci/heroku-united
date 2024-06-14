@@ -9,9 +9,9 @@ spec:
       repo_clone_url: "https://github.com/reesericci/heroku-united.git"
     envs:
     - key: SECRET_KEY_BASE
-      type: secret
+      type: SECRET
     - key: RAILS_MASTER_KEY
-      type: secret
+      type: SECRET
     - key: RAILS_ENV
       value: production
     health_check:
