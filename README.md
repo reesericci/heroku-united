@@ -10,7 +10,7 @@ United is free and open membership software for collective organizations, allowi
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-## Deploying
+## Installation
 
 > [!NOTE]
 > United requires an external email (SMTP) server to send login codes & information to members. We recommend using [Postmark](https://postmarkapp.com) or another **transactional email** service for this. 
@@ -24,14 +24,14 @@ I recommend that people use Railway to deploy United, as it has a free tier and 
 
 [<img src="https://railway.app/button.svg" height="32" alt="Deploy on Railway">](https://railway.app/template/UrEjLl?referralCode=_0Cj0x)
 
----
-
 If you don't want to use Railway, here are some other options for cloud deployments:
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
 [<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
 [<img src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io">](https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io)
 
+
+---
 
 ## Details
 
