@@ -40,6 +40,8 @@ If you don't want to use Railway, here are some other options for cloud deployme
 
 - Ruby 3.3.2
 
+- Rails edge (main branch)
+
 - Site configuration handled through initial wizard
 
 
