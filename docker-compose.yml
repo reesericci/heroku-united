@@ -3,9 +3,7 @@ services:
     build:
       context: .
       dockerfile: Containerfile
-      args:
-        UID: ${UID:-1000}
-        GID: ${GID:-${UID:-1000}}
+    user: ${UID:-1000}:${GID:-1000}
     ports:
       - "80:80"
       - "443:443"
@@ -17,3 +15,5 @@ services:
     # To generate .env secrets, run gen_secrets.sh
     volumes:
       - "./storage/:/rails/storage"
+      - "./db:/rails/db"
+      - "./log:/rails/log"

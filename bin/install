@@ -10,42 +10,61 @@ if ! command -v curl &> /dev/null; then
   exit 1
 fi
 
-printf "Installing United to /srv/united/..."
+printf "Installing United to /srv/united/...\n\n"
 
-curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/united
+curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/
 
 cd /srv/united
 
-bin/gen_secrets
+tee .env <<EOF &> /dev/null 
+SECRET_KEY_BASE=\"$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)\"
+RAILS_MASTER_KEY=\"$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)\"
+EOF
 
-read -p "Would you like to enable HTTPS? (y/N)" -n 1 -r $https
+read -p "Would you like to enable HTTPS? (y/N)" -n 1 -e -r https
 
-if [[ $https =~ ^[Yy]$ ]];
-then
+if [[ $https =~ ^[Yy]$ ]]; then
   printf "What's your external domain?\n"
-  read -r domain
+  read -e -r domain
   fqdn="${domain#http*://}"
   printf "TLS_DOMAIN=${fqdn}" | tee -a .env
 fi
 
-tee /etc/systemd/system/united.service <<EOF
+docker compose build
+
+tee /etc/systemd/system/united.service <<END &> /dev/null
 [Unit]
 Description=United
 After=docker.service
 
-[Service]G
+[Service]
 Type=simple
+DynamicUser=true
+ReadWritePaths=/srv/united/db /srv/united/log /srv/united/storage /run /var
+ReadOnlyPaths=/
+ExecPaths=/usr/sbin/my_daemon /usr/lib /usr/lib64
+InaccessiblePaths=-/lost+found
+NoExecPaths=/
+ExecPaths=/usr/bin/docker /usr/lib /usr/lib64 /srv/united/bin/
 Restart=on-failure
-WorkingDirectory=/srv/united
-ExecStart=/bin/docker compose up --remove-orphans
-ExecStop=/bin/docker compose down
+WorkingDirectory=/srv/united/
+ExecStart=/usr/bin/docker compose up --remove-orphans
+ExecStop=/usr/bin/docker compose down
 
 [Install]
 WantedBy=multi-user.target
-EOF
+END
 
 systemctl daemon-reload
 
-systemctl enable --now united
+docker compose up --remove-orphans -d
 
-printf "United is now available at http://${domain:-$(hostname -I)}
+systemctl enable united.service
+
+ips=$(hostname -i)
+
+printf "United is now available at:\n"
+
+for i in $ips; do
+  printf "http://$i\n"
+done

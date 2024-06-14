@@ -70,6 +70,13 @@ RUN groupadd -f -g $GID rails && \
     useradd -u $UID -g $GID rails --create-home --shell /bin/bash && \
     sed -i 's/env_reset/env_keep="*"/' /etc/sudoers && \
     chown -R rails:rails db log storage tmp
+# Install fixuid
+RUN curl -SsL https://github.com/boxboat/fixuid/releases/download/v0.6.0/fixuid-0.6.0-linux-amd64.tar.gz | tar -C /usr/local/bin -xzf - && \
+    chown root:root /usr/local/bin/fixuid && \
+    chmod 4755 /usr/local/bin/fixuid && \
+    mkdir -p /etc/fixuid && \
+    printf "user: rails\ngroup: rails\n" > /etc/fixuid/config.yml
+
 USER rails:rails
 
 # Deployment options
