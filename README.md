@@ -13,7 +13,7 @@ This program is free software: you can redistribute it and/or modify it under th
 ## Deploying
 
 > [!NOTE]
-> United requires an external email (SMTP) server to send login codes & information to members. We recommend using [Postmark](https://postmarkapp.com) or another **transacational email** service for this.
+> United requires an external email (SMTP) server to send login codes & information to members. We recommend using [Postmark](https://postmarkapp.com) or another **transactional email** service for this.
 
 ### Cloud
 
