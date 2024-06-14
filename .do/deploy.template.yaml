@@ -8,6 +8,8 @@ spec:
        branch: main
        repo_clone_url: "https://github.com/reesericci/heroku-united.git"
      envs:
+       - key: DB_UNITED_1
+         type: SECRET
        - key: SECRET_KEY_BASE
          type: secret
        - key: RAILS_MASTER_KEY
@@ -20,3 +22,5 @@ spec:
   databases:
     - name: db
       engine: "PG"
+      db_name: united
+      db_user: united
