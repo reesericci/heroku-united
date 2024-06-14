@@ -1,0 +1,51 @@
+#!/bin/bash
+
+if ! command -v docker &> /dev/null; then
+  printf "Docker is not installed on this server. You may want to run:\n\ncurl https://get.docker.com | sudo bash \n\nto install Docker"
+  exit 1
+fi
+
+if ! command -v curl &> /dev/null; then
+  printf "cURL is not installed on this server."
+  exit 1
+fi
+
+printf "Installing United to /srv/united/..."
+
+curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/united
+
+cd /srv/united
+
+bin/gen_secrets
+
+read -p "Would you like to enable HTTPS? (y/N)" -n 1 -r $https
+
+if [[ $https =~ ^[Yy]$ ]];
+then
+  printf "What's your external domain?\n"
+  read -r domain
+  fqdn="${domain#http*://}"
+  printf "TLS_DOMAIN=${fqdn}" | tee -a .env
+fi
+
+tee /etc/systemd/system/united.service <<EOF
+[Unit]
+Description=United
+After=docker.service
+
+[Service]G
+Type=simple
+Restart=on-failure
+WorkingDirectory=/srv/united
+ExecStart=/bin/docker compose up --remove-orphans
+ExecStop=/bin/docker compose down
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+
+systemctl enable --now united
+
+printf "United is now available at http://${domain:-$(hostname -I)}
