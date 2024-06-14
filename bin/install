@@ -40,15 +40,16 @@ After=docker.service
 [Service]
 Type=simple
 DynamicUser=yes
-ReadWritePaths=/srv/united/db /srv/united/log /srv/united/storage /run /var
+ReadWritePaths=/srv/united/db /srv/united/log /srv/united/storage/ /run /var
 ReadOnlyPaths=/
 SupplementaryGroups=docker
 InaccessiblePaths=-/lost+found
 NoExecPaths=/
-ExecPaths=/usr/bin/docker /usr/bin/bash /usr/lib /usr/lib64 /srv/united/bin/ /usr/libexec/docker/
+ExecPaths=/usr/bin/docker /usr/bin/bash /usr/lib /usr/lib64 /srv/united/bin/ /usr/libexec/docker/ /usr/bin/id /usr/bin/chown
 Restart=on-failure
 WorkingDirectory=/srv/united/
-Environment=
+StateDirectory=united
+LogsDirectory=united
 ExecStart=/usr/bin/bash -c "FIXUID=$(id -u) FIXGID=$(id -g) docker compose up --remove-orphans"
 ExecStop=/usr/bin/docker compose down
 
