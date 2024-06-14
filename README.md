@@ -12,6 +12,9 @@ This program is free software: you can redistribute it and/or modify it under th
 
 ## Deploying
 
+> [!NOTE]
+> United requires an external email (SMTP) server to send login codes & information to members. We recommend using [Postmark](https://postmarkapp.com) or another **transacational email** service for this.
+
 ### Cloud
 
 I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
@@ -71,6 +74,8 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [ ] Allow for fetching of identity login codes via TOTP app instead of email
 
 - [ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
+  
+  - [ ] Postmark setup wiki guide
 
 - [ ] Approval queue for new members instead of automatic acceptance
 
