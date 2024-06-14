@@ -32,23 +32,24 @@ fi
 
 docker compose build
 
-tee /etc/systemd/system/united.service <<END &> /dev/null
+tee /etc/systemd/system/united.service <<'END' &> /dev/null
 [Unit]
 Description=United
 After=docker.service
 
 [Service]
 Type=simple
-DynamicUser=true
+DynamicUser=yes
 ReadWritePaths=/srv/united/db /srv/united/log /srv/united/storage /run /var
 ReadOnlyPaths=/
-ExecPaths=/usr/sbin/my_daemon /usr/lib /usr/lib64
+SupplementaryGroups=docker
 InaccessiblePaths=-/lost+found
 NoExecPaths=/
-ExecPaths=/usr/bin/docker /usr/lib /usr/lib64 /srv/united/bin/
+ExecPaths=/usr/bin/docker /usr/bin/bash /usr/lib /usr/lib64 /srv/united/bin/ /usr/libexec/docker/
 Restart=on-failure
 WorkingDirectory=/srv/united/
-ExecStart=/usr/bin/docker compose up --remove-orphans
+Environment=
+ExecStart=/usr/bin/bash -c "FIXUID=$(id -u) FIXGID=$(id -g) docker compose up --remove-orphans"
 ExecStop=/usr/bin/docker compose down
 
 [Install]
@@ -57,14 +58,12 @@ END
 
 systemctl daemon-reload
 
-docker compose up --remove-orphans -d
-
 systemctl enable united.service
 
-ips=$(hostname -i)
+systemctl start united.service
 
-printf "United is now available at:\n"
+sleep 2m
 
-for i in $ips; do
-  printf "http://$i\n"
-done
+systemctl status united.service
+
+printf "\n\nUnited is now available at: [ip address of your server]:$(docker compose port web 80)"

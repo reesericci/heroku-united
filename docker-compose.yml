@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Containerfile
-    user: ${UID:-1000}:${GID:-1000}
+    user: ${FIXUID:-1000}:${FIXGID:-1000}
     ports:
       - "80:80"
       - "443:443"
