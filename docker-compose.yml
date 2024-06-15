@@ -10,7 +10,8 @@ services:
     environment:
       - RAILS_ENV=production
       # To enable HTTPS & automatic TLS w/Let's Encrypt
-      # - TLS_DOMAIN=your.external.domain
+      - TLS_DOMAIN=united.local
+      - TLS_LOCAL=true
     env_file: .env
     # To generate .env secrets, run gen_secrets.sh
     volumes:

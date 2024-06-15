@@ -19,9 +19,9 @@ printf "Installing United to /srv/united/...\n\n"
 
 cd /srv
 
-git clone https://codeberg.org/reesericci/united.git
+curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/
+
 cd /srv/united
-git submodule update --init --recursive
 
 tee .env <<EOF &> /dev/null 
 SECRET_KEY_BASE=\"$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)\"
