@@ -1,20 +1,27 @@
 #!/bin/bash
 
 if ! command -v docker &> /dev/null; then
-  printf "Docker is not installed on this server. You may want to run:\n\ncurl https://get.docker.com | sudo bash \n\nto install Docker"
+  printf "Docker is not installed on this server. You may want to run:\n\ncurl https://get.docker.com | sudo bash \n\nto install Docker\n"
   exit 1
 fi
 
 if ! command -v curl &> /dev/null; then
-  printf "cURL is not installed on this server."
+  printf "cURL is not installed on this server.\n"
+  exit 1
+fi
+
+if ! command -v git &> /dev/null; then
+  printf "git is not installed on this server.\n"
   exit 1
 fi
 
 printf "Installing United to /srv/united/...\n\n"
 
-curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/
+cd /srv
 
+git clone https://codeberg.org/reesericci/united.git
 cd /srv/united
+git submodule update --init --recursive
 
 tee .env <<EOF &> /dev/null 
 SECRET_KEY_BASE=\"$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)\"
