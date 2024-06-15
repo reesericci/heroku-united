@@ -96,6 +96,7 @@ gem "pg", "~> 1.5"
 
 gem "solid_cache", "~> 0.6.0"
 
-gem "thruster", "~> 0.1.4"
+#gem "thruster", "~> 0.1.4"
+gem "thruster", git: "https://github.com/reesericci/thruster"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
