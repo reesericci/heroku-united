@@ -30,6 +30,22 @@ If you don't want to use Railway, here are some other options for cloud deployme
 [<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
 [<img src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io">](https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io)
 
+### Computer
+
+#### Automated
+
+> [!CAUTION]
+> The automated install script expects a **dedicated computer or virtual machine** with ports 80 and 443 available.
+
+You can use our simple automated script to install United onto any ol' computer or server running Linux with Docker. I highly recommend this option as it allows for minimizing recurring costs and full control.
+
+Just paste the following in the terminal and answer a few short questions!
+
+```
+bash <( curl -s https://codeberg.org/reesericci/united/raw/branch/main/bin/install)
+```
+
+To install Linux on a computer, please visit the [Fedora Server install guide](https://docs.fedoraproject.org/en-US/fedora-server/installation/).
 
 ---
 
@@ -57,6 +73,8 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [ ] Automated update system
 
 - [ ] Self-hosted deployment instructions
+  - [X] Automated
+  - [ ] Manual 
 
 - [X] OIDC provider
 
