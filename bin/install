@@ -26,6 +26,7 @@ curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /sr
 cd /srv/united
 
 tee .env <<EOF &> /dev/null 
+RAILS_ENV=production
 SECRET_KEY_BASE="$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)"
 RAILS_MASTER_KEY="$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)"
 EOF
