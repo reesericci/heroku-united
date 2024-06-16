@@ -34,7 +34,7 @@ printf "\nDo you have an external domain connected to this server? (y/N) "
 read -n 1 -e -r external
 
 if [[ $external =~ ^[Yy]$ ]]; then
-  printf "\nWhat's your external domain?\n"
+  printf "\nWhat's your external domain?\n\n"
   read -e -r domain
   fqdn="${domain#http*://}"
   printf "\nTLS_DOMAIN=${fqdn}" | tee -a .env
