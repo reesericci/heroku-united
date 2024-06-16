@@ -15,5 +15,5 @@ services:
     env_file: .env
     # To generate .env secrets, run gen_secrets.sh
     volumes:
-      - "${STATE_DIRECTORY:-./storage/:/rails/storage}"
-      - "${LOGS_DIRECTORY:-./log:/rails/log}"
+      - ${STATE_DIRECTORY:-./storage/}:/rails/storage
+      - ${LOGS_DIRECTORY:-./log}:/rails/log
