@@ -1,0 +1,5 @@
+<h2>🗸 Welcome to <%= Config.organization %>, <%= @member.name.split(" ")[0] %>!</h2>
+
+<p>Please note, your membership will expire on <%= @member.expires_at.to_date %> (UTC).</p>
+
+<p>To view and edit your information, visit <a href="<%= Config.external_url%>/kiosk/member/edit"><%= Config.external_url%>/kiosk/member/edit</a></p>

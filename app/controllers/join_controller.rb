@@ -18,6 +18,7 @@ class JoinController < ApplicationController
       return
     end
     m.save!
+    JoinMailer.with(member: m).confirmation.deliver_later
     redirect_to join_confirmation_path
   end
 

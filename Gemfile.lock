@@ -94,11 +94,6 @@ GIT
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
 
-PATH
-  remote: vendor/thruster
-  specs:
-    thruster (0.1.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -446,7 +441,6 @@ DEPENDENCIES
   standard
   standard-rails
   stimulus-rails
-  thruster!
   turbo-rails
   tzinfo-data
   warden (~> 1.2)
