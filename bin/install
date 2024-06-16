@@ -74,4 +74,4 @@ sleep 2m
 
 systemctl status united.service
 
-printf "\n\nUnited is now available at: [ip address of your server]:$(docker compose port web 80)"
+printf "\n\nUnited is now available at: https://$(ip -4 route get 1.1.1.1 | sed -n 's/^.*src \([0-9.]*\).*$/\1/p')\n\n"
