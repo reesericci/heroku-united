@@ -1,23 +1,23 @@
 #!/bin/bash
 
 if ! command -v docker &> /dev/null; then
-  printf "Docker is not installed on this server. You may want to run:\n\ncurl https://get.docker.com | sudo bash \n\nto install Docker\n"
+  printf "\nDocker is not installed on this server. You may want to run:\n\ncurl https://get.docker.com | sudo bash \n\nto install Docker\n"
   exit 1
 fi
 
 if ! command -v curl &> /dev/null; then
-  printf "cURL is not installed on this server.\n"
+  printf "\ncURL is not installed on this server.\n"
   exit 1
 fi
 
 if ! command -v git &> /dev/null; then
-  printf "git is not installed on this server.\n"
+  printf "\ngit is not installed on this server.\n"
   exit 1
 fi
 
-printf "Installing United to /srv/united/...\n\n"
+printf "\nUnited is about to be installed to /srv/united. If this is unintentional, you have 10 seconds to press [CTRL+C] to cancel.  \n\n"
 
-cd /srv
+sleep 10
 
 curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/
 
@@ -28,13 +28,16 @@ SECRET_KEY_BASE="$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openss
 RAILS_MASTER_KEY="$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)"
 EOF
 
-read -p "Would you like to enable HTTPS? (y/N)" -n 1 -e -r https
+read -p "\n\nDo you have an external domain connected to this server? (y/N) " -n 1 -e -r external
 
-if [[ $https =~ ^[Yy]$ ]]; then
-  printf "What's your external domain?\n"
+if [[ $external =~ ^[Yy]$ ]]; then
+  printf "\nWhat's your external domain?\n"
   read -e -r domain
   fqdn="${domain#http*://}"
-  printf "TLS_DOMAIN=${fqdn}" | tee -a .env
+  printf "\nTLS_DOMAIN=${fqdn}" | tee -a .env
+else
+ printf "\nTLS_DOMAIN=united.local" | tee -a .env
+ printf "\nTLS_LOCAL=true" | tee -a .env
 fi
 
 docker compose build
@@ -66,12 +69,8 @@ END
 
 systemctl daemon-reload
 
-systemctl enable united.service
+systemctl enable --now united.service
 
-systemctl start united.service
-
-sleep 2m
-
-systemctl status united.service
+sleep 30
 
 printf "\n\nUnited is now available at: https://$(ip -4 route get 1.1.1.1 | sed -n 's/^.*src \([0-9.]*\).*$/\1/p')\n\n"
