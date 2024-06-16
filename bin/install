@@ -10,8 +10,7 @@ WMMMc        0MMMk  XMMMl    'MMMM. cMMM0   XMMM,   'MMM0     .MMMN oMMMO     NM
 WMMMc        KMMMk  XMMM;    .MMMM. cMMM0   XMMM,   cMMMMMMMMMMMMMN OMMMo     NMMM,  .MMx 
 dMMMM.      oMMMM,  XMMM;    .MMMM. cMMM0   XMMM,   .MMMN           lMMMW     NMMM,    .  
  lMMMMMMMMMMMMMM.   XMMM;    .MMMM. cMMM0   KMMMMMMX 'MMMMMMMMMMMc   OMMMMMMMMMMMM, cMMMMW
-    KMMMMMMMMl      XMMM;    .MMMM. cMMM0    XMMMMMo    WMMMMMMX       0MMMMMdNMMM,  NMMM:
-       .:;                                     ,;          ;;             :.          .,\n"
+    KMMMMMMMMl      XMMM;    .MMMM. cMMM0    XMMMMMo    WMMMMMMX       0MMMMMdNMMM,  NMMM:\n"
 
 if ! command -v docker &> /dev/null; then
   printf "\nDocker is not installed on this server. You may want to run:\n\ncurl https://get.docker.com | sudo bash \n\nto install Docker\n"
