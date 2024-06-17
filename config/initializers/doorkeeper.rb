@@ -14,7 +14,7 @@ Doorkeeper.configure do
     @user = c.request.env["warden"].user(:identity)
     unless @user
       session[:redirect] = request.fullpath
-      redirect_to(new_identity_postmark_path)
+      redirect_to(new_identity_keycode_path)
     end
     @user
   end

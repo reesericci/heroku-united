@@ -1,6 +1,6 @@
 class Member < ApplicationRecord
   include Expirable
-  include Imprintable
+  include Keycode::Imprintor
   include Mortality
 
   include SpreadsheetArchitect

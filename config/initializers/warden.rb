@@ -41,8 +41,8 @@ Rails.application.config.to_prepare do
     end
   end
 
-  # Postmark strategy
-  Warden::Strategies.add(:postmark) do
+  # Keycode strategy
+  Warden::Strategies.add(:keycode) do
     def valid?
       login_params.permitted?
     end
@@ -53,7 +53,7 @@ Rails.application.config.to_prepare do
       rescue ActiveRecord::RecordNotFound
         nil
       end
-      if m&.imprint&.code&.authenticate!(login_params[:code])
+      if m&.keycode_imprint&.code&.authenticate!(login_params[:code])
         success!(m)
       else
         fail!("Could not log in")

@@ -19,7 +19,7 @@ Rails.application.config.to_prepare do
     end
 
     auth_time_from_resource_owner do |resource_owner|
-      resource_owner.imprint.coded_at
+      resource_owner.keycode_imprint.coded_at
     end
 
     # reauthenticate_resource_owner do |resource_owner, return_to|

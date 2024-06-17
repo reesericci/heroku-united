@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   namespace :identity do
     resources :login, only: [:new, :create] do
       collection do
-        resources :postmarks, only: [:new, :create]
+        resources :keycodes, only: [:new, :create]
         get "/destroy", to: "login#destroy"
       end
     end

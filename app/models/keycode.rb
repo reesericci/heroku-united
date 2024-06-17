@@ -1,18 +1,4 @@
-class Imprint < ApplicationRecord
-  belongs_to :imprintable, polymorphic: true
-
-  after_save_commit do
-    if base.blank?
-      update!(base: ROTP::Base32.random, coded_at: DateTime.now)
-    end
-  end
-
-  def code
-    Imprint::Code.new(self)
-  end
-end
-
-class Imprint::Code
+class Keycode
   def initialize(imprint)
     @imprint = imprint
   end
@@ -45,7 +31,7 @@ class Imprint::Code
   end
 
   def ===(other)
-    if other.is_a?(Imprint::Code)
+    if other.is_a?(Keycode)
       if other.instance_variable_get(:@imprint) == @imprint
         other.to_i == to_i
       else

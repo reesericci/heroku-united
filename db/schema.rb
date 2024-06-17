@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_06_17_160249) do
+ActiveRecord::Schema[7.2].define(version: 2024_06_17_173518) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -112,12 +112,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_160249) do
     t.index ["trigger_id"], name: "index_hooks_on_trigger_id"
   end
 
-  create_table "imprints", force: :cascade do |t|
+  create_table "keycode_imprints", force: :cascade do |t|
     t.string "base"
     t.integer "count", default: 0
     t.datetime "coded_at"
-    t.string "imprintable_type"
-    t.string "imprintable_id"
+    t.string "imprintor_type"
+    t.string "imprintor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "used", default: false
@@ -133,7 +133,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_160249) do
     t.boolean "banned", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "imprint_id"
+    t.integer "keycode_imprint_id"
     t.datetime "last_logged_in_at"
     t.integer "address_id"
     t.text "signature"
@@ -141,7 +141,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_160249) do
     t.boolean "deceased", default: false, null: false
     t.index ["address_id"], name: "index_members_on_address_id"
     t.index ["email"], name: "index_members_on_email", unique: true
-    t.index ["imprint_id"], name: "index_members_on_imprint_id"
+    t.index ["keycode_imprint_id"], name: "index_members_on_keycode_imprint_id"
     t.index ["username"], name: "index_members_on_username", unique: true
   end
 
@@ -319,7 +319,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_160249) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "members", "addresses"
-  add_foreign_key "members", "imprints"
+  add_foreign_key "members", "keycode_imprints"
   add_foreign_key "oauth_access_grants", "members", column: "resource_owner_id", primary_key: "username"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "members", column: "resource_owner_id", primary_key: "username"
