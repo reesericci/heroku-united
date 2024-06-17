@@ -107,3 +107,16 @@ You should have received a copy of the GNU Affero General Public License along w
 ![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
 ![Screenshot of the United dashboard in dark mode](pictures/admin-members-dark.png)
 ![Screenshot of the United join page in light mode](pictures/join.png)
+
+```
+MMMMc        0MMMO                  'MMMx     oM,                               xM,  XMMM,
+WMMMc        0MMMk                  xMMMN   XMMM,                             NMMM,  XMMM,
+WMMMc        0MMMk                          XMMM,                             NMMM,  XMMM,
+WMMMc        0MMMk  XMMMKMMMMMMMO   cMMM0.MMMMMMMMMK   XMMMMMMMMO     ,MMMMMMMMMMM,  KMMM,
+WMMMc        0MMMk  XMMMMMX0MMMMMX  cMMM0 KKWMMMXKKx dMMMM,  oMMMM;  XMMMMW0WMMMMM,  dMMM 
+WMMMc        0MMMk  XMMMl    'MMMM. cMMM0   XMMM,   'MMM0     .MMMN oMMMO     NMMM,  ;MMX 
+WMMMc        KMMMk  XMMM;    .MMMM. cMMM0   XMMM,   cMMMMMMMMMMMMMN OMMMo     NMMM,  .MMx 
+dMMMM.      oMMMM,  XMMM;    .MMMM. cMMM0   XMMM,   .MMMN           lMMMW     NMMM,    .  
+ lMMMMMMMMMMMMMM.   XMMM;    .MMMM. cMMM0   KMMMMMMX 'MMMMMMMMMMMc   OMMMMMMMMMMMM, cMMMMW
+    KMMMMMMMMl      XMMM;    .MMMM. cMMM0    XMMMMMo    WMMMMMMX       0MMMMMdNMMM,  NMMM:
+```
