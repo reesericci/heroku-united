@@ -1,6 +1,8 @@
 class Member < ApplicationRecord
   include Expirable
   include Imprintable
+  include Mortality
+
   include SpreadsheetArchitect
 
   validates :username, format: {with: /\A[a-z0-9]+\z/i}
@@ -63,7 +65,9 @@ class Member < ApplicationRecord
     dependent: :delete_all # or :destroy if you need callbacks
 
   def status
-    if banned?
+    if deceased?
+      "deceased"
+    elsif banned?
       "banned"
     elsif expired?
       "expired"

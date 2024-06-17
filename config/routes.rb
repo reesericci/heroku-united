@@ -23,7 +23,9 @@ Rails.application.routes.draw do
   resolve("Configuration") { [:configuration] }
 
   scope "/admin" do
-    resources :members, param: :username, except: [:show, :delete]
+    resources :members, param: :username, except: [:show, :delete] do
+      get "/cemetery", to: "members/cemetery#index", on: :collection
+    end
     get "/", to: redirect("/admin/members")
 
     resources :broadcasts, except: [:show]

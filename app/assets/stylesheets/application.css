@@ -120,6 +120,16 @@ thead th:nth-child(7) {
   word-wrap: normal;
 }
 
+.deceased-chip {
+  border-radius: 4px;
+  background-color: var(--sand-8);
+  font-weight: 600;
+  border: 2px solid var(--sand-11);
+  color: var(--sand-12);
+  padding: 5px 10px;
+  word-wrap: normal;
+}
+
 button, a[type=button], input[type=submit] {
   border-radius: 4px;
   background-color: var(--amber-9);

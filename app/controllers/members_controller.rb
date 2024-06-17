@@ -11,11 +11,14 @@ class MembersController < ApplicationController
   end
 
   def edit
-    @member = Member.find_by(username: params[:username])
+    @member = Member.include_deceased.find_by(username: params[:username])
   end
 
   def update
-    member = Member.find_or_create_by!(username: params[:username])
+    member = Member.include_deceased.find_or_create_by!(username: params[:username])
+    if member.deceased?
+      member.resurrect
+    end
     member.update!(member_params)
     if member.address
       member.address.update!(address_params)
@@ -26,8 +29,12 @@ class MembersController < ApplicationController
   end
 
   def destroy
-    member = Member.find_by(username: params[:username])
-    member.destroy!
+    member = Member.include_deceased.find_by(username: params[:username])
+    if member.deceased? 
+      member.cremate! 
+    else 
+      member.decease 
+    end
     redirect_to members_path, status: 303
   end
 

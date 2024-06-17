@@ -61,8 +61,8 @@
     <%= form.label :banned, "Banned?" %>
     <%= form.check_box :banned %>
   </div>
-  <%= form.submit %>
-  <%= form.submit "Delete Member", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete #{@member.name}?" } %>
+  <%= form.submit @member.deceased? ? "Resurrect and Update" : "Update" %>
+  <%= form.submit @member.deceased? ? "Cremate" : "Decease", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete #{@member.name}?" } %>
 <% end %>
 
 <script>

@@ -5,6 +5,9 @@
 <%= link_to members_path(:csv) do %>
   <button class="subheading-button">Export CSV</button>
 <% end %>
+<%= link_to cemetery_members_path do %>
+  <button class="subheading-button">Visit cemetery</button>
+<% end %>
 
 <%= turbo_stream_from "members" %>
 <table>
