@@ -19,7 +19,7 @@ This program is free software: you can redistribute it and/or modify it under th
 > [!WARNING]
 > Do not use Gmail or similar personal mail services for United.
 
-### Cloud
+### Cloud (IaaS)
 
 I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
 
@@ -88,7 +88,11 @@ If you'd like, please feel free to take a task on here and send in a PR!
   - [ ] Postmark setup wiki guide
 - [ ] Approval queue for new members instead of automatic acceptance
 - [ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)
-- [ ] Managed hosting service 
+- [ ] Managed hosting service
+- [ ] Getting started walkthrough videos
+  - [ ] Railway (Cloud IaaS)
+  - [ ] Hetzner (Own VPS)
+  - [ ] Bare Metal
 
 ## Copyright
 
