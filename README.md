@@ -112,11 +112,8 @@ You should have received a copy of the GNU Affero General Public License along w
 
 ---
 
-<div style="width: fit-content; border: 2px outset; text-align:center">
-	<p style="margin: 0; padding: 0.1em; border: 2px inset">This site is a member of Hard Fork.</p>
-	<div style="display: flex">
-		<a style="flex: 1; margin: 0; padding: 0.1em; border: 2px inset" href="https://webri.ng/webring/hardfork/previous?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><button>Previous Site</button></a>
-		<a style="flex: 1; margin: 0; padding: 0.1em; border: 2px inset" href="https://webri.ng/webring/hardfork/random?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><button>Random Site</button></a>
-		<a style="flex: 1; margin: 0; padding: 0.1em; border: 2px inset" href="https://webri.ng/webring/hardfork/next?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited">Next Site</a>
-	</div>
-</di
+This site is a member of the Hard Fork webring
+
+[![Previous Site](https://codeberg.org/reesericci/united/media/branch/main/pictures/button\(3\).png)](https://webri.ng/webring/hardfork/previous?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited)
+[![Random!](https://codeberg.org/reesericci/united/media/branch/main/pictures/button\(4\).png)](https://webri.ng/webring/hardfork/previous?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited)
+[![Next Site](https://codeberg.org/reesericci/united/media/branch/main/pictures/button\(2).png)](https://webri.ng/webring/hardfork/previous?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited)
