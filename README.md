@@ -66,21 +66,11 @@ To install Linux on a computer, please visit the [Fedora Server install guide](h
 
 If you'd like, please feel free to take a task on here and send in a PR!
 
-- Deploy to [service] buttons
-  - [X] Heroku
-  - [X] Render
-  - [X] Railway
 - [ ] Automated update system
-- [X] Self-hosted deployment instructions
-- [X] OIDC provider
 - [ ] Verify emails
-- [X] Unlimited membership length option
 - [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
-- [X] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
-- [X] CSV export of membership (HIGH PRIORITY)
 - [ ] Triggers & Hooks
 - [ ] Automated testing (RSpec)
-- [X] Self-serve portal for editing membership data 
 - [ ] Allow for fetching of identity login codes via TOTP app instead of email
 - [ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
   - [ ] Postmark setup wiki guide
@@ -91,6 +81,16 @@ If you'd like, please feel free to take a task on here and send in a PR!
   - [ ] Railway (Cloud IaaS)
   - [ ] Hetzner (Own VPS)
   - [ ] Bare Metal
+- Deploy to [service] buttons
+  - [X] Heroku
+  - [X] Render
+  - [X] Railway
+- [X] Self-hosted deployment instructions
+- [X] OIDC provider
+- [X] Unlimited membership length option
+- [X] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
+- [X] CSV export of membership (HIGH PRIORITY)
+- [X] Self-serve portal for editing membership data
 
 ## Screenshots
 
