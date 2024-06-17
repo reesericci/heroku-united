@@ -71,10 +71,7 @@ If you'd like, please feel free to take a task on here and send in a PR!
   - [X] Render
   - [X] Railway
 - [ ] Automated update system
-- [ ] Self-hosted deployment instructions
-  - [X] Automated
-  - [ ] Manual 
-
+- [X] Self-hosted deployment instructions
 - [X] OIDC provider
 - [ ] Verify emails
 - [ ] Unlimited membership length option
