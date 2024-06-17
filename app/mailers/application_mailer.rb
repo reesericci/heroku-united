@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: email_address_with_name("#{Config.smtp[:box]}@#{Config.smtp[:domain]}", Config.organization),
+  default from: email_address_with_name("#{Config.smtp&.dig(:box)}@#{Config.smtp&.dig(:domain)}", Config.organization),
     user_name: Config.smtp[:username],
     password: Config.smtp[:password],
     address: Config.smtp[:server],
