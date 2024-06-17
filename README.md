@@ -94,6 +94,12 @@ If you'd like, please feel free to take a task on here and send in a PR!
   - [ ] Hetzner (Own VPS)
   - [ ] Bare Metal
 
+## Screenshots
+
+![Screenshot of the United dashboard in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png)
+![Screenshot of the United dashboard in dark mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png)
+![Screenshot of the United join page in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png)
+
 ## Copyright
 
 Copyright (C) 2024 [Software Freedom Conservancy](https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/) and United contributors
@@ -104,8 +110,13 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 
-## Screenshots
+---
 
-![Screenshot of the United dashboard in light mode](pictures/admin-members-light.png)
-![Screenshot of the United dashboard in dark mode](pictures/admin-members-dark.png)
-![Screenshot of the United join page in light mode](pictures/join.png)
+<div style="width: fit-content; border: 2px outset; text-align:center">
+	<p style="margin: 0; padding: 0.1em; border: 2px inset">This site is a member of Hard Fork.</p>
+	<div style="display: flex">
+		<a style="flex: 1; margin: 0; padding: 0.1em; border: 2px inset" href="https://webri.ng/webring/hardfork/previous?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><button>Previous Site</button></a>
+		<a style="flex: 1; margin: 0; padding: 0.1em; border: 2px inset" href="https://webri.ng/webring/hardfork/random?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><button>Random Site</button></a>
+		<a style="flex: 1; margin: 0; padding: 0.1em; border: 2px inset" href="https://webri.ng/webring/hardfork/next?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited">Next Site</a>
+	</div>
+</di
