@@ -6,6 +6,7 @@ class ApplicationMailer < ActionMailer::Base
     port: Config.smtp[:port].to_i,
     domain: Config.smtp[:domain],
     authentication: :cram_md5,
-    enable_starttls: true
+    enable_starttls: true,
+    reply_to: Config.email
   layout "mailer"
 end

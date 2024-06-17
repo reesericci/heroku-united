@@ -23,6 +23,8 @@ class Member < ApplicationRecord
 
   self.primary_key = "username"
 
+  self.condition = "membership"
+
   # TODO: proper auxillary fields
 
   store :auxillary, accessors: [:mxid], coder: JSON, prefix: false

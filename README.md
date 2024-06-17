@@ -69,40 +69,28 @@ If you'd like, please feel free to take a task on here and send in a PR!
   - [X] Heroku
   - [X] Render
   - [X] Railway
-
 - [ ] Automated update system
-
 - [ ] Self-hosted deployment instructions
   - [X] Automated
   - [ ] Manual 
 
 - [X] OIDC provider
-
 - [ ] Verify emails
-
 - [ ] Unlimited membership length option
-
 - [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
-
-- [ ] Warning emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
-
+- [ ] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
+  - [X] Advisements
+  - [ ] Renewable 
 - [ ] CSV export of membership (HIGH PRIORITY)
-
 - [ ] Triggers & Hooks
-
 - [ ] Automated testing (RSpec)
-
 - [X] Self-serve portal for editing membership data 
-
 - [ ] Allow for fetching of identity login codes via TOTP app instead of email
-
 - [ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
-  
   - [ ] Postmark setup wiki guide
-
 - [ ] Approval queue for new members instead of automatic acceptance
-
 - [ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)
+- [ ] Managed hosting service 
 
 ## Copyright
 

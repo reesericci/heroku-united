@@ -97,3 +97,5 @@ gem "pg", "~> 1.5"
 gem "solid_cache", "~> 0.6.0"
 
 gem "dockerfile-rails", ">= 1.6", :group => :development
+
+gem "solid_queue", "~> 0.3.1"
