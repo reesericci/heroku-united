@@ -43,7 +43,7 @@ You can use our simple automated script to install United onto any ol' computer 
 Just paste the following in the terminal and answer a few short questions!
 
 ```
-bash <( curl -s https://codeberg.org/reesericci/united/raw/branch/main/bin/install)
+bash <(curl -s https://codeberg.org/reesericci/united/raw/branch/main/bin/install)
 ```
 
 To install Linux on a computer, please visit the [Fedora Server install guide](https://docs.fedoraproject.org/en-US/fedora-server/installation/).
