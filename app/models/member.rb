@@ -3,6 +3,8 @@ class Member < ApplicationRecord
   include Imprintable
   include SpreadsheetArchitect
 
+  validates :username, format: {with: /\A[a-z0-9]+\z/i}
+
   def spreadsheet_columns
     [
       :username,
