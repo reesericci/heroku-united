@@ -30,10 +30,10 @@ class MembersController < ApplicationController
 
   def destroy
     member = Member.include_deceased.find_by(username: params[:username])
-    if member.deceased? 
-      member.cremate! 
-    else 
-      member.decease 
+    if member.deceased?
+      member.cremate!
+    else
+      member.decease
     end
     redirect_to members_path, status: 303
   end
