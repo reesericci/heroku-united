@@ -79,7 +79,7 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [ ] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
   - [X] Advisements
   - [ ] Renewable 
-- [ ] CSV export of membership (HIGH PRIORITY)
+- [X] CSV export of membership (HIGH PRIORITY)
 - [ ] Triggers & Hooks
 - [ ] Automated testing (RSpec)
 - [X] Self-serve portal for editing membership data 

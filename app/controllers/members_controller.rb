@@ -1,8 +1,13 @@
 class MembersController < ApplicationController
   include Authenticate
+  include ActiveSupport::Inflector
 
   def index
-    @members = Member.all.sort_by(&:created_at).reverse
+    @members = Member.order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.csv { render csv: @members.to_csv, filename: "#{parameterize(Time.zone.now.iso8601).upcase}-#{parameterize(Config.organization)}-members" }
+    end
   end
 
   def edit
