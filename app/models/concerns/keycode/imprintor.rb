@@ -4,8 +4,8 @@ module Keycode::Imprintor
   included do
     has_one :keycode_imprint, dependent: :destroy, autosave: true, as: :imprintor, class_name: "Keycode::Imprint"
     after_save_commit do
-      if imprint.blank?
-        create_imprint!
+      if keycode_imprint.blank?
+        create_keycode_imprint!
       end
     end
   end

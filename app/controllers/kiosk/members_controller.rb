@@ -1,5 +1,10 @@
 class Kiosk::MembersController < ApplicationController
   include Identity::Authenticate
+  include Renewer
+
+  renewable do |request|
+    request.env["warden"].user(:identity)
+  end
 
   def edit
     @member = request.env["warden"].user(:identity)

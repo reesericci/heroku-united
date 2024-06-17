@@ -284,3 +284,14 @@ a[type=button].subheading-button {
 .trix-button {
   background: light-dark(transparent, var(--sand-12)) !important;
 }
+
+.notice {
+  background-color: var(--amber-2);
+  padding: 1rem;
+  border: 3px solid var(--amber-7);
+  border-radius: 10px;
+
+  h2, p {
+    margin: 0;
+  }
+}

@@ -56,6 +56,7 @@ Rails.application.routes.draw do
   namespace :kiosk do
     resource :member, only: [:edit, :update, :destroy] do
       get "/", to: redirect("/kiosk/member/edit")
+      post "/renew", to: "renew"
     end
   end
   resolve("Login") { [:login] }

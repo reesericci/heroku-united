@@ -74,11 +74,9 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [X] Self-hosted deployment instructions
 - [X] OIDC provider
 - [ ] Verify emails
-- [ ] Unlimited membership length option
+- [X] Unlimited membership length option
 - [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
-- [ ] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
-  - [X] Advisements
-  - [ ] Renewable 
+- [X] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
 - [X] CSV export of membership (HIGH PRIORITY)
 - [ ] Triggers & Hooks
 - [ ] Automated testing (RSpec)

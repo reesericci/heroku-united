@@ -1,10 +1,19 @@
 <a href="<%= join_path %>"><h2>← Back to Join</h2></a>
 <h1 style="margin-bottom: 1rem">Edit <%= @member.name %></h1>
 <%= link_to destroy_identity_login_index_path do %>
-  <button class="subheading-button">Log out</button>
+    <button class="subheading-button">Log out</button>
 <% end %>
+
 <%= turbo_stream_from @member %>
 <%= form_with model: @member, scope: :member, url: kiosk_member_path, method: :patch do |form| %>
+  <% if @member&.renewable? then %>
+    <div class="notice">
+      <h2>It's time to renew your membership!</h2>
+      <p><%= @member.expired? ? "Your membership expired" : "If you don't renew, your membership will expire" %> <b><%= local_relative_time(@member.expires_at, type: "weekday-or-date") %>.</b></p>
+      <br>
+      <%= form.button "Renew", formaction: renew_kiosk_member_path, formmethod: "post" %>
+    </div>
+  <% end %>
   <div>
     <%= form.label :name, "Full name" %>
     <%= form.text_field :name, placeholder: "Fionah United" %>

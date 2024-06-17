@@ -1,5 +1,6 @@
 class Member < ApplicationRecord
   include Expirable
+  include Renewable
   include Keycode::Imprintor
   include Mortality
 
@@ -49,6 +50,12 @@ class Member < ApplicationRecord
   self.primary_key = "username"
 
   self.condition = "membership"
+
+  self.renew_location = "#{Config.external_url}/kiosk"
+
+  expiry_disabled do
+    Config.membership_length < 0
+  end
 
   # TODO: proper auxillary fields
 
