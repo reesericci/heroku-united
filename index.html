@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>United</title>
+</head>
+
+<body>
+  <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/United.png"
+    alt="United! A free and open system for collective organizations" width="674">
+  <h1>United!</h1>
+  <p><img
+      src="https://img.shields.io/gitea/v/release/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org&amp;color=brightgreen"
+      alt="Release">
+    <img src="https://img.shields.io/gitea/last-commit/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org"
+      alt="Last Commit">
+    <img src="https://img.shields.io/badge/license-AGPL--3.0--or--later-brightgreen" alt="License">
+    <img src="https://img.shields.io/badge/contributions-encouraged-brightgreen" alt="Contributions Encouraged">
+  </p>
+  <p>United is free and open membership software for collective organizations, allowing robust tracking of membership,
+    expirations, email broadcast tools, providing single-sign-on for your members, and more.</p>
+  <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+    Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+    any later version.</p>
+  <h2>Installation</h2>
+  <blockquote>
+    <p>United requires an external email (SMTP) server to send login codes &amp; information to members. We recommend
+      using <a href="https://postmarkapp.com">Postmark</a> or another <strong>transactional email</strong> service for
+      this.</p>
+  </blockquote>
+  <blockquote>
+    <p>Do not use Gmail or similar personal mail services for United.</p>
+  </blockquote>
+  <h3>Cloud (IaaS)</h3>
+  <h4>Railway</h4>
+  <p>I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
+  </p>
+  <p><a href="https://railway.app/template/UrEjLl?referralCode=_0Cj0x"><img src="https://railway.app/button.svg"
+        height="32" alt="Deploy on Railway"></a></p>
+  <p>Here’s a video of me spinning up a United instance in less than 10 minutes on Railway:</p>
+  <video controls="" src="https://codeberg.org/reesericci/united/media/branch/main/pictures/United-Railway.webm"
+    width="500">
+    <strong>Your browser does not support the HTML5 "video" tag.</strong>
+  </video>
+  <h4>Others</h4>
+  <p>If you don’t want to use Railway, here are some other options for cloud deployments:</p>
+  <p><a href="https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united"><img
+        src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"></a>
+    <a href="https://render.com/deploy?repo=https://github.com/reesericci/heroku-united"><img
+        src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render"></a>
+    <a href="https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io"><img
+        src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io"></a>
+  </p>
+  <h3>Computer</h3>
+  <h4>Automated</h4>
+  <blockquote>
+    <p>The automated install script expects a <strong>dedicated computer or virtual machine</strong> with ports 80 and
+      443 available.</p>
+  </blockquote>
+  <p>You can use our simple automated script to install United onto any ol’ computer or server running Linux with
+    Docker. I highly recommend this option as it allows for minimizing recurring costs and full control.</p>
+  <p>Just paste the following in the terminal and answer a few short questions!</p>
+  <pre><code class="hljs">bash &lt;(curl -s https://codeberg.org/reesericci/united/raw/branch/main/bin/install)
+</code></pre>
+  <p>To install Linux on a computer, please visit the <a
+      href="https://docs.fedoraproject.org/en-US/fedora-server/installation/">Fedora Server install guide</a>.</p>
+  <hr>
+  <h2>Details</h2>
+  <ul>
+    <li>
+      <p>SQLite Database by default (No external DB required)</p>
+      <ul>
+        <li>Optional PostgreSQL support available by setting the <code>DATABASE_URL</code> environment variable</li>
+      </ul>
+    </li>
+    <li>
+      <p>Ruby 3.3.2</p>
+    </li>
+    <li>
+      <p>Rails edge (main branch)</p>
+    </li>
+    <li>
+      <p>Site configuration handled through initial wizard</p>
+    </li>
+  </ul>
+  <h2>TODOS (Roadmap-ish, no particular order)</h2>
+  <p>If you’d like, please feel free to take a task on here and send in a PR!</p>
+  <ul>
+    <li>[ ] Automated update system</li>
+    <li>[ ] Verify emails</li>
+    <li>[ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API</li>
+    <li>[ ] Triggers &amp; Hooks</li>
+    <li>[ ] Automated testing (RSpec)</li>
+    <li>[ ] Allow for fetching of identity login codes via TOTP app instead of email</li>
+    <li>[ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
+      <ul>
+        <li>[ ] Postmark setup wiki guide</li>
+      </ul>
+    </li>
+    <li>[ ] Approval queue for new members instead of automatic acceptance</li>
+    <li>[ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)</li>
+    <li>[ ] Managed hosting service</li>
+    <li>[ ] Getting started walkthrough videos
+      <ul>
+        <li>[X] Railway (Cloud IaaS)</li>
+        <li>[ ] Hetzner (Own VPS)</li>
+        <li>[ ] Bare Metal</li>
+      </ul>
+    </li>
+    <li>Deploy to [service] buttons
+      <ul>
+        <li>[X] Heroku</li>
+        <li>[X] Render</li>
+        <li>[X] Railway</li>
+      </ul>
+    </li>
+    <li>[X] Self-hosted deployment instructions</li>
+    <li>[X] OIDC provider</li>
+    <li>[X] Unlimited membership length option</li>
+    <li>[X] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)</li>
+    <li>[X] CSV export of membership (HIGH PRIORITY)</li>
+    <li>[X] Self-serve portal for editing membership data</li>
+  </ul>
+  <h2>Screenshots</h2>
+  <p><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png"
+      alt="Screenshot of the United dashboard in light mode">
+    <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png"
+      alt="Screenshot of the United dashboard in dark mode">
+    <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png"
+      alt="Screenshot of the United join page in light mode">
+  </p>
+  <h2>Copyright</h2>
+  <p>Copyright © 2024 <a href="https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/">Software
+      Freedom Conservancy</a> and United contributors</p>
+  <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General
+    Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option)
+    any later version.</p>
+  <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+    warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+    details.</p>
+  <p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see <a
+      href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.</p>
+  <hr>
+  <p>This site is a member of the Hard Fork webring</p>
+  <p><a href="https://webri.ng/webring/hardfork/previous?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><img
+        src="https://codeberg.org/reesericci/united/media/branch/main/pictures/button(3).png" alt="Previous Site"></a>
+    <a href="https://webri.ng/webring/hardfork/random?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><img
+        src="https://codeberg.org/reesericci/united/media/branch/main/pictures/button(4).png" alt="Random!"></a>
+    <a href="https://webri.ng/webring/hardfork/next?via=https%3A%2F%2Fcodeberg.org%2Freesericci%2Funited"><img
+        src="https://codeberg.org/reesericci/united/media/branch/main/pictures/button(2).png" alt="Next Site"></a>
+  </p>
+
+  <style>
+    @import url("https://oxal.org/projects/sakura/demo/normalize.css");
+    @import url("https://oxal.org/projects/sakura/demo/sakura-vader.css");
+  </style>
+</body>
+
+</html>
