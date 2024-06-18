@@ -29,8 +29,8 @@ I recommend that people use Railway to deploy United, as it has a free tier and 
 
 Here's a video of me spinning up a United instance in less than 10 minutes on Railway:
 
-<video width="500" controls>
-  <source src="pictures/United-Railway.webm" type="video/webm">
+<video controls="" src="https://codeberg.org/reesericci/united/media/branch/main/pictures/United-Railway.webm" width="500">
+  <strong>Your browser does not support the HTML5 "video" tag.</strong>
 </video>
 
 #### Others
