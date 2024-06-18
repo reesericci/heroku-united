@@ -49,7 +49,7 @@
   <p><a href="https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united"><img
         src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku"></a>
     <a href="https://render.com/deploy?repo=https://github.com/reesericci/heroku-united"><img
-        src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render"></a>
+        src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render" style="border-radius: 6px;"></a>
     <a href="https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io"><img
         src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io"></a>
   </p>
@@ -85,7 +85,15 @@
       <p>Site configuration handled through initial wizard</p>
     </li>
   </ul>
-  <h2>TODOS (Roadmap-ish, no particular order)</h2>
+  <h2>Screenshots</h2>
+  <p><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png"
+      alt="Screenshot of the United dashboard in light mode">
+    <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png"
+      alt="Screenshot of the United dashboard in dark mode">
+    <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png"
+      alt="Screenshot of the United join page in light mode">
+  </p>
+  <h2>TODOS</h2>
   <p>If you’d like, please feel free to take a task on here and send in a PR!</p>
   <ul>
     <li>[ ] Automated update system</li>
@@ -123,14 +131,6 @@
     <li>[X] CSV export of membership (HIGH PRIORITY)</li>
     <li>[X] Self-serve portal for editing membership data</li>
   </ul>
-  <h2>Screenshots</h2>
-  <p><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png"
-      alt="Screenshot of the United dashboard in light mode">
-    <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png"
-      alt="Screenshot of the United dashboard in dark mode">
-    <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png"
-      alt="Screenshot of the United join page in light mode">
-  </p>
   <h2>Copyright</h2>
   <p>Copyright © 2024 <a href="https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/">Software
       Freedom Conservancy</a> and United contributors</p>
@@ -155,6 +155,10 @@
   <style>
     @import url("https://oxal.org/projects/sakura/demo/normalize.css");
     @import url("https://oxal.org/projects/sakura/demo/sakura-vader.css");
+
+    img {
+      height: revert-layer;
+    }
   </style>
 </body>
 
