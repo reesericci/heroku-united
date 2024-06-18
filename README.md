@@ -71,8 +71,14 @@ To install Linux on a computer, please visit the [Fedora Server install guide](h
 
 - Site configuration handled through initial wizard
 
+## Screenshots
 
-## TODOS (Roadmap-ish, no particular order)
+![Screenshot of the United dashboard in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png)
+![Screenshot of the United dashboard in dark mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png)
+![Screenshot of the United join page in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png)
+
+
+## TODOS
 
 If you'd like, please feel free to take a task on here and send in a PR!
 
@@ -102,11 +108,6 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [X] CSV export of membership (HIGH PRIORITY)
 - [X] Self-serve portal for editing membership data
 
-## Screenshots
-
-![Screenshot of the United dashboard in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png)
-![Screenshot of the United dashboard in dark mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png)
-![Screenshot of the United join page in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png)
 
 ## Copyright
 
