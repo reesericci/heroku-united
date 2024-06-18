@@ -64,19 +64,18 @@ To install Linux on a computer, please visit the [Fedora Server install guide](h
 
 - SQLite Database by default (No external DB required)
   - Optional PostgreSQL support available by setting the `DATABASE_URL` environment variable
-
 - Ruby 3.3.2
-
 - Rails edge (main branch)
-
 - Site configuration handled through initial wizard
+- We relentlessly aim for:
+  - Simple deployment
+  - Low-maintainance stability
 
 ## Screenshots
 
 ![Screenshot of the United dashboard in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png)
 ![Screenshot of the United dashboard in dark mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png)
 ![Screenshot of the United join page in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png)
-
 
 ## TODOS
 
