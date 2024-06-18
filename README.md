@@ -21,9 +21,19 @@ This program is free software: you can redistribute it and/or modify it under th
 
 ### Cloud (IaaS)
 
+#### Railway
+
 I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
 
 [<img src="https://railway.app/button.svg" height="32" alt="Deploy on Railway">](https://railway.app/template/UrEjLl?referralCode=_0Cj0x)
+
+Here's a video of me spinning up a United instance in less than 10 minutes on Railway:
+
+<video width="500" controls>
+  <source src="pictures/United-Railway.webm" type="video/webm">
+</video>
+
+#### Others
 
 If you don't want to use Railway, here are some other options for cloud deployments:
 
@@ -78,7 +88,7 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)
 - [ ] Managed hosting service
 - [ ] Getting started walkthrough videos
-  - [ ] Railway (Cloud IaaS)
+  - [X] Railway (Cloud IaaS)
   - [ ] Hetzner (Own VPS)
   - [ ] Bare Metal
 - Deploy to [service] buttons
