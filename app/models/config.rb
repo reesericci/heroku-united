@@ -15,7 +15,7 @@ class Config < ApplicationRecord
   end
 
   validate do |c|
-    if Array.wrap(c.extensions).try(:none?, ->(e) { e.is_a? Symbol })
+    if !Array.wrap(c.extensions).try(:none?, ->(e) { e.is_a? Symbol })
       errors.add :extensions, :invalid_type, message: "does not decode to an Array of Symbols"
     end
   end
