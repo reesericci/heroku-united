@@ -15,7 +15,7 @@ class Config < ApplicationRecord
   end
 
   validate do |c|
-    if !Array.wrap(c.extensions).try(:none?, ->(e) { e.is_a? Symbol })
+    if !Array.wrap(c.extensions).try(:all?, ->(e) { e.is_a? Symbol })
       errors.add :extensions, :invalid_type, message: "does not decode to an Array of Symbols"
     end
   end
@@ -38,7 +38,7 @@ class Config < ApplicationRecord
     extensions.each do |e|
       hash[e] = e.to_s
     end
-    Extension.enum :name, hash, instance_methods: false
+    Extension.enum :name, hash, instance_methods: false, validate: {allow_nil: true}
   end
 
   def self.extensions_enum
