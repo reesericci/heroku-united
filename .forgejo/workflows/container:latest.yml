@@ -1,12 +1,12 @@
 on: [push]
 jobs:
-  test:
+  build:
     runs-on: docker
+    container:
+      image: docker.io/goltzsche/podman:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Install podman
-        run: apt-get update && apt-get install podman -y
       - name: Build image
         run: podman build -t codeberg.org/reesericci/united:latest .
       - name: Login to Codeberg registry
