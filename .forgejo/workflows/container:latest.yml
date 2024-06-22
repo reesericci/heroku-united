@@ -4,7 +4,7 @@ jobs:
     runs-on: docker
     steps:
       - name: Install podman
-        run: apt-get install podman -y
+        run: apt-get update && apt-get install podman -y
       - name: Build image
         run: podman build -t codeberg.org/reesericci/united:latest .
       - name: Login to Codeberg registry
