@@ -346,6 +346,8 @@ GEM
     shell (0.8.1)
       e2mmap
       sync
+    solid_cable (1.0.3)
+      rails (< 9)
     solid_cache (0.6.0)
       activejob (>= 7)
       activerecord (>= 7)
@@ -459,6 +461,7 @@ DEPENDENCIES
   rubocop-rails-omakase
   selenium-webdriver
   shell (~> 0.8.1)
+  solid_cable (~> 1.0)
   solid_cache (~> 0.6.0)
   solid_queue (~> 0.3.1)
   spreadsheet_architect (~> 5.0)

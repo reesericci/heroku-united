@@ -101,3 +101,5 @@ gem "dockerfile-rails", ">= 1.6", :group => :development
 gem "solid_queue", "~> 0.3.1"
 
 gem "spreadsheet_architect", "~> 5.0"
+
+gem "solid_cable", "~> 1.0"
