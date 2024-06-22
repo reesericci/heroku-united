@@ -48,6 +48,15 @@
       </div>
     </div>
   <% end %>
+  <%= form.fields_for :extensions do |extensions_form| %>
+    <% Extension.names.keys.each do |e| %>
+      <div>
+        <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
+        <%= extensions_form.text_field e %>
+      </div>
+    <% end %>
+  <% end %>
+  
   <div style="height: 100%; width: 100%;">
     <%= form.label :signature, "Signature" %>
     <%= form.hidden_field :signature %>

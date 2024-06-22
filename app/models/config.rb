@@ -1,7 +1,10 @@
 class Config < ApplicationRecord
   before_create :check_for_existing
   before_destroy :check_for_existing
-  self.table_name = :configurations
+  self.table_name = "configurations"
+  broadcasts_refreshes
+
+  serialize :extensions, type: Array, coder: SymbolJSON
 
   has_secure_password
 
@@ -9,6 +12,12 @@ class Config < ApplicationRecord
 
   before_validation do
     self.email = email.downcase
+  end
+
+  validate do |c|
+    if Array.wrap(c.extensions).try(:none?, ->(e) { e.is_a? Symbol })
+      errors.add :extensions, :invalid_type, message: "does not decode to an Array of Symbols"
+    end
   end
 
   after_save_commit do
@@ -19,9 +28,25 @@ class Config < ApplicationRecord
   end
 
   after_initialize do
-    if Rails.application.credentials&.oidc&.[](:key) != oidc_key
-      update!(oidc_key: Rails.application.credentials&.oidc&.[](:key))
+    update!(oidc_key: Rails.application.credentials&.oidc&.[](:key).presence ||
+    oidc_key.presence ||
+    OpenSSL::PKey::RSA.new(2048))
+  end
+
+  after_save_commit do
+    hash = {}
+    extensions.each do |e|
+      hash[e] = e.to_s
     end
+    Extension.enum :name, hash, instance_methods: false
+  end
+
+  def self.extensions_enum
+    hash = {}
+    extensions.each do |e|
+      hash[e] = e.to_s
+    end
+    hash
   end
 
   class << self

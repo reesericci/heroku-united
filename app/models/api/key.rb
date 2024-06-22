@@ -19,6 +19,8 @@ class Api::Key < ApplicationRecord
   end
 
   before_validation do
-    self.password = SecureRandom.base64(54) unless password_digest.present?
+    if password_digest.blank?
+      self.password = SecureRandom.base64(54)
+    end
   end
 end

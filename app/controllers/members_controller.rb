@@ -25,6 +25,13 @@ class MembersController < ApplicationController
     elsif Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})).valid?
       member.update!(address: Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})))
     end
+    params[:member][:extensions_attributes].each do |i|
+      if member.extensions.find_by(name: i[1].keys.first).present?
+        member.extensions.find_by(name: i[1].keys.first).update!(content: i[1][i[1].keys.first])
+      else
+        member.extensions.create!(name: i[1].keys.first, content: i[1][i[1].keys.first])
+      end
+    end
     redirect_to members_path
   end
 

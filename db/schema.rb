@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_06_17_173518) do
+ActiveRecord::Schema[7.2].define(version: 2024_06_21_204334) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -93,6 +93,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_173518) do
     t.string "password_digest"
     t.string "external_url"
     t.text "oidc_key"
+    t.text "extensions"
   end
 
   create_table "couriers", force: :cascade do |t|
@@ -100,6 +101,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_173518) do
     t.string "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "extensions", primary_key: ["name", "extensible_type", "extensible_id"], force: :cascade do |t|
+    t.string "name"
+    t.string "extensible_type"
+    t.string "extensible_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["extensible_type", "extensible_id"], name: "index_extensions_on_extensible"
   end
 
   create_table "hooks", force: :cascade do |t|
@@ -128,7 +139,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_17_173518) do
     t.string "email"
     t.string "name"
     t.string "pronouns"
-    t.text "auxillary"
     t.datetime "expires_at"
     t.boolean "banned", default: false
     t.datetime "created_at", null: false

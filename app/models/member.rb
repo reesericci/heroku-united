@@ -3,6 +3,7 @@ class Member < ApplicationRecord
   include Renewable
   include Keycode::Imprintor
   include Mortality
+  include Extensibility
 
   include SpreadsheetArchitect
 
@@ -56,10 +57,6 @@ class Member < ApplicationRecord
   expiry_disabled do
     Config.membership_length < 0
   end
-
-  # TODO: proper auxillary fields
-
-  store :auxillary, accessors: [:mxid], coder: JSON, prefix: false
 
   has_many :access_grants,
     class_name: "Doorkeeper::AccessGrant",

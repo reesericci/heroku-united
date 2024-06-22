@@ -5,6 +5,9 @@ class JoinController < ApplicationController
   def create
     m = Member.new(member_params)
     m.build_address(address_params)
+    params[:member][:extensions].each do |k, v|
+      m.extensions.new(name: k, content: v)
+    end
     m.expires_at = DateTime.now + Config.membership_length.days
     if m.invalid?
       errors = "<ul>"
