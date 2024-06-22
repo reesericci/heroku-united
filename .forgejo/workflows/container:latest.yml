@@ -3,7 +3,7 @@ jobs:
   build:
     runs-on: docker
     container:
-      image: docker.io/goltzsche/podman:latest
+      image: goltzsche/podman:latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
