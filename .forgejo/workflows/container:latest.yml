@@ -1,17 +1,29 @@
+name: Build container
 on: [push]
+
 jobs:
   build:
+    name: Build image
     runs-on: ubuntu-latest
-    container:
-      image: docker.io/mgoltzsche/podman:latest
     steps:
-      - name: Setup node
-        uses: https://github.com/actions/setup-node@v4
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build image
-        run: podman build -t codeberg.org/reesericci/united:latest .
-      - name: Login to Codeberg registry
-        run: echo ${{ secrets.GITHUB_TOKEN }} | podman login --username reesericci codeberg.org
-      - name: Push image
-        run: podman push codeberg.org/reesericci/united:latest
+    - uses: actions/checkout@v4
+    - name: Buildah Action
+      id: build-image
+      uses: https://github.com/redhat-actions/buildah-build@v2
+      with:
+        image: codeberg.org/reesericci/united
+        tags: latest ${{ github.sha }}
+        containerfiles: |
+          ./Containerfile
+    - name: Push to codeberg
+      id: push-to-codeberg
+      uses: https://github.com/redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: codeberg.org/reesericci
+        username: reesericci
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Print image url
+      run: echo "Image pushed to ${{ steps.push-to-quay.outputs.registry-paths }}"
