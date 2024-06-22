@@ -12,8 +12,6 @@ jobs:
       - name: Build
         uses: https://codeberg.org/umglurf/kaniko-action@main
         with:
-          cache: true
-          cache_repo: codeberg.org/${{ github.repository }}/cache
           credentials: |
             codeberg.org=reesericci:${{ secrets.CODEBERG_TOKEN }}          
           destinations: |
