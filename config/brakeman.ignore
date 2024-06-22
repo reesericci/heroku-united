@@ -1,0 +1,75 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "2d5edea79f28e6db2ec216351fffb9d569d34285a46043e7155ee668851786ef",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/api/members_controller.rb",
+      "line": 43,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.permit(:username, :name, :email, :pronouns, :banned, :expires_at)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Api::MembersController",
+        "method": "members_params"
+      },
+      "user_input": ":banned",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "460ee08af1ba1eccf5e4a7400fc23d41434fcda3c42b52f22861408ed1fc13a1",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/api/members_controller.rb",
+      "line": 47,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:member).permit(:username, :name, :email, :pronouns, :banned, :expires_at)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Api::MembersController",
+        "method": "member_params"
+      },
+      "user_input": ":banned",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "d6767ee79f7ebb066855b538f96ecb609fb5ee87b1a5a60131eb57ff38c4ed78",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/members_controller.rb",
+      "line": 51,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:member).permit(:name, :username, :email, :expires_at, :banned)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "MembersController",
+        "method": "member_params"
+      },
+      "user_input": ":banned",
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2024-06-22 07:58:18 -0500",
+  "brakeman_version": "6.1.2"
+}

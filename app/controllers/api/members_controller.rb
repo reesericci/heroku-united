@@ -33,18 +33,17 @@ class Api::MembersController < Api::BaseController
   end
 
   def destroy
-    Member.find_by(username: params[:username])&.destroy
-    
+    Member.find_by(username: params[:username])&.destroy!
     render json: Member.ids
   end
 
   private
 
   def members_params
-    params.permit(:username, :name, :email, :pronouns, :auxillary, :banned, :expires_at)
+    params.permit(:username, :name, :email, :pronouns, :banned, :expires_at)
   end
 
   def member_params
-    params.require(:member).permit(:username, :name, :email, :pronouns, :auxillary, :banned, :expires_at)
+    params.require(:member).permit(:username, :name, :email, :pronouns, :banned, :expires_at)
   end
 end
