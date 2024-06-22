@@ -5,12 +5,10 @@ jobs:
   build:
     name: Build image
     runs-on: ubuntu-latest
+    container:
+      image: quay.io/buildah/stable:latest
     steps:
     - uses: actions/checkout@v4
-    - name: Install Buildah
-      run: |
-        sudo apt-get -y update
-        sudo apt-get -y install buildah
     - name: Buildah Action
       id: build-image
       uses: https://github.com/redhat-actions/buildah-build@v2
