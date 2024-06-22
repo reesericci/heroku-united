@@ -3,4 +3,4 @@ jobs:
   test:
     runs-on: breadrunner
     steps:
-      - run: echo All Good
+      - run: echo it works!
