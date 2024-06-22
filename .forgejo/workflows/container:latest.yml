@@ -1,7 +1,7 @@
 on: [push]
 jobs:
   build:
-    runs-on: docker
+    runs-on: ubuntu-latest
     container:
       image: docker.io/mgoltzsche/podman:latest
     steps:
