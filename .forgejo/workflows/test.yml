@@ -1,6 +1,6 @@
 on: [push]
 jobs:
   test:
-    runs-on: breadrunner
+    runs-on: docker
     steps:
       - run: echo it works!
