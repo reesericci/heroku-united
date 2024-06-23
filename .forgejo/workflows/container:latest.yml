@@ -18,14 +18,3 @@ jobs:
             codeberg.org/${{ github.repository }}:latest
           push: 'true'
           docker_file: "Containerfile"
-      - name: Build for Docker Hub
-        uses: https://codeberg.org/umglurf/kaniko-action@main
-        with:
-          cache: true
-          cache_repo: codeberg.org/${{ github.repository }}/cache
-          credentials: |
-            docker.io=reesericci:${{ secrets.DOCKER_PASSWORD }}     
-          destinations: |
-            docker.io/${{ github.repository }}:latest
-          push: 'true'
-          docker_file: "Containerfile"
