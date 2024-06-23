@@ -81,7 +81,6 @@ To install Linux on a computer, please visit the [Fedora Server install guide](h
 
 If you'd like, please feel free to take a task on here and send in a PR!
 
-- [X] Auxillary (Custom) Fields
 - [ ] Automated update system
 - [ ] Verify emails
 - [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
@@ -97,6 +96,8 @@ If you'd like, please feel free to take a task on here and send in a PR!
   - [X] Railway (Cloud IaaS)
   - [ ] Hetzner (Own VPS)
   - [ ] Bare Metal
+- [ ] Trial/Demo Mode
+- [X] Auxillary (Custom) Fields
 - Deploy to [service] buttons
   - [X] Heroku
   - [X] Render
