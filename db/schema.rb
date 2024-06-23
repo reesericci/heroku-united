@@ -77,12 +77,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_141955) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "callers", force: :cascade do |t|
-    t.string "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "configurations", force: :cascade do |t|
     t.string "organization", null: false
     t.integer "membership_length", null: false
@@ -96,13 +90,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_141955) do
     t.text "extensions"
   end
 
-  create_table "couriers", force: :cascade do |t|
-    t.string "subject"
-    t.string "to"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "extensions", primary_key: ["name", "extensible_type", "extensible_id"], force: :cascade do |t|
     t.string "name"
     t.string "extensible_type"
@@ -111,16 +98,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_22_141955) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["extensible_type", "extensible_id"], name: "index_extensions_on_extensible"
-  end
-
-  create_table "hooks", force: :cascade do |t|
-    t.string "name"
-    t.string "trigger_id"
-    t.string "hookable_type"
-    t.integer "hookable_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["trigger_id"], name: "index_hooks_on_trigger_id"
   end
 
   create_table "keycode_imprints", force: :cascade do |t|
