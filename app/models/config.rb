@@ -35,7 +35,7 @@ class Config < ApplicationRecord
 
   after_save_commit do
     hash = {}
-    extensions.each do |e|
+    (extensions || []).each do |e|
       hash[e] = e.to_s
     end
     Extension.enum :name, hash, instance_methods: false, validate: {allow_nil: true}
@@ -43,7 +43,7 @@ class Config < ApplicationRecord
 
   def self.extensions_enum
     hash = {}
-    extensions.each do |e|
+    (extensions || []).each do |e|
       hash[e] = e.to_s
     end
     hash
