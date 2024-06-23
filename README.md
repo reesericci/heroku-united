@@ -12,6 +12,9 @@ United is free and open membership software for collective organizations, allowi
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
+<img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png" width="30%" alt="Screenshot of the United dashboard in light mode"></img> <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png" alt="Screenshot of the United dashboard in dark mode" width="30%"></img> <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png" width="30%"></img> <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/kiosk-renew-light.png" alt="Screenshot of the United member kiosk requiring a renewal in light mode" width="30%"></img> <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/kiosk-dark.png" alt="Screenshot of the United member kiosk in dark mode" width="30%"></img> <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-broadcasts-light.png" alt="Screenshot of the United broadcasts dashboard in light mode"
+ width="30%"></img>
+
 ## Installation
 
 > [!NOTE]
@@ -71,12 +74,6 @@ To install Linux on a computer, please visit the [Fedora Server install guide](h
 - We relentlessly aim for:
   - Simple deployment
   - Low-maintainance stability
-
-## Screenshots
-
-![Screenshot of the United dashboard in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png)
-![Screenshot of the United dashboard in dark mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png)
-![Screenshot of the United join page in light mode](https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png)
 
 ## TODOS
 
