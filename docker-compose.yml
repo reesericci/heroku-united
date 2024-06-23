@@ -1,14 +1,20 @@
 services:
   web:
-    build:
-      context: .
-      dockerfile: Containerfile
+    image: codeberg.org/reesericci/united:latest
     user: ${FIXUID:-1000}:${FIXGID:-1000}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     ports:
       - "80:80"
       - "443:443"
     env_file: .env
-    # To generate .env secrets, run gen_secrets.sh
     volumes:
       - ${STATE_DIRECTORY:-./storage/}:/rails/storage
       - ${LOGS_DIRECTORY:-./log}:/rails/log
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_LABEL_ENABLE: true
+      WATCHTOWER_POLL_INTERVAL: 1800

@@ -24,23 +24,25 @@ if ! command -v curl &>/dev/null; then
   exit 1
 fi
 
-if ! command -v git &>/dev/null; then
-  printf "\ngit is not installed on this server.\n"
+if ! command -v openssl &>/dev/null; then
+  printf "\nopenssl is not installed on this server.\n"
   exit 1
 fi
 
-printf "\nUnited is about to be installed to /srv/united. If this is unintentional, you have 10 seconds to press [CTRL+C] to cancel.  \n\n"
+printf "\nUnited is about to be installed to /etc/united, and will attempt to bind to :80 and :443. If this is unintentional, you have 10 seconds to press [CTRL+C] to cancel.  \n\n"
 
 sleep 10
 
-curl https://codeberg.org/reesericci/united/archive/main.tar.gz | tar -xz -C /srv/
+mkdir -p /etc/united || exit
 
-cd /srv/united || exit
+cd /etc/united || exit
+
+curl -O "https://codeberg.org/reesericci/united/raw/branch/main/docker-compose.yml"
 
 tee .env <<EOF &>/dev/null
 RAILS_ENV=production
-SECRET_KEY_BASE="$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)"
-RAILS_MASTER_KEY="$(docker run -it --rm intel/qat-crypto-base:qatsw-ubuntu openssl rand -base64 48)"
+SECRET_KEY_BASE="$(openssl rand -base64 48)"
+RAILS_MASTER_KEY="$(openssl rand -base64 48)"
 EOF
 
 printf "\nDo you have an external domain connected to this server? (y/N) "
@@ -66,16 +68,15 @@ After=docker.service
 [Service]
 Type=simple
 DynamicUser=yes
-ReadWritePaths=/srv/united/db /srv/united/log /srv/united/storage/ /run /var /srv/united/.env
-ReadOnlyPaths=/
 SupplementaryGroups=docker
 InaccessiblePaths=-/lost+found
 NoExecPaths=/
-ExecPaths=/usr/bin/docker /usr/bin/bash /usr/lib /usr/lib64 /srv/united/bin/ /usr/libexec/docker/ /usr/bin/id /usr/bin/chown
+ExecPaths=/usr/bin/docker /usr/bin/bash /usr/lib /usr/lib64 /usr/libexec/docker/ /usr/bin/id /usr/bin/chown
 Restart=on-failure
-WorkingDirectory=/srv/united/
+WorkingDirectory=/etc/united
 StateDirectory=united
 LogsDirectory=united
+ConfigurationDirectory=united
 ExecStart=/usr/bin/bash -c "FIXUID=$(id -u) FIXGID=$(id -g) docker compose up --remove-orphans"
 ExecStop=/usr/bin/docker compose down
 
