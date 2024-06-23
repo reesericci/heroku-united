@@ -13,8 +13,10 @@ jobs:
         uses: https://codeberg.org/umglurf/kaniko-action@main
         with:
           credentials: |
-            codeberg.org=reesericci:${{ secrets.CODEBERG_TOKEN }}          
+            codeberg.org=reesericci:${{ secrets.CODEBERG_TOKEN }}  
+            docker.io=reesericci:${{ secrets.DOCKER_PASSWORD }}        
           destinations: |
-            codeberg.org/${{ github.repository }}:${{ github.event.release.tag_name }}      
+            docker.io/${{ github.repository }}:${{ github.event.release.tag_name }}
+            codeberg.org/${{ github.repository }}:${{ github.event.release.tag_name }}
           push: 'true'
           docker_file: "Containerfile"
