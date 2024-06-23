@@ -86,6 +86,8 @@ ExecStop=/usr/bin/docker compose down
 WantedBy=multi-user.target
 END
 
+docker compose pull
+
 systemctl daemon-reload
 
 systemctl enable --now united.service
