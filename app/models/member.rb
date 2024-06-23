@@ -15,18 +15,15 @@ class Member < ApplicationRecord
       :name,
       :pronouns,
       :email,
-      ["Auxillary", auxillary&.to_json],
       ["Line 1", address&.line1],
       ["Line 2", address&.line2],
       ["City", address&.city],
       ["Province", address&.province],
       ["Code", address&.code],
-      ["Country", address&.country.to_s],
-      :expires_at,
-      :created_at,
-      :updated_at,
-      :banned
-    ]
+      ["Country", address&.country.to_s]
+    ] +
+      (Extension.names || {}).keys.map { |e| [(e.present? ? ActiveSupport::Inflector.humanize(e) : ""), extensions.find_by(name: e)&.content] } +
+      [:expires_at, :created_at, :updated_at, :banned]
   end
 
   # Addressable concern wasn't working
