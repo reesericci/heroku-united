@@ -6,6 +6,7 @@
 ![Last Commit](https://img.shields.io/gitea/last-commit/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org)
 ![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-brightgreen)
 ![Contributions Encouraged](https://img.shields.io/badge/contributions-encouraged-brightgreen)
+[![wakatime](https://wakatime.com/badge/user/02e135ef-3334-4334-bed2-d93c78a66812/project/018efdd4-e497-4afc-a027-22c684b20171.svg)](https://wakatime.com/badge/user/02e135ef-3334-4334-bed2-d93c78a66812/project/018efdd4-e497-4afc-a027-22c684b20171)
 
 United is free and open membership software for collective organizations, allowing robust tracking of membership, expirations, email broadcast tools, providing single-sign-on for your members, and more.
 
