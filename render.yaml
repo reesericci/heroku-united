@@ -7,17 +7,15 @@ databases:
 services:
   - type: web
     name: united
-    runtime: ruby
+    runtime: docker
     plan: free
-    buildCommand: "./render.sh"
-    startCommand: "bundle exec rails db:migrate && bundle exec rails server"
+    image:
+      url: docker.io/reesericci/united:latest
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: united
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false
       - key: SECRET_KEY_BASE
         sync: false
       - key: WEB_CONCURRENCY

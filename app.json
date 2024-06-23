@@ -3,13 +3,16 @@
   "description": "Free and open membership software for collective organizations (source at Codeberg)",
   "repository": "https://github.com/reesericci/heroku-united",
   "logo": "https://codeberg.org/reesericci/united/media/branch/main/pictures/icon.png",
+  "website": "https://united.obl.ong",
   "keywords": ["united", "membership", "rails"],
   "success_url": "/admin/configuration/new",
   "addons": ["heroku-postgresql:essential-0"],
   "env": {
     "RAILS_ENV": "production",
     "COOKIE_SECRET": {
-      "description": "This gets generated",
+      "generator": "secret"
+    },
+    "SECRET_KEY_BASE": {
       "generator": "secret"
     }
   },
