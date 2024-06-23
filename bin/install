@@ -42,7 +42,6 @@ curl -O "https://codeberg.org/reesericci/united/raw/branch/main/docker-compose.y
 tee .env <<EOF &>/dev/null
 RAILS_ENV=production
 SECRET_KEY_BASE="$(openssl rand -base64 32)"
-RAILS_MASTER_KEY="$(openssl rand -base64 32)"
 EOF
 
 printf "\nDo you have an external domain connected to this server? (y/N) "
