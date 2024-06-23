@@ -4,8 +4,6 @@ eval "$(fixuid)"
 
 # If running the rails server then create or migrate existing database
 if [ "${*}" == "./bin/thrust ./bin/rails server" ]; then
-  rm -rf ./config/credentials.yml.enc
-  rm -rf ./config/master.key
   ./bin/rails db:prepare
 fi
 
