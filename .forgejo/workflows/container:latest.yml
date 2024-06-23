@@ -7,14 +7,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build
+      - name: Build for Codeberg
         uses: https://codeberg.org/umglurf/kaniko-action@main
         with:
+          cache: true
+          cache_repo: codeberg.org/${{ github.repository }}/cache
           credentials: |
             codeberg.org=reesericci:${{ secrets.CODEBERG_TOKEN }}     
+          destinations: |
+            codeberg.org/${{ github.repository }}:latest
+          push: 'true'
+          docker_file: "Containerfile"
+      - name: Build for Docker Hub
+        uses: https://codeberg.org/umglurf/kaniko-action@main
+        with:
+          cache: true
+          cache_repo: codeberg.org/${{ github.repository }}/cache
+          credentials: |
             docker.io=reesericci:${{ secrets.DOCKER_PASSWORD }}     
           destinations: |
             docker.io/${{ github.repository }}:latest
-            codeberg.org/${{ github.repository }}:latest
           push: 'true'
           docker_file: "Containerfile"
