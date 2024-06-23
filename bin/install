@@ -29,7 +29,7 @@ if ! command -v openssl &>/dev/null; then
   exit 1
 fi
 
-printf "\nUnited is about to be installed to /etc/united, and will attempt to bind to :80 and :443. If this is unintentional, you have 10 seconds to press [CTRL+C] to cancel.  \n\n"
+printf "\nUnited is about to be installed to /etc/united, and will attempt to bind to :80 and :443. \n\nIf this is unintentional, you have 10 seconds to press [CTRL+C] to cancel.  \n\n"
 
 sleep 10
 
@@ -52,13 +52,15 @@ if [[ $external =~ ^[Yy]$ ]]; then
   printf "\nWhat's your external domain?\n\n"
   read -e -r domain
   fqdn="${domain#http*://}"
-  printf '\nTLS_DOMAIN=%s' "$fqdn" | tee -a .env
+  tee -a .env <<EOF &>/dev/null
+TLS_DOMAIN=$fqdn
+EOF
 else
-  printf "\nTLS_DOMAIN=united.local" | tee -a .env
-  printf "\nTLS_LOCAL=true" | tee -a .env
+  tee -a .env <<EOF &>/dev/null
+TLS_DOMAIN=united.local
+TLS_LOCAL=true
+EOF
 fi
-
-docker compose build
 
 tee /etc/systemd/system/united.service <<'END' &>/dev/null
 [Unit]
