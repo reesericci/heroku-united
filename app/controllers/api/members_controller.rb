@@ -4,20 +4,51 @@ class Api::MembersController < Api::BaseController
   end
 
   def create
-    @member = Member.new(members_params)
+    @member = Member.new(member_params)
     if @member.invalid?
       render json: @member.errors, status: 400
       return
     end
 
-    @member.save
+    @member.save!
 
-    render "show"
+    returned = false
+
+    params[:extensions].each do |k, v|
+      e = if @member.extensions.find_by(name: k).present?
+        e = @member.extensions.find_by(name: k)
+        e.assign_attributes(content: v)
+        e
+      else
+        @member.extensions.new(name: k, content: v)
+      end
+      if e.invalid?
+        render json: e.errors, status: 400
+        returned = true
+        break
+      end
+      e.save!
+    end
+
+    render "show" unless returned
   end
 
   def update
     @member = Member.find_by(username: params[:username])
     @member&.assign_attributes(member_params)
+    params[:extensions].each do |k, v|
+      if member.extensions.find_by(name: k).present?
+        member.extensions.find_by(name: k).update!(content: v)
+      else
+        member.extensions.create!(name: k, content: v)
+      end
+    end
+    if member.address
+      member.address.update!(address_params)
+    elsif Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})).valid?
+      member.update!(address: Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})))
+    end
+
     if @member&.invalid?
       render json: @member.errors, status: 400
       return
@@ -39,11 +70,15 @@ class Api::MembersController < Api::BaseController
 
   private
 
-  def members_params
-    params.permit(:username, :name, :email, :pronouns, :banned, :expires_at)
-  end
-
   def member_params
     params.require(:member).permit(:username, :name, :email, :pronouns, :banned, :expires_at)
+  end
+
+  def address_params
+    params.require(:member).permit(address: [:line1, :line2, :city, :province, :code, :country])
+  end
+
+  def extensions_params
+    params.require(:member)[:extensions]
   end
 end

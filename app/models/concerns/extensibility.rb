@@ -8,7 +8,7 @@ module Extensibility
     after_initialize do
       (Extension.names || {}).keys.each do |e|
         if extensions.find_by(name: e).blank?
-          extensions.create(name: e, content: "")
+          persisted? ? extensions.create(name: e, content: "") : extensions.new(name: e, content: "")
         end
       end
     end
