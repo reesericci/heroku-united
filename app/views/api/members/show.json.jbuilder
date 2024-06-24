@@ -9,13 +9,13 @@ json.extensions @member.extensions do |e|
   json.content e.content
 end
 
-json.address @member.address do |a|
-  json.line1 a.line1
-  json.line2 a.line2
-  json.city a.city
-  json.province a.province
-  json.country a.country
-  json.code a.code
+json.address do
+  json.line1 @member.address.line1
+  json.line2 @member.address.line2
+  json.city @member.address.city
+  json.province @member.address.province
+  json.country @member.address.country.name
+  json.code @member.address.code
 end
 
 json.banned @member.banned?

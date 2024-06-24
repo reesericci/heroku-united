@@ -23,11 +23,36 @@ class Api::MembersController < Api::BaseController
         @member.extensions.new(name: k, content: v)
       end
       if e.invalid?
+        @member.delete
         render json: e.errors, status: 400
         returned = true
         break
       end
       e.save!
+    end
+
+    if @member.address
+      a = @member.address
+      a.assign_attributes(address_params)
+      if a.invalid?
+        @member.delete
+        render json: a.errors, status: 400
+        return
+      end
+    else
+      a = begin 
+        Address.new(address_params.merge({addressable_id: @member.id, addressable_type: "Member"})) 
+      rescue => e
+        @member.delete
+        render json: e.to_json, status: 400
+        return
+      end
+      if a.invalid?
+        @member.delete
+        render json: a.errors, status: 400
+        return
+      end
+      @member.update!(address: a)
     end
 
     render "show" unless returned
@@ -43,10 +68,27 @@ class Api::MembersController < Api::BaseController
         member.extensions.create!(name: k, content: v)
       end
     end
-    if member.address
-      member.address.update!(address_params)
-    elsif Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})).valid?
-      member.update!(address: Address.new(address_params.merge({addressable_id: member.id, addressable_type: "Member"})))
+    if @member.address
+      a = @member.address
+      a.assign_attributes(address_params)
+      if a.invalid?
+        render json: a.errors, status: 400
+        return
+      end
+    else
+      a = begin 
+        Address.new(address_params.merge({addressable_id: @member.id, addressable_type: "Member"})) 
+      rescue => e
+        @member.delete
+        render json: e.to_json, status: 400
+        return
+      end
+      if a.invalid?
+        @member.delete
+        render json: a.errors, status: 400
+        return
+      end
+      @member.update!(address: a)
     end
 
     if @member&.invalid?
@@ -75,7 +117,7 @@ class Api::MembersController < Api::BaseController
   end
 
   def address_params
-    params.require(:member).permit(address: [:line1, :line2, :city, :province, :code, :country])
+    params.require(:address).permit(:line1, :line2, :city, :province, :code, :country)
   end
 
   def extensions_params

@@ -1,4 +1,5 @@
 class Api::BaseController < ActionController::API
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
   before_action :ensure_authenticated
 
   def ensure_authenticated
