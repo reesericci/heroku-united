@@ -22,11 +22,11 @@ Rails.application.config.to_prepare do
   # Password strategy
   Warden::Strategies.add(:password) do
     def valid?
-      login_params.permitted?
+      rendezvous_params.permitted?
     end
 
     def authenticate!
-      c = Config.find_by(email: login_params[:email].downcase)&.authenticate(login_params[:password])
+      c = Config.find_by(email: rendezvous_params[:email].downcase)&.authenticate(rendezvous_params[:password])
       if c == false || c.nil?
         fail!("Could not log in")
       else
@@ -36,8 +36,8 @@ Rails.application.config.to_prepare do
 
     private
 
-    def login_params
-      ActionController::Parameters.new(params).require(:login).permit(:email, :password)
+    def rendezvous_params
+      ActionController::Parameters.new(params).require(:rendezvous).permit(:email, :password)
     end
   end
 

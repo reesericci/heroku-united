@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   use_doorkeeper
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
+  mount MissionControl::Jobs::Engine, at: "/secret/jobs"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -22,19 +23,24 @@ Rails.application.routes.draw do
 
   resolve("Configuration") { [:configuration] }
 
-  scope "/admin" do
+  scope "/secret" do
     resources :members, param: :username, except: [:show, :delete] do
       get "/cemetery", to: "members/cemetery#index", on: :collection
     end
-    get "/", to: redirect("/admin/members"), as: :admin
+    get "/", to: redirect("/secret/members"), as: :secret
 
     resources :broadcasts, except: [:show]
 
     resource :configuration, except: [:edit, :destroy]
 
-    get "/login", to: "logins#new"
-    post "/login", to: "logins#create"
-    get "/logout", to: "logins#destroy"
+    resources :rendezvous, only: [:new, :create] do
+      collection do
+        get "/delete", to: "rendezvous#delete"
+      end
+    end
+
+    get "/login", to: redirect("/rendezvous/new")
+    get "/logout", to: redirect("/rendezvous/delete")
 
     resources :api_keys, only: [:index, :create, :destroy]
   end
@@ -61,5 +67,6 @@ Rails.application.routes.draw do
     end
   end
   resolve("Login") { [:login] }
+  resolve("Rendezvous") { [:rendezvous] }
   resolve("Member") { [:member] }
 end

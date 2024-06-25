@@ -1,5 +1,4 @@
-class MembersController < ApplicationController
-  include Authenticate
+class MembersController < SecretController
   include ActiveSupport::Inflector
 
   def index

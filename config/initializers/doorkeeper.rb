@@ -28,7 +28,7 @@ Doorkeeper.configure do
     # Put your admin authentication logic here.
     # Example implementation:
     if !request.env["warden"].authenticated?
-      redirect_to login_path, flash: {error: (request.env["PATH_INFO"] == members_path) ? nil : "You need to sign in to access that page", redirect_back: request.env["PATH_INFO"]}
+      redirect_to new_rendezvous_path, flash: {error: (request.env["PATH_INFO"] == members_path) ? nil : "You need to sign in to access that page", redirect_back: request.env["PATH_INFO"]}
     end
   end
 

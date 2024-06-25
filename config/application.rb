@@ -29,5 +29,6 @@ module United
     config.active_record.sqlite3_production_warning = false
     config.cache_store = :solid_cache_store
     config.active_job.queue_adapter = :solid_queue
+    config.mission_control.jobs.base_controller_class = "SecretController"
   end
 end

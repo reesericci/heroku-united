@@ -5,7 +5,7 @@
   "logo": "https://codeberg.org/reesericci/united/media/branch/main/pictures/icon.png",
   "website": "https://united.obl.ong",
   "keywords": ["united", "membership", "rails"],
-  "success_url": "/admin/configuration/new",
+  "success_url": "/secret/configuration/new",
   "addons": ["heroku-postgresql:essential-0"],
   "env": {
     "RAILS_ENV": "production",

@@ -1,6 +1,4 @@
-class ApiKeysController < ApplicationController
-  include Authenticate
-
+class ApiKeysController < SecretController
   def index
   end
 

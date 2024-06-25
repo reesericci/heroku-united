@@ -1,5 +1,5 @@
 <h1>Login to <%= Config.organization %></h1>
-<%= form_with scope: :login, url: login_path, method: :post do |form| %>
+<%= form_with scope: :rendezvous, url: rendezvous_index_path, method: :post do |form| %>
   <div>
     <%= form.label :email, "Email" %>
     <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>

@@ -1,6 +1,4 @@
-class BroadcastsController < ApplicationController
-  include Authenticate
-
+class BroadcastsController < SecretController
   def new
   end
 
