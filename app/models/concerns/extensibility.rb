@@ -8,7 +8,14 @@ module Extensibility
     after_initialize do
       (Extension.names || {}).keys.each do |e|
         if extensions.find_by(name: e).blank?
-          persisted? ? extensions.create(name: e, content: "") : extensions.new(name: e, content: "")
+          ext = extensions.new(name: e, content: "")
+          if persisted?
+            begin
+              ext.save!
+            rescue
+              Rails.logger.warn("Unable to save new extension")
+            end
+          end
         end
       end
     end

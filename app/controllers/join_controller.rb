@@ -6,7 +6,11 @@ class JoinController < ApplicationController
     m = Member.new(member_params)
     m.build_address(address_params)
     params[:member][:extensions].each do |k, v|
-      m.extensions.new(name: k, content: v)
+      if m.extensions.find_by(name: k).blank?
+        m.extensions.new(name: k, content: v)
+      else
+        m.extensions.find_by(name: k).assign_attributes(content: v)
+      end
     end
     m.expires_at = DateTime.now + Config.membership_length.days
     if m.invalid?
@@ -21,6 +25,7 @@ class JoinController < ApplicationController
       return
     end
     m.save!
+    m.extensions.each { |e| e.save! }
     JoinMailer.with(member: m).confirmation.deliver_later
     redirect_to join_confirmation_path
   end
