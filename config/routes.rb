@@ -39,8 +39,8 @@ Rails.application.routes.draw do
       end
     end
 
-    get "/login", to: redirect("/rendezvous/new")
-    get "/logout", to: redirect("/rendezvous/delete")
+    get "/login", to: redirect("/secret/rendezvous/new")
+    get "/logout", to: redirect("/secret/rendezvous/delete")
 
     resources :api_keys, only: [:index, :create, :destroy]
   end
