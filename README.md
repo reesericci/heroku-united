@@ -83,7 +83,7 @@ If you'd like, please feel free to take a task on here and send in a PR!
 - [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
 - [ ] Triggers & Hooks
 - [ ] Automated testing (RSpec)
-- [ ] Allow for fetching of identity login codes via TOTP app instead of email
+- [X] Allow for fetching of identity login codes via TOTP app instead of email
 - [ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
   - [ ] Postmark setup wiki guide
 - [ ] Approval queue for new members instead of automatic acceptance
