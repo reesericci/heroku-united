@@ -53,7 +53,7 @@ Rails.application.config.to_prepare do
       rescue ActiveRecord::RecordNotFound
         nil
       end
-      if m&.keycode_imprint&.code&.authenticate!(login_params[:code])
+      if m&.keycode_imprint&.authenticate!(login_params[:code])
         success!(m)
       else
         fail!("Could not log in")

@@ -56,7 +56,7 @@ group :development do
   gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
@@ -103,3 +103,9 @@ gem "solid_queue", "~> 0.3.1"
 gem "spreadsheet_architect", "~> 5.0"
 
 gem "solid_cable", "~> 1.0"
+
+gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
+
+gem "litestream", "~> 0.10.4"
+
+gem "rqrcode", "~> 2.2"

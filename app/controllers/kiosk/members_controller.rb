@@ -1,8 +1,13 @@
 class Kiosk::MembersController < ApplicationController
   include Identity::Authenticate
   include Renewer
+  include Keycode::Imprint::Rotator
 
   renewable do |request|
+    request.env["warden"].user(:identity)
+  end
+
+  imprintor do |request|
     request.env["warden"].user(:identity)
   end
 
@@ -72,7 +77,7 @@ class Kiosk::MembersController < ApplicationController
   private
 
   def member_params
-    params.require(:member).permit(:name, :username, :email, :signature)
+    params.require(:member).permit(:name, :username, :email, :signature, keycode_imprint_attributes: [:email, :base])
   end
 
   def address_params

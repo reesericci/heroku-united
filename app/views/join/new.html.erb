@@ -2,7 +2,10 @@
 
 <h1 style="margin-bottom: 1rem;">Join <%= Config.organization %></h1>
 <%= link_to edit_kiosk_member_path do %>
-  <button class="subheading-button">Or edit your membership</button>
+  <button class="subheading-button">Member login</button>
+<% end %>
+<%= link_to admin_path do %>
+  <button class="subheading-button">Administrator login</button>
 <% end %>
 <%= form_with model: @member, scope: :member, url: join_path, method: :post do |form| %>
   <div>

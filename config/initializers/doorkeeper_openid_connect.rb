@@ -3,13 +3,19 @@
 Rails.application.config.to_prepare do
   Doorkeeper::OpenidConnect.configure do
     issuer do
-      Config.external_url || "http://localhost:3000"
+      Rails.cache.fetch("#{Config.cache_key_with_version}/external_url", expires_in: 12.hours) do
+        Config.external_url || "http://localhost:3000"
+      end
     end
 
-    signing_key begin
-      Config.first.oidc_key || "A signing key has not been provided"
-    rescue
-      "A signing key has not been provided"
+    signing_key do 
+      Rails.cache.fetch("#{Config.cache_key_with_version}/oidc_signing_key", expires_in: 12.hours) do
+        begin
+          Config.oidc_key || "A signing key has not been provided"
+        rescue
+          "A signing key has not been provided"
+        end
+      end
     end
 
     subject_types_supported [:public]

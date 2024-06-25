@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :members, param: :username, except: [:show, :delete] do
       get "/cemetery", to: "members/cemetery#index", on: :collection
     end
-    get "/", to: redirect("/admin/members")
+    get "/", to: redirect("/admin/members"), as: :admin
 
     resources :broadcasts, except: [:show]
 
@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resource :member, only: [:edit, :update, :destroy] do
       get "/", to: redirect("/kiosk/member/edit")
       post "/renew", to: "renew"
+      post "/imprint/rotate", to: "rotate_imprint"
     end
   end
   resolve("Login") { [:login] }

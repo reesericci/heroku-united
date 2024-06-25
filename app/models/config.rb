@@ -54,6 +54,8 @@ class Config < ApplicationRecord
     Config.column_names.each do |k|
       delegate k, to: :first, allow_nil: true
     end
+
+    delegate :cache_key_with_version, to: :first, allow_nil: true
   end
 
   private

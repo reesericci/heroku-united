@@ -70,6 +70,24 @@
     </div>
   </div>
   <div>
+    <label>TOTP (Authenticator App) base - hover or tap to view</label>
+    <%= form.button "Rotate base", formaction: imprint_rotate_kiosk_member_path, formmethod: "post" %>
+    <br>
+    <div class="blur">
+      <% cache @member.keycode_imprint do %>
+        <%= raw qr_code(@member.keycode_imprint.uri(@member.username)) %>
+        <p><%= @member.keycode_imprint.base %></p>
+      <% end %>
+    </div>
+  </div>
+  <%= form.fields_for :keycode_imprint do |imprint_form| %>
+    <div>
+      <%= imprint_form.label :email, "Email login codes" %>
+      <%= imprint_form.check_box :email %>
+    </div>
+    <%= imprint_form.hidden_field :base, value: @member.keycode_imprint.base %>
+  <% end %>
+  <div>
     <%= form.label :expires_at, "Expires on" %>
     <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year, disabled: true %>
   </div>
@@ -138,3 +156,14 @@
     })
   })
 </script>
+
+<style>
+  div.blur {
+    filter: blur(5px);
+    transition: 0.25s ease-in-out;
+
+    &:hover, &:active, &:focus {
+      filter: none;
+    }
+  }
+</style>
