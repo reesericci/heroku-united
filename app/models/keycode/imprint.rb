@@ -43,26 +43,26 @@ class Keycode::Imprint < ApplicationRecord
     def initialize(imprint)
       @imprint = imprint
     end
-  
+
     def rotate!
       @imprint.update!(count: @imprint.count + 1, coded_at: DateTime.now, used: false)
       self
     end
-  
+
     def to_i
       @imprint.hotp.at(@imprint.count).to_i
     end
-  
+
     def to_s
       @imprint.hotp.at(@imprint.count).to_s
     end
-  
+
     alias_method :to_str, :to_s
-  
+
     def void?
       DateTime.now.after?(@imprint.coded_at + 10.minutes) || @imprint.used?
     end
-  
+
     alias_method :⛔️?, :void?
   end
 end

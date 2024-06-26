@@ -96,7 +96,7 @@ gem "pg", "~> 1.5"
 
 gem "solid_cache", "~> 0.6.0"
 
-gem "dockerfile-rails", ">= 1.6", :group => :development
+gem "dockerfile-rails", ">= 1.6", group: :development
 
 gem "solid_queue", "~> 0.3.1"
 
@@ -111,3 +111,7 @@ gem "litestream", "~> 0.10.4"
 gem "rqrcode", "~> 2.2"
 
 gem "mission_control-jobs", "~> 0.2.1"
+
+gem "factory_bot", "~> 6.4"
+
+gem "factory_bot_rails", "~> 6.4"

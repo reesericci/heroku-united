@@ -40,8 +40,8 @@ class Api::MembersController < Api::BaseController
         return
       end
     else
-      a = begin 
-        Address.new(address_params.merge({addressable_id: @member.id, addressable_type: "Member"})) 
+      a = begin
+        Address.new(address_params.merge({addressable_id: @member.id, addressable_type: "Member"}))
       rescue => e
         @member.delete
         render json: e.to_json, status: 400
@@ -76,8 +76,8 @@ class Api::MembersController < Api::BaseController
         return
       end
     else
-      a = begin 
-        Address.new(address_params.merge({addressable_id: @member.id, addressable_type: "Member"})) 
+      a = begin
+        Address.new(address_params.merge({addressable_id: @member.id, addressable_type: "Member"}))
       rescue => e
         @member.delete
         render json: e.to_json, status: 400

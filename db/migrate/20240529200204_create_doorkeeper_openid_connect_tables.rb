@@ -3,6 +3,7 @@ class CreateDoorkeeperOpenidConnectTables < ActiveRecord::Migration[7.2]
     create_table :oauth_openid_requests do |t|
       t.references :access_grant, null: false, index: true
       t.string :nonce, null: false
+      t.timestamps
     end
 
     add_foreign_key(

@@ -55,6 +55,8 @@ class Member < ApplicationRecord
     Config.membership_length < 0
   end
 
+  # standard:disable Rails/InverseOf
+
   has_many :access_grants,
     class_name: "Doorkeeper::AccessGrant",
     foreign_key: :resource_owner_id,
@@ -64,6 +66,8 @@ class Member < ApplicationRecord
     class_name: "Doorkeeper::AccessToken",
     foreign_key: :resource_owner_id,
     dependent: :delete_all # or :destroy if you need callbacks
+
+  # standard:enable Rails/InverseOf
 
   def status
     if deceased?

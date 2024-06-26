@@ -8,13 +8,11 @@ Rails.application.config.to_prepare do
       end
     end
 
-    signing_key do 
+    signing_key do
       Rails.cache.fetch("#{Config.cache_key_with_version}/oidc_signing_key", expires_in: 12.hours) do
-        begin
-          Config.oidc_key || "A signing key has not been provided"
-        rescue
-          "A signing key has not been provided"
-        end
+        Config.oidc_key || "A signing key has not been provided"
+      rescue
+        "A signing key has not been provided"
       end
     end
 

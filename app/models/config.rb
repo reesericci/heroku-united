@@ -10,7 +10,7 @@ class Config < ApplicationRecord
 
   store :smtp, accessors: [:server, :port, :username, :password, :box, :domain], prefix: true
 
-  before_validation do
+  before_save do
     self.email = email.downcase
   end
 

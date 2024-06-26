@@ -10,7 +10,7 @@ class Api::BroadcastsController < Api::BaseController
       return
     end
 
-    @broadcast.save
+    @broadcast.save!
 
     render "show"
   end
@@ -20,7 +20,7 @@ class Api::BroadcastsController < Api::BaseController
   end
 
   def destroy
-    Broadcast.find_by(id: params[:id])&.destroy
+    Broadcast.find_by(id: params[:id])&.destroy!
 
     render json: Broadcast.ids
   end
