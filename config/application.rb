@@ -35,7 +35,5 @@ module United
     config.solid_queue.connects_to = {database: {writing: :queue, reading: :queue}}
 
     config.mission_control.jobs.base_controller_class = "SecretController"
-
-    config.active_record.sqlite3_production_warning = false
   end
 end

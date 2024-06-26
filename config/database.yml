@@ -10,17 +10,17 @@ primary: &primary
 queue: &queue
   <<: *default
   migrations_paths: db/queue_migrate
-  database: storage/queue.sqlite3
+  database: storage/queue-<%= ENV["RAILS_ENV"] || "development" %>.sqlite3
 
 cache: &cache
   <<: *default
   migrations_paths: db/cache_migrate
-  database: storage/cache.sqlite3
+  database: storage/cache-<%= ENV["RAILS_ENV"] || "development" %>.sqlite3
 
 cable: &cable
   <<: *default
   migrations_paths: db/cable_migrate
-  database: storage/cable.sqlite3
+  database: storage/cable-<%= ENV["RAILS_ENV"] || "development" %>.sqlite3
 
 production: &production
   primary: *primary
@@ -32,10 +32,5 @@ development:
   <<: *production
  
 test:
-  primary:
-    <<: *default
-    database: storage/test.sqlite3
-  queue: *queue
-  cache: *cache
-  cable: *cable
+  <<: *production
  

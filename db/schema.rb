@@ -213,15 +213,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_26_032125) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "solid_queue_recurring_executions", force: :cascade do |t|
-    t.integer "job_id", null: false
-    t.string "task_key", null: false
-    t.datetime "run_at", null: false
-    t.datetime "created_at", null: false
-    t.index ["job_id"], name: "index_solid_queue_recurring_executions_on_job_id", unique: true
-    t.index ["task_key", "run_at"], name: "index_solid_queue_recurring_executions_on_task_key_and_run_at", unique: true
-  end
-
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "members", "addresses"
   add_foreign_key "members", "keycode_imprints"

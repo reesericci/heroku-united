@@ -52,12 +52,12 @@ jobs:
 
       - name: Lint code for consistent style
         run: bin/bundle exec standardrb --fix --format github
-
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y chromium-browser curl libjemalloc2 libsqlite3-0 libvips libpq-dev
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y chromium-browser curl libjemalloc2 libvips postgresql-client libpq-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -68,20 +68,17 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Set up database
-        env:
-          RAILS_ENV: test
-        run: bin/rails db:setup
-
       - name: Run tests
         env:
           RAILS_ENV: test
-        run: bin/bundle exec rspec
+        run: bin/rails db:setup spec
 
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/capybara
-          if-no-files-found: ignore
+      # Forgejo doesn't suppport upload-artifact
+      #
+      # - name: Keep screenshots from failed system tests
+      #   uses: actions/upload-artifact@v4
+      #   if: failure()
+      #   with:
+      #     name: screenshots
+      #     path: ${{ github.workspace }}/tmp/capybara
+      #     if-no-files-found: ignore
