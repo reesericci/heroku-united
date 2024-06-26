@@ -76,39 +76,6 @@ To install Linux on a computer, please visit the [Fedora Server install guide](h
   - Simple deployment
   - Low-maintainance stability
 
-## TODOS
-
-If you'd like, please feel free to take a task on here and send in a PR!
-
-- [ ] Verify emails
-- [ ] Make normal API OAuth-based to consolidate between OIDC Provider w/Doorkeeper and normal API
-- [ ] Triggers & Hooks
-- [ ] Automated testing (RSpec)
-- [X] Allow for fetching of identity login codes via TOTP app instead of email
-- [ ] Easier SMTP setup/SMTP setup guidance with external provider (e.g. Postmark or SES)
-  - [ ] Postmark setup wiki guide
-- [ ] Approval queue for new members instead of automatic acceptance
-- [ ] Surface errors to administrator via alerts (e.g. SMTP misconfiguration)
-- [ ] Managed hosting service
-- [ ] Getting started walkthrough videos
-  - [X] Railway (Cloud IaaS)
-  - [ ] Hetzner (Own VPS)
-  - [ ] Bare Metal
-- [ ] Trial/Demo Mode
-- [X] Automated update system
-- [X] Auxillary (Custom) Fields
-- Deploy to [service] buttons
-  - [X] Heroku
-  - [X] Render
-  - [X] Railway
-- [X] Self-hosted deployment instructions
-- [X] OIDC provider
-- [X] Unlimited membership length option
-- [X] Advisory emails for upcoming expirations, and allow for renewing of memberships (HIGH PRIORITY)
-- [X] CSV export of membership (HIGH PRIORITY)
-- [X] Self-serve portal for editing membership data
-
-
 ## Copyright
 
 Copyright (C) 2024 [Software Freedom Conservancy](https://sfconservancy.org/assignment/90c1485a-f5ca-4b6c-ba1a-fded83d87cf3/) and United contributors
