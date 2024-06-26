@@ -32,6 +32,9 @@ development:
   <<: *production
  
 test:
-  <<: *primary
-  database: db/test.sqlite3
+  primary:
+    database: storage/test.sqlite3
+  queue: *queue
+  cache: *cache
+  cable: *cable
  

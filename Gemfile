@@ -115,3 +115,5 @@ gem "mission_control-jobs", "~> 0.2.1"
 gem "factory_bot", "~> 6.4"
 
 gem "factory_bot_rails", "~> 6.4"
+
+gem "capybara-screenshot", "~> 1.0"
