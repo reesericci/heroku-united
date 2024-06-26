@@ -42,7 +42,7 @@ Here's a video of me spinning up a United instance in less than 10 minutes on Ra
 If you don't want to use Railway, here are some other options for cloud deployments:
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
-[<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
+[<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render" style="border-radius: 6px;">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
 [<img src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io">](https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io)
 
 ### Computer
