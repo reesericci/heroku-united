@@ -57,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libsqlite3-0 libvips libpq-devel 
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y chromium-browser curl libjemalloc2 libsqlite3-0 libvips libpq-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
