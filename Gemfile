@@ -117,3 +117,7 @@ gem "factory_bot", "~> 6.4"
 gem "factory_bot_rails", "~> 6.4"
 
 gem "capybara-screenshot", "~> 1.0"
+
+gem "simplecov", "~> 0.22.0"
+
+gem "simplecov-small-badge", "~> 0.2.7"

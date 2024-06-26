@@ -1,3 +1,4 @@
 {
-  "vscode-run-rspec-file.custom-command": "bundle exec rspec --color"
+  "vscode-run-rspec-file.custom-command": "bundle exec rspec --color",
+  "simplecov-vscode.enabled": false
 }

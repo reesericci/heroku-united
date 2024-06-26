@@ -12,6 +12,18 @@ require "capybara-screenshot/rspec"
 Capybara::Screenshot.autosave_on_failure = true
 Capybara.asset_host = "http://localhost:3000"
 
+require "simplecov"
+require "simplecov_small_badge"
+
+SimpleCov.start "rails" do
+  enable_coverage_for_eval
+  add_group "Views", "app/views"
+  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::HTMLFormatter,
+    SimpleCovSmallBadge::Formatter
+  ])
+end
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
