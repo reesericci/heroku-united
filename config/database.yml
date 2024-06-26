@@ -33,6 +33,7 @@ development:
  
 test:
   primary:
+    <<: *default
     database: storage/test.sqlite3
   queue: *queue
   cache: *cache
