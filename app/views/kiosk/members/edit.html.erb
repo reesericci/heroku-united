@@ -74,7 +74,7 @@
     <%= form.button "Rotate base", formaction: imprint_rotate_kiosk_member_path, formmethod: "post" %>
     <br>
     <div class="blur">
-      <% cache @member.keycode_imprint do %>
+      <% cache @member.keycode_imprint.base do %>
         <%= raw qr_code(@member.keycode_imprint.uri(@member.username)) %>
         <p><%= @member.keycode_imprint.base %></p>
       <% end %>
