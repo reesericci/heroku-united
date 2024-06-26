@@ -26,8 +26,7 @@ class Keycode::Imprint < ApplicationRecord
   end
 
   def authenticate!(other)
-    # ⛔️ references the void method, I thought it would be a fun surprise to use an emoji :P
-    if (hotp.verify(other, count) || totp.verify(other, drift_behind: 5)) && !code.⛔️?
+    if (hotp.verify(other, count) || totp.verify(other, drift_behind: 5)) && !code.void?
       update!(used: true)
       true
     else
@@ -37,6 +36,7 @@ class Keycode::Imprint < ApplicationRecord
 
   def rotate!
     update!(base: ROTP::Base32.random, coded_at: DateTime.now)
+    self
   end
 
   class Keycode
@@ -62,7 +62,5 @@ class Keycode::Imprint < ApplicationRecord
     def void?
       DateTime.now.after?(@imprint.coded_at + 10.minutes) || @imprint.used?
     end
-
-    alias_method :⛔️?, :void?
   end
 end

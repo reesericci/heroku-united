@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "the join process", type: :feature do
+RSpec.describe "a new member", type: :feature do
   before :each do
     Config.create!(attributes_for(:config))
   end

@@ -17,4 +17,11 @@ FactoryBot.define do
       }
     }
   end
+
+  factory :member do
+    name { "Fionah United" }
+    username { "fionahu" }
+    email { "fionah@united.local" }
+    expires_at { 1.year.from_now }
+  end
 end
