@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_configured
     unless Config.first
-      redirect_to new_configuration_path
+      redirect_to new_organization_config_path
     end
   end
 end

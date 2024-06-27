@@ -1,2 +1,0 @@
-module Kiosk::MemberHelper
-end

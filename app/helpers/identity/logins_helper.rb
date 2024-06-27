@@ -1,2 +1,0 @@
-module Identity::LoginsHelper
-end

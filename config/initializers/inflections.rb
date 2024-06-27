@@ -16,5 +16,5 @@
 # end
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym "JSON"
-  inflect.irregular "rendezvous", "rendezvous"
+  inflect.irregular "cemetery", "cemeteries"
 end

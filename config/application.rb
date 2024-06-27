@@ -34,6 +34,6 @@ module United
     config.active_job.queue_adapter = :solid_queue
     config.solid_queue.connects_to = {database: {writing: :queue, reading: :queue}}
 
-    config.mission_control.jobs.base_controller_class = "SecretController"
+    config.mission_control.jobs.base_controller_class = "Organization::BaseController"
   end
 end

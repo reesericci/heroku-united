@@ -6,7 +6,7 @@ RSpec.describe "a new member", type: :feature do
   end
 
   it "joins" do
-    visit "/join"
+    visit new_my_membership_path
 
     fill_in "Full name", with: "Fionah United"
     fill_in "Username", with: "fionahu"
@@ -22,6 +22,6 @@ RSpec.describe "a new member", type: :feature do
 
     click_on "Join!"
 
-    expect(page).to have_current_path(join_confirmation_path)
+    expect(page).to have_current_path(my_membership_path)
   end
 end

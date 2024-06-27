@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   use_doorkeeper
   mount Rswag::Ui::Engine => "/api-docs"
   mount Rswag::Api::Engine => "/api-docs"
-  mount MissionControl::Jobs::Engine, at: "/secret/jobs"
+  mount MissionControl::Jobs::Engine, at: "/organization/jobs"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,58 +15,53 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", :as => :pwa_manifest
 
   # Defines the root path route ("/")
-  root "join#new"
+  root "my/memberships#new"
 
-  get "/join", to: "join#new"
-  post "/join", to: "join#create"
-  get "/join/confirmation", to: "join#confirmation"
+  namespace :organization do
+    root "members#index", as: :members
 
-  resolve("Configuration") { [:configuration] }
+    resources :members, param: :username, except: [:index, :edit, :delete]
 
-  scope "/secret" do
-    resources :members, param: :username, except: [:show, :delete] do
-      get "/cemetery", to: "members/cemetery#index", on: :collection
-    end
-    get "/", to: redirect("/secret/members"), as: :secret
+    resources :broadcasts, only: [:index, :destroy, :create]
 
-    resources :broadcasts, except: [:show]
+    resource :config, except: [:edit, :destroy]
 
-    resource :configuration, except: [:edit, :destroy]
-
-    resources :rendezvous, only: [:new, :create] do
+    resource :journey, only: [:new, :create] do
       collection do
-        get "/delete", to: "rendezvous#delete"
+        get "/delete", to: "journeys#delete"
       end
     end
 
-    get "/login", to: redirect("/secret/rendezvous/new")
-    get "/logout", to: redirect("/secret/rendezvous/delete")
+    get "/cemetery", to: "cemeteries#index"
 
     resources :api_keys, only: [:index, :create, :destroy]
   end
 
-  scope "/api", module: "api" do
+  namespace :api do
     resources :members, param: :username, except: [:new, :edit, :delete]
     resources :broadcasts, except: [:new, :edit, :delete, :update]
   end
 
-  namespace :identity do
-    resources :login, only: [:new, :create] do
+  namespace :my do
+    root to: redirect("/my/membership")
+
+    resource :journey, only: [:new, :create] do
       collection do
         resources :keycodes, only: [:new, :create]
-        get "/destroy", to: "login#destroy"
+        get "/delete", to: "journeys#delete"
       end
+    end
+
+    resource :membership, only: [:new, :create, :show, :update, :destroy] do
+      resource :renewals, only: [:new], module: :membership
+    end
+
+    namespace :imprint do
+      resource :rotations, only: [:new]
     end
   end
 
-  namespace :kiosk do
-    resource :member, only: [:edit, :update, :destroy] do
-      get "/", to: redirect("/kiosk/member/edit")
-      post "/renew", to: "renew"
-      post "/imprint/rotate", to: "rotate_imprint"
-    end
-  end
-  resolve("Login") { [:login] }
-  resolve("Rendezvous") { [:rendezvous] }
-  resolve("Member") { [:member] }
+  resolve("Membership") { [:membership] }
+  resolve("Journey") { [:journey] }
+  resolve("Config") { [:config] }
 end

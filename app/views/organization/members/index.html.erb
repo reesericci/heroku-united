@@ -1,0 +1,64 @@
+<%= render "nav" %>
+
+<h1 style="margin-bottom: 8px">Here's the members:</h1>
+<button id="share" class="subheading-button">Share join link</button>
+<%= link_to organization_members_path(:csv) do %>
+  <button class="subheading-button">Export CSV</button>
+<% end %>
+<%= link_to organization_cemetery_path do %>
+  <button class="subheading-button">Visit cemetery</button>
+<% end %>
+
+<%= turbo_stream_from "members" %>
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Expires on</th>
+    <th>Member since</th>
+    <th>Status</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @members.each do |m| %>
+      <%= turbo_stream_from m %>
+      <tr>
+        <td><%= m.name %></td>
+        <td><%= m.username %></td>  
+        <td><%= m.email %></td>
+        <td><%= local_relative_time(m.expires_at, type: "time-or-date") %></td>
+        <td><%= local_relative_time(m.created_at, type: "time-or-date") %></td>
+        <td><span class="<%= m.status %>-chip"><%= m.status %></span></td>
+        <td>
+          <%= link_to organization_member_path(m) do %>
+            <button>Edit</button>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<script type="module">
+  const shareBtn = document.querySelector("button#share")
+
+  if (!navigator.share) {
+    shareBtn.textContent = "Copy join link"  
+  }
+
+  shareBtn.addEventListener("click", async (event) => {
+    if (navigator.share) {
+      // Use Web Share API
+      await navigator.share({
+        title: "Join <%= Config.organization %>",
+        text: "Become a member of <%= Config.organization %>!",
+        url: "<%= new_my_membership_path %>",
+      })
+    } else {
+      // Copy to clipboard if Web Share is unavailable
+      await navigator.clipboard.writeText("<%= new_my_membership_path %>");
+      alert("Copied join link to clipboard!")
+    }
+  })
+</script>

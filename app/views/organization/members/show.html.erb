@@ -1,0 +1,113 @@
+<a href="<%= organization_members_path %>"><h2>← Back to Home</h2></a>
+<h1><%= @member.name %></h1>
+<%= turbo_stream_from @member %>
+<%= form_with model: @member, url: organization_member_path, scope: :member do |form| %>
+  <div>
+    <%= form.label :name, "Full name" %>
+    <%= form.text_field :name, placeholder: "Fionah United" %>
+  </div>
+  <div>
+    <%= form.label :name, "Username" %>
+    <%= form.text_field :username, placeholder: "fionahu" %>
+  </div>
+  <div>
+    <%= form.label :email, "Email" %>
+    <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
+  </div>
+  <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
+  <%= form.fields_for :address, @member.address || Address.new(addressable_id: @member, addressable_type: Member) do |address_form| %>
+    <div>
+      <%= address_form.label :line1, "Number and Street" %>
+      <%= address_form.text_field :line1 %>
+    </div>
+    <div>
+      <%= address_form.label :line2, "Line 2" %>
+      <%= address_form.text_field :line2 %>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div style="max-width: 50%;">
+        <%= address_form.label :city %>
+        <%= address_form.text_field :city %>
+      </div>
+      <div style="max-width: 50%;">
+        <%= address_form.label :province %>
+        <%= address_form.text_field :province %>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div style="width: 50%">
+        <%= address_form.label :code, "Postal Code" %>
+        <%= address_form.text_field :code %>
+      </div>
+      <div style="width: 50%">
+        <%= address_form.label :country %>
+        <%= address_form.select :country, Domesticable::Country.all.prepend(nil) %>
+      </div>
+    </div>
+  <% end %>
+  <%= form.fields_for :extensions, Extension.names.keys.map { |name| @member.extensions.find_by(name: name) || @member.extensions.new(name: name) } do |e| %>
+    <div>
+      <%= e.label e.object.name.to_sym, ActiveSupport::Inflector.humanize(e.object.name.to_s) %>
+      <%= e.text_field e.object.name.to_sym, value: e.object.content %>
+    </div>
+  <% end %>
+
+  <div style="height: 100%; width: 100%;">
+    <%= form.label :signature, "Signature" %>
+    <%= form.hidden_field :signature %>
+    <div style="position: relative; width: 100%;">
+      <canvas class="signature" style="cursor: not-allowed; pointer-events: none;">
+      </canvas>
+    </div>
+  </div>
+  <div>
+    <%= form.label :expires_at, "Expires on" %>
+    <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year %>
+  </div>
+  <div>
+    <%= form.label :banned, "Banned?" %>
+    <%= form.check_box :banned %>
+  </div>
+  <%= form.submit @member.deceased? ? "Resurrect and Update" : "Update" %>
+  <%= form.submit @member.deceased? ? "Cremate" : "Decease", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete #{@member.name}?" } %>
+<% end %>
+
+<script>
+  import("signature_pad").then((mod) => {
+    const canvas = document.querySelector("canvas")
+    const SignaturePad = mod.default;
+    const bgColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#111110": "#fdfdfc";
+
+    const pad = new SignaturePad(canvas, {
+      penColor: window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+    });
+
+    pad.off();
+
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = 150 * ratio;
+      canvas.getContext("2d").scale(ratio, ratio);
+      pad.clear(); // otherwise isEmpty() might return incorrect value
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const data = JSON.parse(document.querySelector("#member_signature").value)
+    data.forEach((p) => {
+      p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+    })
+    pad.fromData(data)
+
+    window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+      let currentData = pad.toData();
+      pad.clear()
+      currentData.forEach((p) => {
+        p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+      })
+      pad.fromData(currentData)
+    })
+  })
+</script>

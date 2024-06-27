@@ -41,15 +41,15 @@ class Member < ApplicationRecord
   validates :name, presence: true
 
   before_validation do
-    self.email = email.downcase
-    self.username = username.downcase
+    self.email = email&.downcase
+    self.username = username&.downcase
   end
 
   self.primary_key = "username"
 
   self.condition = "membership"
 
-  self.renew_location = "#{Config.external_url}/kiosk"
+  self.renew_location = "#{Config.external_url}/my"
 
   expiry_disabled do
     Config.membership_length < 0

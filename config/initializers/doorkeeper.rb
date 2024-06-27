@@ -11,10 +11,10 @@ Doorkeeper.configure do
     # Put your resource owner authentication logic here.
     # Example implementation:
     #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
-    @user = c.request.env["warden"].user(:identity)
+    @user = c.request.env["warden"].user(:my)
     unless @user
       session[:redirect] = request.fullpath
-      redirect_to(new_identity_keycode_path)
+      redirect_to(new_my_journey_keycode_path)
     end
     @user
   end
@@ -28,7 +28,7 @@ Doorkeeper.configure do
     # Put your admin authentication logic here.
     # Example implementation:
     if !request.env["warden"].authenticated?
-      redirect_to new_rendezvous_path, flash: {error: (request.env["PATH_INFO"] == members_path) ? nil : "You need to sign in to access that page", redirect_back: request.env["PATH_INFO"]}
+      redirect_to new_organization_journey_path, flash: {error: (request.env["PATH_INFO"] == organization_members_path) ? nil : "You need to sign in to access that page", redirect_back: request.env["PATH_INFO"]}
     end
   end
 

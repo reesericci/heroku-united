@@ -14,7 +14,7 @@ Rails.application.config.middleware.use Warden::Manager do |manager|
 
   manager.failure_app = ->(env) do
     env["REQUEST_METHOD"] = "GET"
-    LoginsController.action(:new).call(env)
+    Organization::JourneysController.action(:new).call(env)
   end
 end
 
@@ -22,11 +22,11 @@ Rails.application.config.to_prepare do
   # Password strategy
   Warden::Strategies.add(:password) do
     def valid?
-      rendezvous_params.permitted?
+      journey_params.permitted?
     end
 
     def authenticate!
-      c = Config.find_by(email: rendezvous_params[:email].downcase)&.authenticate(rendezvous_params[:password])
+      c = Config.find_by(email: journey_params[:email].downcase)&.authenticate(journey_params[:password])
       if c == false || c.nil?
         fail!("Could not log in")
       else
@@ -36,24 +36,24 @@ Rails.application.config.to_prepare do
 
     private
 
-    def rendezvous_params
-      ActionController::Parameters.new(params).require(:rendezvous).permit(:email, :password)
+    def journey_params
+      ActionController::Parameters.new(params).require(:journey).permit(:email, :password)
     end
   end
 
   # Keycode strategy
   Warden::Strategies.add(:keycode) do
     def valid?
-      login_params.permitted?
+      journey_params.permitted?
     end
 
     def authenticate!
       m = begin
-        Member.find(login_params[:username])
+        Member.find(journey_params[:username])
       rescue ActiveRecord::RecordNotFound
         nil
       end
-      if m&.keycode_imprint&.authenticate!(login_params[:code])
+      if m&.keycode_imprint&.authenticate!(journey_params[:code])
         success!(m)
       else
         fail!("Could not log in")
@@ -62,8 +62,8 @@ Rails.application.config.to_prepare do
 
     private
 
-    def login_params
-      ActionController::Parameters.new(params).require(:login).permit(:username, :code)
+    def journey_params
+      ActionController::Parameters.new(params).require(:journey).permit(:username, :code)
     end
   end
 end
