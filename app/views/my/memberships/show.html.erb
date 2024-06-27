@@ -11,7 +11,7 @@
       <h2>It's time to renew your membership!</h2>
       <p><%= @member.expired? ? "Your membership expired" : "If you don't renew, your membership will expire" %> <b><%= local_relative_time(@member.expires_at, type: "weekday-or-date") %>.</b></p>
       <br>
-      <%= form.button "Renew", formaction: new_my_membership_renewals_path, formmethod: "post" %>
+      <%= form.button "Renew", formaction: my_membership_renewals_path, formmethod: "post" %>
     </div>
   <% end %>
   <div>
@@ -71,7 +71,7 @@
   </div>
   <div>
     <label>TOTP (Authenticator App) base - hover or tap to view</label>
-    <%= form.button "Rotate base", formaction: new_my_imprint_rotations_path, formmethod: "post" %>
+    <%= form.button "Rotate base", formaction: my_imprint_rotations_path, formmethod: "post" %>
     <br>
     <div class="blur">
       <% cache @member.keycode_imprint do %>

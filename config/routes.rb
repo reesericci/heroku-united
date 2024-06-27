@@ -53,11 +53,11 @@ Rails.application.routes.draw do
     end
 
     resource :membership, only: [:new, :create, :show, :update, :destroy] do
-      resource :renewals, only: [:new], module: :membership
+      resource :renewals, only: [:create], module: :membership
     end
 
     namespace :imprint do
-      resource :rotations, only: [:new]
+      resource :rotations, only: [:create]
     end
   end
 
