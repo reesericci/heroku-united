@@ -4,6 +4,7 @@ class Member < ApplicationRecord
   include Keycode::Imprintor
   include Mortality
   include Extensibility
+  include Verifiable
 
   include SpreadsheetArchitect
 

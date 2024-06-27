@@ -54,6 +54,7 @@ Rails.application.config.to_prepare do
         nil
       end
       if m&.keycode_imprint&.authenticate!(journey_params[:code])
+        m.verify
         success!(m)
       else
         fail!("Could not log in")

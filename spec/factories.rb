@@ -1,4 +1,10 @@
 FactoryBot.define do
+  factory :member_verification, class: 'Member::Verification' do
+    member { nil }
+    verified { false }
+    verified_at { "2024-06-27 09:10:17" }
+  end
+
   factory :config do
     organization { "United!" }
     membership_length { 365 }

@@ -1,4 +1,4 @@
-class BroadcastMailer < ApplicationMailer
+class Organization::BroadcastMailer < ApplicationMailer
   def new
     @member = params[:member]
     @broadcast = params[:broadcast]

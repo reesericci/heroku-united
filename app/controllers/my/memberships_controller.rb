@@ -39,7 +39,7 @@ class My::MembershipsController < My::BaseController
       end
       e.save!
     end
-    JoinMailer.with(member: m).confirmation.deliver_later unless rendered
+    My::MembershipMailer.with(member: m).created.deliver_later unless rendered
     redirect_to my_membership_path unless rendered
   end
 

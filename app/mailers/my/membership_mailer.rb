@@ -1,5 +1,5 @@
-class JoinMailer < ApplicationMailer
-  def confirmation
+class My::MembershipMailer < ApplicationMailer
+  def created
     @member = params[:member]
 
     mail(to: email_address_with_name(@member.email, @member.name),
