@@ -9,6 +9,8 @@
 [![wakatime](https://wakatime.com/badge/user/02e135ef-3334-4334-bed2-d93c78a66812/project/018efdd4-e497-4afc-a027-22c684b20171.svg)](https://wakatime.com/badge/user/02e135ef-3334-4334-bed2-d93c78a66812/project/018efdd4-e497-4afc-a027-22c684b20171)
 ![Code Coverage](https://codeberg.org/reesericci/united/media/branch/main/coverage/coverage_badge_total.svg)
 
+![Produced By Human, Not by AI](https://codeberg.org/reesericci/united/media/branch/main/pictures/Produced-By-Human-Not-By-AI-Badge-white.svg)
+
 United is free and open membership software for collective organizations, allowing robust tracking of membership, expirations, email broadcast tools, providing single-sign-on for your members, and more.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
