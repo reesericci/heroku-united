@@ -3,6 +3,9 @@ class Config < ApplicationRecord
   before_destroy :check_for_existing
   self.table_name = "configurations"
   broadcasts_refreshes
+  acts_as_money
+
+  money :dues, cents: :dues_amount_as_cents, currency: :dues_currency
 
   serialize :extensions, type: Array, coder: SymbolJSON
 
@@ -31,6 +34,8 @@ class Config < ApplicationRecord
     update!(oidc_key: Rails.application.credentials&.oidc&.[](:key).presence ||
     oidc_key.presence ||
     OpenSSL::PKey::RSA.new(2048))
+
+    Stripe.api_key = stripe_secret_key
   end
 
   after_save_commit do
@@ -56,6 +61,7 @@ class Config < ApplicationRecord
     end
 
     delegate :cache_key_with_version, to: :first, allow_nil: true
+    delegate :dues, to: :first, allow_nil: true
   end
 
   private

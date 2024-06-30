@@ -56,6 +56,12 @@ Rails.application.routes.draw do
       resource :renewals, only: [:create], module: :membership
     end
 
+    resources :payments do
+      collection do
+        resources :intents, only: [:create]
+      end
+    end
+
     namespace :imprint do
       resource :rotations, only: [:create]
     end

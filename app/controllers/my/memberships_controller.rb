@@ -6,41 +6,39 @@ class My::MembershipsController < My::BaseController
   end
 
   def create
-    m = Member.new(member_params)
-    m.expires_at = DateTime.now + Config.membership_length.days
-    if m.invalid?
-      errors = "<ul>"
-      m.errors.full_messages.each do |e|
-        errors += "<li>#{e}</li>"
-      end
-      errors += "</ul>"
-      flash.now[:error] = errors
-      @member = m
+    @member = Member.new(member_params)
+
+    @member.expires_at = DateTime.now
+
+    (params[:member][:extensions] || {}).each do |k, v|
+      e = @member.extensions.find_by(name: k) || @member.extensions.new(name: k)
+      e.assign_attributes(content: v)
+    end
+    if @member.invalid?
+      flash.now[:error] = @member.errors.full_messages
       render :new, status: :unprocessable_entity
       return
     end
-    m.save!
-    rendered = false
-    params[:member][:extensions].each do |k, v|
-      e = m.extensions.find_by(name: k) || m.extensions.new(name: k)
-      e.assign_attributes(content: v)
-      if e.invalid?
-        errors = "<ul>"
-        m.errors.full_messages.each do |e|
-          errors += "<li>#{e}</li>"
-        end
-        errors += "</ul>"
-        flash.now[:error] = errors
-        @member = m
-        m.delete
+
+    if Config.payable
+      @payment = @member.payments.find_or_create_by!(stripe_id: params[:member][:stripe_payment_intent])
+
+      if @payment.state == :failed
+        flash.now[:error] = "Payment was not successfully processed."
         render :new, status: :unprocessable_entity
-        rendered = true
-        break
+        return
       end
-      e.save!
+
+      if @member.payment_processing?
+        @member.save!
+        redirect_to my_membership_path
+      end
+
     end
-    My::MembershipMailer.with(member: m).created.deliver_later unless rendered
-    redirect_to my_membership_path unless rendered
+
+    My::MembershipMailer.with(member: @member).created.deliver_later
+    @member.save!
+    redirect_to my_membership_path
   end
 
   def show

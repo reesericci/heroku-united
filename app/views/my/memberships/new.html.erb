@@ -7,7 +7,7 @@
 <%= link_to organization_members_path do %>
   <button class="subheading-button">Administrator login</button>
 <% end %>
-<%= form_with scope: :member, url: my_membership_path, method: :post do |form| %>
+<%= form_with scope: :member, url: my_membership_path, method: :post, data: { turbo: false } do |form| %>
   <div>
     <%= form.label :name, "Full name" %>
     <%= form.text_field :name, placeholder: "Fionah United" %>
@@ -63,7 +63,7 @@
   <div style="height: 100%; width: 100%;">
     <%= form.label :signature, "Signature" %>
     <%= form.hidden_field :signature %>
-    <div style="position: relative; width: 100%;">
+    <div style="position: relative; width: 100%;" data-turbo-permanent>
       <canvas class="signature">
       </canvas>
       <div style="display: flex; flex-direction: row; gap: 0.5rem; position: absolute; top: 0.5rem; right: 0.5rem;">
@@ -72,7 +72,148 @@
       </div>
     </div>
   </div>
-  <%= form.submit  "Join!" %>
+
+  <h3 style="margin: 0; margin-top: 0.5rem;">Dues</h3>
+  <p style="margin: 0;"><%= Config.organization %> charges <b><%= Config.dues.format(symbol: Config.dues.currency.to_s + ' ') %></b> in dues every <b><%= Config.membership_length %></b> days. <br><br>You will not be automatically renewed, but notified when your membership is expiring.</p>
+
+  <div id="payment-element" style="display: block">
+    <!-- Elements will create form elements here -->
+  </div>
+
+  <%= form.hidden_field :stripe_payment_intent_id %>
+
+  <%= form.submit "Join!", id: "submit" %>
+<% end %>
+
+<% if Config.payable %>
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <script>
+    const stripe = Stripe("<%= Config.stripe_publishable_key %>")
+    const options = {
+      mode: 'payment',
+      paymentMethodCreation: 'manual',
+      setupFutureUsage: 'off_session',
+      amount: Number('<%= Config.dues.fractional %>'),
+      currency: '<%= Config.dues.currency.iso_code.downcase %>',
+      appearance: {
+        theme: "flat",
+        variables: {
+          fontFamily: "Overpass, system-ui",
+          colorPrimary: "#e5484d",
+          borderRadius: "3px",
+          colorDanger: "#641723"
+        },
+        rules: {
+          ".Input": {
+            backgroundColor: "light-dark(#fdfdfc,#111110)",
+            border: "1px solid light-dark(#bcbbb5,#62605b)",
+            padding: "0.5rem",
+            marginBottom: "0.5rem"
+          },
+          ".Input--invalid": {
+            color: "light-dark(#641723,#ffd1d9)"
+          },
+          ".Error": {
+            color: "light-dark(#ce2c31,#ff9592)"
+          },
+          ".Tab": {
+            backgroundColor: "light-dark(#fdfdfc,#111110)",
+            border: "1px solid light-dark(#bcbbb5,#62605b)",
+            padding: "0.5rem"
+          },
+          ".Tab--selected": {
+            border: "1px solid light-dark(#bcbbb5,#62605b)",
+          },
+          ".Label": {
+            fontWeight: "300",
+            fontSize: "16px"
+          }
+        },
+      }
+    };
+
+    // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in a previous step
+    const elements = stripe.elements(options);
+
+    // Create and mount the Payment Element
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
+
+    const submitBtn = document.getElementById('submit');
+    const form = document.querySelector("form");
+    form.addEventListener("submit", processPayment)
+
+    async function processPayment(event) {
+      // We don't want to let default form submission happen here,
+      // which would refresh the page.
+      event.preventDefault();
+
+      // Prevent multiple form submissions
+      if (submitBtn.disabled) {
+        return;
+      }
+
+      // Disable form submission while loading
+      submitBtn.disabled = true;
+
+      // Trigger form validation and wallet collection
+      const {error: submitError} = await elements.submit();
+      if (submitError) {
+        window.alert(submitError);
+        submitBtn.disabled = false
+        return;
+      }
+
+      // Create the ConfirmationToken using the details collected by the Payment Element
+      const {error, confirmationToken} = await stripe.createConfirmationToken({
+        elements
+      });
+
+      if (error) {
+        window.alert(submitError);
+        submitBtn.disabled = false
+        return;
+      }
+
+      const res = await fetch("/my/payments/intents", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+          "stripe_confirmation_token": confirmationToken.id,
+        }),
+      });
+
+      const response = await res.json();
+
+      if (response.error) {
+        window.alert(error);
+        submitBtn.disabled = false
+        return;
+      } else if (response.status === "requires_action") {
+        const {
+          error,
+          paymentIntent
+        } = await stripe.handleNextAction({
+          clientSecret: response.client_secret
+        });
+
+        if (error) {
+          window.alert(error);
+          submitBtn.disabled = false
+          return
+        } else {
+          document.querySelector("#member_stripe_payment_intent").value = response.id
+          form.removeEventListener("submit", processPayment)
+          form.requestSubmit()
+        }
+      } else {
+        document.querySelector("#member_stripe_payment_intent").value = response.id
+        form.removeEventListener("submit", processPayment)
+        form.requestSubmit()
+      }
+    };
+  </script>
 <% end %>
 
 <script>

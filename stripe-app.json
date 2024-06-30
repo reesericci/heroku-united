@@ -1,0 +1,23 @@
+{
+  "id": "ci.reeseric.united",
+  "version": "0.0.3",
+  "name": "United",
+  "icon": "./pictures/icon-filled.png",
+  "permissions": [
+    {
+      "permission": "payment_intent_write",
+      "purpose": "Checkout"
+    },
+    {
+      "permission": "webhook_write",
+      "purpose": "Listen for payment events"
+    },
+    {
+      "permission": "stripecli_session_write",
+      "purpose": "Creating WebSocket connection to forward webhooks"
+    }
+  ],
+  "ui_extension": {},
+  "stripe_api_access_type": "restricted_api_key",
+  "distribution_type": "private"
+}

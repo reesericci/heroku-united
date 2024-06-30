@@ -121,3 +121,9 @@ gem "capybara-screenshot", "~> 1.0"
 gem "simplecov", "~> 0.22.0"
 
 gem "simplecov-small-badge", "~> 0.2.7"
+
+gem "acts_as_money", "~> 0.2.6"
+
+gem "stripe", "~> 12.0"
+
+gem "stripe_puma", path: "/var/home/reesericci/Code/stripe_puma"

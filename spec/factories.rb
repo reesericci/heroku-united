@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :payment do
+    amount_in_cents { 1 }
+    currency { "MyString" }
+  end
+
   factory :member_verification, class: 'Member::Verification' do
     member { nil }
     verified { false }

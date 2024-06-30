@@ -56,3 +56,6 @@ pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
 
 # Start Solid Queue supervisor with puma
 plugin :solid_queue
+
+# Start Stripe listener with puma
+plugin :stripe

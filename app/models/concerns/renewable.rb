@@ -1,5 +1,6 @@
 module Renewable
   extend ActiveSupport::Concern
+  include Payable
 
   def renew
     if renewable?

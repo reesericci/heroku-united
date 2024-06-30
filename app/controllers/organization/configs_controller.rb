@@ -40,6 +40,6 @@ class Organization::ConfigsController < Organization::BaseController
   private
 
   def config_params
-    params.require(:config).permit(:organization, :external_url, :membership_length, :email, :password, extensions: [], smtp: [:server, :port, :username, :password, :box, :domain])
+    params.require(:config).permit(:organization, :external_url, :membership_length, :email, :password, :stripe_publishable_key, :stripe_secret_key, :payments, extensions: [], smtp: [:server, :port, :username, :password, :box, :domain])
   end
 end

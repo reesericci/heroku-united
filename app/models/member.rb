@@ -75,6 +75,8 @@ class Member < ApplicationRecord
       "deceased"
     elsif banned?
       "banned"
+    elsif payment_processing?
+      "processing"
     elsif expired?
       "expired"
     else

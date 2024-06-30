@@ -47,7 +47,7 @@
 
     <div>
       <%= smtp_form.label :password, "Password" %>
-      <%= smtp_form.password_field :password, value: Config.first.smtp[:password], placeholder: "password123" %>
+      <%= smtp_form.password_field :password, placeholder: "password123" %>
     </div>
 
     <div style="display: flex; flex-direction: row; justify-content: space-between;">
@@ -63,6 +63,19 @@
     </div>
   <% end %>
 
+  <br>
+
+  <h3 style="margin: 0">Stripe information</h3>
+  <p style="margin: 0">Stripe is the payment provider for collecting dues. To get the details to fill these out, click below. <br><br>You can skip these fields if you're not collecting dues.</p>
+  <div>
+    <%= form.label :stripe_publishable_key, "Publishable key" %>
+    <%= form.text_field :stripe_publishable_key, placeholder: "pk_xxxxx" %>
+  </div>
+  <div>
+    <%= form.label :stripe_secret_key, "Secret key" %>
+    <%= form.password_field :stripe_secret_key, placeholder: "rk_xxxxx" %>
+  </div>
+  
   <br>
   <h3 style="margin: 0">Member Fields</h3>
   <p style="margin: 0">This section allows you to add custom fields for your members to fill out. <br><br>You can only add 3 new fields at a time; after updating, 3 more fields will appear.</p>
