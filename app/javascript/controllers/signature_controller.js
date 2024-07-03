@@ -6,7 +6,7 @@ export default class extends Controller {
 
   connect() {
     this.pad = new SignaturePad(this.canvasTarget, {
-      penColor: window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+      penColor: penColor()
     });
 
     this.pad.fromData(this.data)
@@ -27,7 +27,7 @@ export default class extends Controller {
     const data = this.fieldTarget.value ? JSON.parse(this.fieldTarget.value) : []
     
     data.forEach((p) => {
-      p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
+      p.penColor = penColor()
     })
 
     return data
@@ -65,5 +65,9 @@ export default class extends Controller {
       p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
     })
     this.pad.fromData(currentData)
+  }
+
+  penColor() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
   }
 }
