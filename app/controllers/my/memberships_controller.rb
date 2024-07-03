@@ -6,73 +6,43 @@ class My::MembershipsController < My::BaseController
   end
 
   def create
-    m = Member.new(member_params)
+    m = Member.new(member_params.merge!({extensions_attributes: mapped_extensions}))
     m.expires_at = DateTime.now + Config.membership_length.days
+
     if m.invalid?
-      errors = "<ul>"
-      m.errors.full_messages.each do |e|
-        errors += "<li>#{e}</li>"
-      end
-      errors += "</ul>"
-      flash.now[:error] = errors
-      @member = m
+      flash.now[:error] = m.errors.full_messages
       render :new, status: :unprocessable_entity
       return
     end
+
     m.save!
-    rendered = false
-    params[:member][:extensions].each do |k, v|
-      e = m.extensions.find_by(name: k) || m.extensions.new(name: k)
-      e.assign_attributes(content: v)
-      if e.invalid?
-        errors = "<ul>"
-        m.errors.full_messages.each do |e|
-          errors += "<li>#{e}</li>"
-        end
-        errors += "</ul>"
-        flash.now[:error] = errors
-        @member = m
-        m.delete
-        render :new, status: :unprocessable_entity
-        rendered = true
-        break
-      end
-      e.save!
-    end
-    My::MembershipMailer.with(member: m).created.deliver_later unless rendered
-    redirect_to my_membership_path unless rendered
+
+    # TODO: make this a callback instead
+    My::MembershipMailer.with(member: m).created.deliver_later
+
+    redirect_to my_membership_path
   end
 
   def show
-    @member = request.env["warden"].user(:my)
     Journey.basecamp = request.env["PATH_INFO"]
   end
 
   def update
-    m = request.env["warden"].user(:my)
-    m.assign_attributes(member_params)
-    if m.username_changed?
-      if Member.find(m.username)
-        errors = "<ul><li>Username is already taken</li></ul>"
-        flash.now[:error] = errors
-        m.username = m.username_was
-        m.errors.add(:username, "is already taken")
-        @member = m
-        render :show, status: :unprocessable_entity
-        return
-      end
+    m = My.member
+    m.assign_attributes(member_params.merge!({extensions_attributes: mapped_extensions}))
+
+    # TODO: make this a validation
+    if m.username_changed? && Member.find(m.username)
+      m.username = m.username_was
+      return
     end
+
     if m.invalid?
-      errors = "<ul>"
-      m.errors.full_messages.each do |e|
-        errors += "<li>#{e}</li>"
-      end
-      errors += "</ul>"
-      flash.now[:error] = errors
-      @member = m
+      flash.now[:error] = m.errors.full_messages
       render :show, status: :unprocessable_entity
       return
     end
+
     m.save!
     redirect_to my_membership_path
   end
@@ -80,6 +50,11 @@ class My::MembershipsController < My::BaseController
   private
 
   def member_params
-    params.require(:member).permit(:name, :username, :email, :signature, keycode_imprint_attributes: [:email, :base], address_attributes: [:line1, :line2, :city, :province, :code, :country])
+    params.require(:member).permit(:name, :username, :email, :signature, keycode_imprint_attributes: [:email, :base], address_attributes: [:line1, :line2, :city, :province, :code, :country], extensions_attributes: {})
+  end
+
+  def mapped_extensions
+    attrs = member_params[:extensions_attributes]
+    attrs.keys.map { |e| {name: e, content: attrs[e]} }
   end
 end

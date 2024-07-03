@@ -26,6 +26,14 @@
     <%= form.label :email, "Email" %>
     <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
   </div>
+  <%= form.fields_for :extensions_attributes do |extensions_form| %>
+    <% Config.extensions.each do |e| %>
+      <div>
+        <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
+        <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e).content %>
+      </div>
+    <% end %>
+  <% end %>
   <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
   <%= form.fields_for :address, My.address || Address.new(addressable_id: My, addressable_type: Member) do |address_form| %>
     <div>

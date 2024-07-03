@@ -25,7 +25,15 @@
     <div class="bottom-container">
       <% if flash[:error] %>
         <div class="flash-error">
-          <p><%= flash[:error].html_safe %></p>
+          <% if flash[:error].is_a? Array %>
+            <ul>
+              <% flash[:error].each do |f| %>
+                <li><%= f.html_safe %></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p><%= flash[:error].html_safe %></p>
+          <% end %>
         </div>
       <% end %>
 
