@@ -53,9 +53,7 @@ class Member < ApplicationRecord
 
   self.renew_location = "#{Config.external_url}/my"
 
-  expiry_disabled do
-    Config.membership_length < 0
-  end
+  self.expiry_disabled = -> { Config.membership_length < 0 }
 
   # standard:disable Rails/InverseOf
 
