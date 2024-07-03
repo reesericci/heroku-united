@@ -41,4 +41,6 @@
 /node_modules
 db/test.sqlite3
 
+coverage/
+!coverage/coverage_badge_total.svg
 .build/

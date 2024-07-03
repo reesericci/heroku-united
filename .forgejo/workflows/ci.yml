@@ -59,6 +59,14 @@ jobs:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y chromium-browser curl libjemalloc2 libvips postgresql-client libpq-dev
 
+      - name: Install CodeClimate Test Reporter
+        run: sudo wget -O /bin/codeclimate https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 && sudo chmod +x /bin/codeclimate
+
+      - name: Pending test
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        run: codeclimate before-build
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -71,7 +79,13 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         run: bin/rails db:setup spec
+      
+      - name: After test
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        run: codeclimate after-build
 
       # Forgejo doesn't suppport upload-artifact
       #

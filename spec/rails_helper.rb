@@ -13,6 +13,7 @@ Capybara::Screenshot.autosave_on_failure = true
 Capybara.asset_host = "http://localhost:3000"
 
 require "simplecov"
+require "simplecov_json_formatter"
 require "simplecov_small_badge"
 
 SimpleCov.start "rails" do
@@ -20,6 +21,7 @@ SimpleCov.start "rails" do
   add_group "Views", "app/views"
   SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
+    SimpleCov::Formatter::JSONFormatter,
     SimpleCovSmallBadge::Formatter
   ])
 end
