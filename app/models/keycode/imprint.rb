@@ -26,12 +26,16 @@ class Keycode::Imprint < ApplicationRecord
   end
 
   def authenticate!(other)
-    if (email ? hotp.verify(other, count) : false || totp.verify(other, drift_behind: 5)) && !code.void?
+    if verify(other)
       update!(used: true)
       true
     else
       false
     end
+  end
+
+  def verify(other)
+    ((email ? hotp.verify(other, count) : false) || totp.verify(other, drift_behind: 5)) && !code.void?
   end
 
   def rotate!
