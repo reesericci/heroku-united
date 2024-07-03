@@ -14,7 +14,7 @@ class Organization::MembersController < Organization::BaseController
   end
 
   def update
-    member = Member.include_deceased.find_or_create_by!(username: params[:username])
+    member = Member.include_deceased.find_by(username: params[:username])
     if member.deceased?
       member.resurrect
     end
