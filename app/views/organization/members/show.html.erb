@@ -45,11 +45,13 @@
       </div>
     </div>
   <% end %>
-  <%= form.fields_for :extensions, Extension.names.keys.map { |name| @member.extensions.find_by(name: name) || @member.extensions.new(name: name) } do |e| %>
-    <div>
-      <%= e.label e.object.name.to_sym, ActiveSupport::Inflector.humanize(e.object.name.to_s) %>
-      <%= e.text_field e.object.name.to_sym, value: e.object.content %>
-    </div>
+  <%= form.fields_for :extensions_attributes do |extensions_form| %>
+    <% Config.extensions.each do |e| %>
+      <div>
+        <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
+        <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e).content %>
+      </div>
+    <% end %>
   <% end %>
 
   <div style="height: 100%; width: 100%;">
