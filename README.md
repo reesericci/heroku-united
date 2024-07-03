@@ -8,6 +8,7 @@
 ![Contributions Encouraged](https://img.shields.io/badge/contributions-encouraged-brightgreen)
 [![wakatime](https://wakatime.com/badge/user/02e135ef-3334-4334-bed2-d93c78a66812/project/018efdd4-e497-4afc-a027-22c684b20171.svg)](https://wakatime.com/badge/user/02e135ef-3334-4334-bed2-d93c78a66812/project/018efdd4-e497-4afc-a027-22c684b20171)
 ![Code Coverage](https://codeberg.org/reesericci/united/media/branch/main/coverage/coverage_badge_total.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/ce969661e4948733fdb0/maintainability)](https://codeclimate.com/github/reesericci/heroku-united/maintainability)
 
 ![Produced By Human, Not by AI](https://codeberg.org/reesericci/united/media/branch/main/pictures/Produced-By-Human-Not-By-AI-Badge-white.svg)
 
