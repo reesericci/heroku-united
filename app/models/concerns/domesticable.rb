@@ -31,7 +31,7 @@ module Domesticable
         end
       elsif name.respond_to?(:to_sym)
         if Country.all.map { |c| c.to_sym }.include?(name)
-          @name = Hash[*Country.all.collect { |v| [v.to_sym, v.to_s] }.flatten][name]
+          @name = sym_hash[name]
         else
           raise InvalidCountry
         end
@@ -56,6 +56,10 @@ module Domesticable
       @@all_str.map do |c|
         new(c)
       end
+    end
+
+    def self.sym_hash
+      Hash[*Country.all.collect { |v| [v.to_sym, v.to_s] }.flatten]
     end
 
     @@all_str = "Afghanistan
