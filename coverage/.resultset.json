@@ -744,8 +744,6 @@
           1,
           null,
           1,
-          0,
-          null,
           null,
           null,
           null,
@@ -789,15 +787,76 @@
         "lines": [
           1,
           1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
           null,
           1,
           1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/var/home/reesericci/Code/united/app/models/concerns/expirable/advisor.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          4,
           1,
           4,
           3,
           null,
           null,
           null,
+          1,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
           null,
           1,
           0,
@@ -807,28 +866,8 @@
           0,
           null,
           null,
-          1,
-          0,
-          null,
           null,
           1,
-          0,
-          null,
-          null,
-          1,
-          0,
-          0,
-          null,
-          null,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          1,
-          0,
-          null,
           null,
           1,
           0,
@@ -836,17 +875,6 @@
           null,
           1,
           0,
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          null,
           null,
           null
         ]
@@ -2037,21 +2065,6 @@
           0,
           0,
           0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
           0
         ],
         "branches": {
@@ -2169,6 +2182,59 @@
           0,
           0,
           0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/var/home/reesericci/Code/united/app/models/expirable/advisory/day.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/var/home/reesericci/Code/united/app/models/expirable/advisory/expired.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/var/home/reesericci/Code/united/app/models/expirable/advisory/month.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/var/home/reesericci/Code/united/app/models/expirable/advisory/week.rb": {
+        "lines": [
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/var/home/reesericci/Code/united/app/models/expirable/advisory.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
           0,
           0,
           0,
@@ -2305,6 +2371,6 @@
         }
       }
     },
-    "timestamp": 1720014891
+    "timestamp": 1720022493
   }
 }

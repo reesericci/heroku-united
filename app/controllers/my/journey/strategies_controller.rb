@@ -6,7 +6,7 @@ class My::Journey::StrategiesController < My::Journey::BaseController
       icon: "123.svg"
     }]
 
-    if Journey.explorer.keyring
+    if Journey.explorer&.keyring
       @strategies.push({
         name: "Passkey",
         path: new_my_passkey_authentication_path,
