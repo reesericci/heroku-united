@@ -1,0 +1,36 @@
+<%= turbo_frame_tag My.keyring.id, style: "width: 100%;" do %>
+  <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center; padding-top: 1rem;border: 1px solid var(--sand-8);border-radius: 3px;width: 100%;padding-bottom: 1rem;background: var(--sand-1);">
+    <%= image_tag "passkey.svg", alt: "Passkey Logo", width: "40px" %>
+    <h4 style="margin: 0">Creating Passkey...</h4>
+    <p style="margin: 0">Click <a id="here" style="text-decoration: underline; color: var(--green-8)">here</a> if a popup doesn't appear</p>
+  </div>
+
+  <%= form_with url: my_passkeys_path, method: :post, scope: :passkey, id: "passkey_form" do |form| %>
+    <%= form.hidden_field :challenge, value: @options.challenge %>
+    <%= form.hidden_field :credential %>
+    <%= form.hidden_field :name %>
+  <% end %>
+
+  <script>
+    import("@github/webauthn-json/browser-ponyfill").then(({ create, parseCreationOptionsFromJSON }) => {
+      const json = JSON.parse(`<%= raw @options.as_json.to_json %>`)
+      console.log(json)
+      const options = parseCreationOptionsFromJSON({publicKey: json})
+
+      async function createCredential() {
+        try {
+          const response = await create(options);
+          document.getElementById("passkey_credential").value = JSON.stringify(response.toJSON())
+          document.getElementById("passkey_name").value = prompt("What would you like to name your passkey?");
+          document.getElementById("passkey_form").requestSubmit()
+        } catch (e) {
+          Turbo.visit("/my/passkeys", { frame: "<%= My.keyring.id %>" })
+        }
+      }
+
+      createCredential()
+
+      document.getElementById("here").addEventListener("click", () => createCredential())
+    });
+  </script>
+<% end %>

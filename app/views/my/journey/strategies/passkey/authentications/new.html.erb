@@ -1,0 +1,28 @@
+<div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center; padding-top: 1rem;border: 1px solid var(--sand-8);border-radius: 3px;width: 100%;padding-bottom: 1rem;background: var(--sand-1); width:600px;">
+  <%= image_tag "passkey.svg", alt: "Passkey Logo", width: "40px" %>
+  <h4 style="margin: 0">Authenticating Passkey...</h4>
+  <p style="margin: 0">Click <a id="here" style="text-decoration: underline; color: var(--green-8)">here</a> if a popup doesn't appear</p>
+</div>
+
+<%= form_with url: my_passkey_authentications_path, method: :post, scope: :journey, id: "journey_form" do |form| %>
+  <%= form.hidden_field :credential %>
+<% end %>
+
+<script>
+  import("@github/webauthn-json/browser-ponyfill").then(({ get, parseRequestOptionsFromJSON }) => {
+    const json = JSON.parse(`<%= raw @options.as_json.to_json %>`)
+    console.log(json)
+    const options = parseRequestOptionsFromJSON({publicKey: json})
+
+    async function createCredential() {
+      // TODO: make noise on failure
+      const response = await get(options);
+      document.getElementById("journey_credential").value = JSON.stringify(response.toJSON())
+      document.getElementById("journey_form").requestSubmit()
+    }
+
+    createCredential()
+
+    document.getElementById("here").addEventListener("click", () => createCredential())
+  });
+</script>

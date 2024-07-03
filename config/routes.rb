@@ -47,7 +47,18 @@ Rails.application.routes.draw do
 
     resource :journey, only: [:new, :create] do
       collection do
-        resources :keycodes, only: [:new, :create]
+        resources :strategies, only: [:index], shallow: true, as: "journey_strategies", module: :journey do
+          collection do
+            scope module: :strategies do
+              namespace :keycode do
+                resources :authentications, only: [:new, :create]
+              end
+              namespace :passkey do
+                resources :authentications, only: [:new, :create]
+              end
+            end
+          end
+        end
         get "/delete", to: "journeys#delete"
       end
     end
@@ -59,6 +70,8 @@ Rails.application.routes.draw do
     namespace :imprint do
       resource :rotations, only: [:create]
     end
+
+    resources :passkeys, only: [:index, :new, :create, :destroy]
   end
 
   resolve("Membership") { [:membership] }

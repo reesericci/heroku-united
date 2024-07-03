@@ -26,7 +26,7 @@ class Keycode::Imprint < ApplicationRecord
   end
 
   def authenticate!(other)
-    if (hotp.verify(other, count) || totp.verify(other, drift_behind: 5)) && !code.void?
+    if (email ? hotp.verify(other, count) : false || totp.verify(other, drift_behind: 5)) && !code.void?
       update!(used: true)
       true
     else

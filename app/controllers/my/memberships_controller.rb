@@ -45,7 +45,7 @@ class My::MembershipsController < My::BaseController
 
   def show
     @member = request.env["warden"].user(:my)
-    session[:redirect] = request.env["PATH_INFO"]
+    Journey.basecamp = request.env["PATH_INFO"]
   end
 
   def update

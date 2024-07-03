@@ -1,0 +1,14 @@
+<%= turbo_frame_tag My.keyring.id do %>
+  <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; width: 100%;">
+    <%= link_to new_my_passkey_path do %>
+      <button>Create passkey</button>
+    <% end %>
+    <br>
+    <% My.keyring.passkeys.each do |p| %>
+      <%= form_with model: p, url: my_passkey_path(p.id), html: { style: "flex-direction: row; gap: 0.5rem; width: 100%;" } do |form| %>
+        <%= form.text_field :name, value: p.name, disabled: true %>
+        <%= form.submit "Delete", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete the #{p.name} passkey?" } %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

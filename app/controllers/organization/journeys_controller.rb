@@ -4,7 +4,7 @@ class Organization::JourneysController < ApplicationController
   end
 
   def create
-    request.env["warden"].authenticate
+    request.env["warden"].authenticate(:organization_password)
     if !request.env["warden"].authenticated?
       flash[:error] = "Unable to log in, likely invalid email or password."
       redirect_back fallback_location: new_organization_journey_path

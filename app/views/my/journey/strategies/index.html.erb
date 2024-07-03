@@ -1,0 +1,40 @@
+<h2>How would you like to authenticate?</h2>
+
+<section>
+  <% @strategies.each do |strategy| %>
+    <%= link_to strategy[:path] do %>
+      <button>
+        <%= image_tag strategy[:icon], alt: "#{strategy[:name]} icon", width: "40px" %>
+        <%= strategy[:name] %>
+      </button>
+    <% end %>
+  <% end %>
+</section>
+
+<style>
+  section {
+    display: flex;
+    gap: 1rem;
+    width: 350px;
+    a {
+      width: 50%;
+      button {
+        display: flex;
+        gap: 0.1rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 1.75 / 1;
+        font-size: 1.25rem;
+        color: var(--yellow-12);
+        background-color: var(--yellow-3);
+        border-color: var(--yellow-7);
+        &:hover {
+          background: var(--yellow-4);
+          border-color: var(--yellow-8);
+        }
+      }
+    }
+  }
+</style>

@@ -5,6 +5,7 @@ class Member < ApplicationRecord
   include Mortality
   include Extensibility
   include Verifiable
+  include My::Keyable
 
   include SpreadsheetArchitect
 

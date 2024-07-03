@@ -13,7 +13,7 @@ Doorkeeper.configure do
     #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
     @user = c.request.env["warden"].user(:my)
     unless @user
-      session[:redirect] = request.fullpath
+      Journey.basecamp = request.fullpath
       redirect_to(new_my_journey_keycode_path)
     end
     @user

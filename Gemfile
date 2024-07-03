@@ -121,3 +121,9 @@ gem "capybara-screenshot", "~> 1.0"
 gem "simplecov", "~> 0.22.0"
 
 gem "simplecov-small-badge", "~> 0.2.7"
+
+gem "webauthn", "~> 3.1"
+
+gem "session_attributes"
+
+gem "binding_of_caller", "~> 1.0"

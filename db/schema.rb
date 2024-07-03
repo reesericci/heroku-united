@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_06_27_141013) do
+ActiveRecord::Schema[7.2].define(version: 2024_07_01_035407) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -94,6 +94,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_27_141013) do
     t.string "external_url"
     t.text "oidc_key"
     t.text "extensions"
+    t.text "stripe_publishable_key"
+    t.text "stripe_secret_key"
+    t.boolean "payable", default: false, null: false
+    t.bigint "dues_amount_as_cents"
+    t.string "dues_currency"
   end
 
   create_table "couriers", force: :cascade do |t|
@@ -133,6 +138,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_27_141013) do
     t.datetime "updated_at", null: false
     t.boolean "used", default: false
     t.boolean "email", default: true, null: false
+  end
+
+  create_table "keyrings", id: false, force: :cascade do |t|
+    t.text "id"
+    t.string "type"
+    t.string "keyable_type"
+    t.string "keyable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_keyrings_on_id", unique: true
   end
 
   create_table "members", id: false, force: :cascade do |t|
@@ -202,6 +217,27 @@ ActiveRecord::Schema[7.2].define(version: 2024_06_27_141013) do
     t.integer "access_grant_id", null: false
     t.string "nonce", null: false
     t.index ["access_grant_id"], name: "index_oauth_openid_requests_on_access_grant_id"
+  end
+
+  create_table "passkeys", id: false, force: :cascade do |t|
+    t.text "id"
+    t.string "name"
+    t.text "keyring_id"
+    t.text "public_key"
+    t.integer "sign_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_passkeys_on_id", unique: true
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "state"
+    t.string "stripe_id", null: false
+    t.string "payee_type", null: false
+    t.string "payee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payee_type", "payee_id"], name: "index_payments_on_payee"
   end
 
   create_table "sessions", force: :cascade do |t|

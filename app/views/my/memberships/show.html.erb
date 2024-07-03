@@ -1,15 +1,15 @@
 <a href="<%= new_my_membership_path %>"><h2>← Back to Join</h2></a>
-<h1 style="margin-bottom: 1rem">Edit <%= @member.name %></h1>
+<h1 style="margin-bottom: 1rem">Edit <%= My.name %></h1>
 <%= link_to delete_my_journey_path do %>
     <button class="subheading-button">Log out</button>
 <% end %>
 
-<%= turbo_stream_from @member %>
-<%= form_with model: @member, scope: :member, url: my_membership_path, method: :patch do |form| %>
-  <% if @member&.renewable? then %>
+<%= turbo_stream_from My %>
+<%= form_with model: My, scope: :member, url: my_membership_path, method: :patch do |form| %>
+  <% if My&.renewable? then %>
     <div class="notice">
       <h2>It's time to renew your membership!</h2>
-      <p><%= @member.expired? ? "Your membership expired" : "If you don't renew, your membership will expire" %> <b><%= local_relative_time(@member.expires_at, type: "weekday-or-date") %>.</b></p>
+      <p><%= My.expired? ? "Your membership expired" : "If you don't renew, your membership will expire" %> <b><%= local_relative_time(My.expires_at, type: "weekday-or-date") %>.</b></p>
       <br>
       <%= form.button "Renew", formaction: my_membership_renewals_path, formmethod: "post" %>
     </div>
@@ -27,7 +27,7 @@
     <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
   </div>
   <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
-  <%= form.fields_for :address, @member.address || Address.new(addressable_id: @member, addressable_type: Member) do |address_form| %>
+  <%= form.fields_for :address, My.address || Address.new(addressable_id: My, addressable_type: Member) do |address_form| %>
     <div>
       <%= address_form.label :line1, "Number and Street" %>
       <%= address_form.text_field :line1 %>
@@ -57,26 +57,32 @@
       </div>
     </div>
   <% end %>
-  <div style="height: 100%; width: 100%;">
+  <div style="height: 100%; width: 100%;" data-controller="signature">
     <%= form.label :signature, "Signature" %>
-    <%= form.hidden_field :signature %>
+    <%= form.hidden_field :signature, data: {"signature-target": "field"} %>
     <div style="position: relative; width: 100%;">
-      <canvas class="signature">
+      <canvas class="signature" data-signature-target="canvas">
       </canvas>
       <div style="display: flex; flex-direction: row; gap: 0.5rem; position: absolute; top: 0.5rem; right: 0.5rem;">
-          <button id="undo">Undo</button>
-          <button id="clear">Clear</button>
+          <button data-action="signature#undo:prevent">Undo</button>
+          <button data-action="signature#clear:prevent">Clear</button>
       </div>
     </div>
   </div>
+  <h3 style="margin: 0; margin-top: 0.5rem;">Authentication</h3>
+  <div>
+    <label>Passkeys <a style="text-decoration: underline; color: var(--green-8)" href="https://www.eff.org/deeplinks/2023/10/what-passkey">(what are these?)</a></label>
+    <%= turbo_frame_tag (My.keyring || My.create_keyring).id, src: my_passkeys_path, style: "width: 100%;" %>
+  </div>
+  <br>
   <div>
     <label>TOTP (Authenticator App) base - hover or tap to view</label>
     <%= form.button "Rotate base", formaction: my_imprint_rotations_path, formmethod: "post" %>
     <br>
     <div class="blur">
-      <% cache @member.keycode_imprint do %>
-        <%= raw qr_code(@member.keycode_imprint.uri(@member.username)) %>
-        <p><%= @member.keycode_imprint.base %></p>
+      <% cache My.keycode_imprint do %>
+        <%= raw qr_code(My.keycode_imprint.uri(My.username)) %>
+        <%= text_field_tag :base, My.keycode_imprint.base, { disabled: true, autocomplete: "off" } %>
       <% end %>
     </div>
   </div>
@@ -85,8 +91,9 @@
       <%= imprint_form.label :email, "Email login codes" %>
       <%= imprint_form.check_box :email %>
     </div>
-    <%= imprint_form.hidden_field :base, value: @member.keycode_imprint.base %>
+    <%= imprint_form.hidden_field :base, value: My.keycode_imprint.base %>
   <% end %>
+  <h3 style="margin: 0; margin-top: 0.5rem;">Other Details</h3>
   <div>
     <%= form.label :expires_at, "Expires on" %>
     <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year, disabled: true %>
@@ -99,68 +106,14 @@
   <%= form.submit "Delete Membership", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete your membership?" } %>
 <% end %>
 
-<script>
-  import("signature_pad").then((mod) => {
-    const canvas = document.querySelector("canvas")
-    const SignaturePad = mod.default;
-    const bgColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#111110": "#fdfdfc";
-
-    const pad = new SignaturePad(canvas, {
-      penColor: window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
-    });
-
-    const data = document.querySelector("#member_signature").value ? JSON.parse(document.querySelector("#member_signature").value) : []
-    
-    data.forEach((p) => {
-      p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
-    })
-    pad.fromData(data)
-
-    function resizeCanvas() {
-      const ratio = Math.max(window.devicePixelRatio || 1, 1);
-      canvas.width = canvas.offsetWidth * ratio;
-      canvas.height = 150 * ratio;
-      canvas.getContext("2d").scale(ratio, ratio);
-      pad.clear(); // otherwise isEmpty() might return incorrect value
-      pad.fromData(data);
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    document.querySelector("form").addEventListener("submit", () => {
-        document.querySelector("#member_signature").value = JSON.stringify(pad.toData());
-    })
-
-    document.getElementById('clear').addEventListener('click', function(e) {
-        e.preventDefault();
-        pad.clear();
-    });
-
-    document.getElementById('undo').addEventListener('click', function(e) {
-        e.preventDefault();
-        let currentData = pad.toData();
-        if (currentData) {
-            currentData.pop(); // remove the last dot or line
-            pad.fromData(data);
-        }
-    });
-
-    window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
-      let currentData = pad.toData();
-      pad.clear()
-      currentData.forEach((p) => {
-        p.penColor = window.matchMedia('(prefers-color-scheme: dark)').matches ? "#FBFBFE" : "black"
-      })
-      pad.fromData(currentData)
-    })
-  })
-</script>
-
 <style>
   div.blur {
     filter: blur(5px);
     transition: 0.25s ease-in-out;
+    gap: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
     &:hover, &:active, &:focus {
       filter: none;

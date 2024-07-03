@@ -1,0 +1,2 @@
+module My::JourneysHelper
+end

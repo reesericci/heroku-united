@@ -9,3 +9,5 @@ pin "local-time" # @3.0.2
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.esm.js"
 pin "signature_pad" # @5.0.1
+pin "@github/webauthn-json", to: "@github--webauthn-json.js" # @2.1.1
+pin "@github/webauthn-json/browser-ponyfill", to: "@github--webauthn-json--browser-ponyfill.js" # @2.1.1

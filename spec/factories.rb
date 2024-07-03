@@ -1,4 +1,16 @@
 FactoryBot.define do
+  factory :my_keyring, class: 'My::Keyring' do
+    
+  end
+
+  factory :passkey do
+    lockable_id { "MyString" }
+    lockable_type { "MyString" }
+    id { "MyText" }
+    lock { "MyText" }
+    sign_count { 1 }
+  end
+
   factory :member_verification, class: 'Member::Verification' do
     member { nil }
     verified { false }

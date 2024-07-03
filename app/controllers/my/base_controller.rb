@@ -3,8 +3,10 @@ class My::BaseController < ApplicationController
 
   def ensure_authenticated
     if !request.env["warden"].authenticated?(:my)
-      session[:redirect] = request.env["PATH_INFO"]
-      redirect_to new_my_keycode_path
+      Journey.basecamp = request.env["PATH_INFO"]
+      redirect_to new_my_journey_path
+    else
+      My.member = request.env["warden"].user(:my)
     end
   end
 end

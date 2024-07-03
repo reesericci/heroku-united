@@ -162,6 +162,7 @@ input[type=submit]:hover {
 input[type=submit].delete {
   background-color: var(--red-10);
   border-color: var(--red-10);
+  box-sizing: border-box;
 }
 
 input[type=submit].delete:hover {
