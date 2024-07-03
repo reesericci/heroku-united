@@ -24,21 +24,29 @@ module Domesticable
   class Country
     def initialize(name)
       if name.respond_to?(:to_str)
-        if @@all_str.include?(name)
-          @name = name
-        else
-          raise InvalidCountry
-        end
+        from_str(name)
       elsif name.respond_to?(:to_sym)
-        if Country.all.map { |c| c.to_sym }.include?(name)
-          @name = sym_hash[name]
-        else
-          raise InvalidCountry
-        end
+        from_sym(name)
       elsif name.blank?
         nil
       else
         raise "Invalid format, please use a String or Symbol"
+      end
+    end
+
+    def self.from_str(name)
+      if @@all_str.include?(name)
+        @name = name
+      else
+        raise InvalidCountry
+      end
+    end
+
+    def self.from_sym(name)
+      if Country.all.map { |c| c.to_sym }.include?(name)
+        @name = sym_hash[name]
+      else
+        raise InvalidCountry
       end
     end
 
