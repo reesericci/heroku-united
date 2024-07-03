@@ -80,7 +80,7 @@ jobs:
         env:
           RAILS_ENV: test
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        run: bin/rails db:setup spec
+        run: bin/rails db:setup && bin/bundle exec rspec .
       
       - name: After test
         env:
