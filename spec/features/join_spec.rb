@@ -22,6 +22,6 @@ RSpec.describe "a new member", type: :feature do
 
     click_on "Join!"
 
-    expect(page).to have_current_path(my_membership_path)
+    expect(page).to have_current_path(new_my_journey_path)
   end
 end

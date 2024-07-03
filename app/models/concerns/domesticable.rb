@@ -24,9 +24,9 @@ module Domesticable
   class Country
     def initialize(name)
       if name.respond_to?(:to_str)
-        from_str(name)
+        @name = Country.from_str(name)
       elsif name.respond_to?(:to_sym)
-        from_sym(name)
+        @name = Country.from_sym(name)
       elsif name.blank?
         nil
       else
@@ -36,7 +36,7 @@ module Domesticable
 
     def self.from_str(name)
       if @@all_str.include?(name)
-        @name = name
+        name
       else
         raise InvalidCountry
       end
@@ -44,7 +44,7 @@ module Domesticable
 
     def self.from_sym(name)
       if Country.all.map { |c| c.to_sym }.include?(name)
-        @name = sym_hash[name]
+        sym_hash[name]
       else
         raise InvalidCountry
       end

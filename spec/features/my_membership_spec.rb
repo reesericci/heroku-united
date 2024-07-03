@@ -12,7 +12,10 @@ RSpec.describe "a member", type: :feature do
     fill_in "Username", with: "fionahu"
     click_on "Continue →"
 
-    fill_in "Enter your login code", with: Member.find("fionahu").keycode_imprint.code.rotate!.to_i
+    page.find("[href=\"#{new_my_keycode_authentication_path}\"]").click
+    expect(page).to have_current_path new_my_keycode_authentication_path
+
+    fill_in id: "keycode_code", with: Member.find("fionahu").keycode_imprint.code.to_i
     click_on "Continue →"
 
     expect(page).to have_current_path(my_membership_path)

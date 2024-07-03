@@ -30,7 +30,7 @@
     <% Config.extensions.each do |e| %>
       <div>
         <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
-        <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e).content %>
+        <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e)&.content %>
       </div>
     <% end %>
   <% end %>
