@@ -23,5 +23,6 @@ FactoryBot.define do
     username { "fionahu" }
     email { "fionah@united.local" }
     expires_at { 1.year.from_now }
+    keycode_imprint_attributes { {email: true} }
   end
 end

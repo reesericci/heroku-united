@@ -16,6 +16,7 @@ RSpec.describe "a member", type: :feature do
     expect(page).to have_current_path new_my_keycode_authentication_path
 
     fill_in id: "keycode_code", with: Member.find("fionahu").keycode_imprint.code.to_i
+    sleep 2
     click_on "Continue →"
 
     expect(page).to have_current_path(my_membership_path)
