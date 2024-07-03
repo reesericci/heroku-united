@@ -3,15 +3,22 @@ class Expirable::AdvisementJob < ApplicationJob
 
   def perform(*args)
     Expirable.find_each do |e|
-      if e.expired? && e.expiry_advised != :expired
-        Expirable::AdvisoryMailer.with(expirable: e).expired.deliver_later
-      elsif e.day_only? && e.expiry_advised != :day
-        Expirable::AdvisoryMailer.with(expirable: e).day.deliver_later
-      elsif e.week_only? && e.expiry_advised != :week
-        Expirable::AdvisoryMailer.with(expirable: e).week.deliver_later
-      elsif e.month_only? && e.expiry_advised != :month
-        Expirable::AdvisoryMailer.with(expirable: e).month.deliver_later
-      end
+      mail(e)
     end
+  end
+
+  private
+
+  def mail(e)
+    if e.expiry_advised != relative_expiring(e)
+      Expirable::AdvisoryMailer.with(expirable: e).send(relative_expiring(e)).deliver_later
+    end
+  end
+
+  def relative_expiring(e)
+    :expired if e.expired
+    :day if e.day_only?
+    :week if e.week_only?
+    :month if e.month_only?
   end
 end
