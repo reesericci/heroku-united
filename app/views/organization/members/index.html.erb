@@ -1,14 +1,25 @@
 <%= render "nav" %>
 
 <h1 style="margin-bottom: 8px">Here's the members:</h1>
-<button id="share" class="subheading-button">Share join link</button>
-<%= link_to organization_members_path(:csv) do %>
-  <button class="subheading-button">Export CSV</button>
-<% end %>
-<%= link_to organization_cemetery_path do %>
-  <button class="subheading-button">Visit cemetery</button>
-<% end %>
-
+<div class="subheading-buttons">
+  <button id="share" class="subheading-button">Share join link</button>
+  <%= link_to organization_cemetery_path do %>
+    <button class="subheading-button">Visit cemetery</button>
+  <% end %>
+  <div style="display: inline-flex; gap: 0;border-radius: 4px;box-sizing: border-box;position: relative;">
+    <%= link_to organization_export_path(:csv), data: { turbo: false } do %>
+      <button class="subheading-button" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+        Export
+      </button>
+    <% end %>
+    <details class="dropdown" style="display: inline-flex;">
+      <summary class="subheading-button">↓</summary>
+      <div>
+        <%= link_to "OpenSlides", organization_export_path(:open_slides), data: { turbo: false } %>
+      </div>
+    </details>
+  </div>
+</div>
 <%= turbo_stream_from "members" %>
 <table>
   <thead>
@@ -40,25 +51,46 @@
   </tbody>
 </table>
 
-<script type="module">
-  const shareBtn = document.querySelector("button#share")
-
-  if (!navigator.share) {
-    shareBtn.textContent = "Copy join link"  
-  }
-
-  shareBtn.addEventListener("click", async (event) => {
-    if (navigator.share) {
-      // Use Web Share API
-      await navigator.share({
-        title: "Join <%= Config.organization %>",
-        text: "Become a member of <%= Config.organization %>!",
-        url: "<%= new_my_membership_path %>",
-      })
-    } else {
-      // Copy to clipboard if Web Share is unavailable
-      await navigator.clipboard.writeText("<%= new_my_membership_path %>");
-      alert("Copied join link to clipboard!")
+<style>
+  details {
+    summary {
+      height: 53%;
+      display: inline-flex;
+      border-radius: 4px;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding: 5px 10px;
+      background-color: var(--red-11) !important;
+      border: 2px solid var(--red-11) !important;
+      cursor: pointer;
+      transition: ease-in-out 0.2s;
+      &:hover {
+        background-color: var(--red-12) !important;
+        border-color: var(--red-12) !important;
+      }
     }
-  })
-</script>
+    div {
+      position: absolute;
+      top: 29px;
+      background: var(--red-11);
+      color: white;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      border-top-left-radius: 0;
+      left: 65px;
+      width: max-content;
+      gap: 0.5rem;
+      overflow: hidden;
+      a {
+        font-weight: 600;
+        font-size: smaller;
+        padding: 0.5rem 10px;
+        transition: ease-in-out 0.2s;
+        &:hover {
+          background-color: var(--red-12);
+        }
+      }
+    }
+  }
+</style>

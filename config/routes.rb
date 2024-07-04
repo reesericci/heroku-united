@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   namespace :organization do
     root "members#index", as: :members
 
-    resources :members, param: :username, except: [:index, :edit, :delete]
+    resources :members, param: :username, except: [:index, :edit, :delete] do
+      collection do
+        resources :exports, only: [:show], param: :type, module: :member
+      end
+    end
 
     resources :broadcasts, only: [:index, :destroy, :create]
 

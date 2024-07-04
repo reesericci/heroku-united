@@ -1,7 +1,9 @@
 <%= render "nav" %>
 
 <h1 style="margin-bottom: 8px">API Keys</h1>
-<a type="button" class="subheading-button" href="<%= rswag_ui_path %>" target="_blank">Open docs</a>
+<div class="subheading-buttons">
+  <a type="button" class="subheading-button" href="<%= rswag_ui_path %>" target="_blank">Open docs</a>
+</div>
 
 <%= turbo_stream_from "api_keys" %>
 

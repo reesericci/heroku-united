@@ -3,7 +3,9 @@
   <h1 style="margin-bottom: 8px"><%= t('.title') %></h1>
 </div>
 
-<button class="subheading-button"><%= link_to t('.new'), new_oauth_application_path, class: 'btn btn-success' %></button>
+<div class="subheading-buttons">
+  <button class="subheading-button"><%= link_to t('.new'), new_oauth_application_path, class: 'btn btn-success' %></button>
+</div>
 
 <table class="table table-striped">
   <thead>

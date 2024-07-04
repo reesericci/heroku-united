@@ -1,16 +1,16 @@
 <%
-  def underlined?(path)
-    current_page?(path) ? "text-decoration: underline" : nil
+  def current?(path)
+    current_page?(path) ? { style: "text-decoration: underline", "aria-current": "page" } : {}
   end
 %>
 
 <div style="display: inline-flex; gap: 1rem">
   <h2><%= Config.organization %> —</h2>
   <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
-    <%= link_to "Home", organization_members_path, style: underlined?(organization_members_path) %>
-    <%= link_to "Broadcasts", organization_broadcasts_path, style: underlined?(organization_broadcasts_path) %>
-    <%= link_to "API Keys", organization_api_keys_path, style: underlined?(organization_api_keys_path) %>
-    <%= link_to "Identity", oauth_applications_path, style: underlined?(oauth_applications_path)  %>
-    <%= link_to "Config", organization_config_path, style: underlined?(organization_config_path)  %>
+    <%= link_to "Home", organization_members_path, current?(organization_members_path) %>
+    <%= link_to "Broadcasts", organization_broadcasts_path, current?(organization_broadcasts_path) %>
+    <%= link_to "API Keys", organization_api_keys_path, current?(organization_api_keys_path) %>
+    <%= link_to "Identity", oauth_applications_path, current?(oauth_applications_path) %>
+    <%= link_to "Config", organization_config_path, current?(organization_config_path) %>
   </nav>
 </div>

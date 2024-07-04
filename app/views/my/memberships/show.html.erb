@@ -1,8 +1,10 @@
 <a href="<%= new_my_membership_path %>"><h2>← Back to Join</h2></a>
 <h1 style="margin-bottom: 1rem">Edit <%= My.name %></h1>
-<%= link_to delete_my_journey_path do %>
-    <button class="subheading-button">Log out</button>
-<% end %>
+<div class="subheading-buttons">
+  <%= link_to delete_my_journey_path do %>
+      <button class="subheading-button">Log out</button>
+  <% end %>
+</div>
 
 <%= turbo_stream_from My %>
 <%= form_with model: My, scope: :member, url: my_membership_path, method: :patch do |form| %>

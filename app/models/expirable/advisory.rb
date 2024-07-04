@@ -10,6 +10,6 @@ class Expirable::Advisory
   private
 
   def sym
-    self.class.name.split("::")[2].downcase.to_sym
+    ActiveSupport::Inflector.demodulize(self.class.name).downcase.to_sym
   end
 end

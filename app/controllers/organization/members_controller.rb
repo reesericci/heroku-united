@@ -5,7 +5,6 @@ class Organization::MembersController < Organization::BaseController
     @members = Member.order(created_at: :desc)
     respond_to do |format|
       format.html
-      format.csv { render csv: @members.to_csv, filename: "#{parameterize(Time.zone.now.iso8601).upcase}-#{parameterize(Config.organization)}-members" }
     end
   end
 

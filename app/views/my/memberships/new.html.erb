@@ -1,12 +1,14 @@
 <% content_for :title do "Join #{Config.organization}" end %>
 
 <h1 style="margin-bottom: 1rem;">Join <%= Config.organization %></h1>
-<%= link_to my_membership_path do %>
-  <button class="subheading-button">Member login</button>
-<% end %>
-<%= link_to organization_members_path do %>
-  <button class="subheading-button">Administrator login</button>
-<% end %>
+<div class="subheading-buttons">
+  <%= link_to my_membership_path do %>
+    <button class="subheading-button">Member login</button>
+  <% end %>
+  <%= link_to organization_members_path do %>
+    <button class="subheading-button">Administrator login</button>
+  <% end %>
+</div>
 <%= form_with scope: :member, url: my_membership_path, method: :post do |form| %>
   <div>
     <%= form.label :name, "Full name" %>
