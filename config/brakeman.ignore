@@ -3,40 +3,17 @@
     {
       "warning_type": "Mass Assignment",
       "warning_code": 105,
-      "fingerprint": "2d5edea79f28e6db2ec216351fffb9d569d34285a46043e7155ee668851786ef",
+      "fingerprint": "2cbbab7ac8291c2c4998e06cbe6e020890e24e17a04d6d387b0549ea104023cd",
       "check_name": "PermitAttributes",
       "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/api/members_controller.rb",
-      "line": 43,
+      "file": "app/controllers/organization/members_controller.rb",
+      "line": 37,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.permit(:username, :name, :email, :pronouns, :banned, :expires_at)",
+      "code": "params.require(:member).permit(:name, :username, :email, :expires_at, :banned, :address_attributes => ([:line1, :line2, :city, :province, :code, :country]), :extensions_attributes => ({}))",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "Api::MembersController",
-        "method": "members_params"
-      },
-      "user_input": ":banned",
-      "confidence": "Medium",
-      "cwe_id": [
-        915
-      ],
-      "note": ""
-    },
-    {
-      "warning_type": "Mass Assignment",
-      "warning_code": 105,
-      "fingerprint": "460ee08af1ba1eccf5e4a7400fc23d41434fcda3c42b52f22861408ed1fc13a1",
-      "check_name": "PermitAttributes",
-      "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/api/members_controller.rb",
-      "line": 47,
-      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:member).permit(:username, :name, :email, :pronouns, :banned, :expires_at)",
-      "render_path": null,
-      "location": {
-        "type": "method",
-        "class": "Api::MembersController",
+        "class": "Organization::MembersController",
         "method": "member_params"
       },
       "user_input": ":banned",
@@ -47,19 +24,53 @@
       "note": ""
     },
     {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "9d451369872d76709907a1e2c4afb13b5fcf7319e740347db9640abbc634ccf6",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/my/memberships/show.html.erb",
+      "line": 94,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "qr_code(My.keycode_imprint.uri(My.username))",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "My::MembershipsController",
+          "method": "show",
+          "line": 28,
+          "file": "app/controllers/my/memberships_controller.rb",
+          "rendered": {
+            "name": "my/memberships/show",
+            "file": "app/views/my/memberships/show.html.erb"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "my/memberships/show"
+      },
+      "user_input": "My.keycode_imprint.uri(My.username)",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
       "warning_type": "Mass Assignment",
       "warning_code": 105,
-      "fingerprint": "d6767ee79f7ebb066855b538f96ecb609fb5ee87b1a5a60131eb57ff38c4ed78",
+      "fingerprint": "ac4a6a113b9b1e453be37b39a5b9b3c1060798deaaa1860295a218572263271e",
       "check_name": "PermitAttributes",
       "message": "Potentially dangerous key allowed for mass assignment",
-      "file": "app/controllers/members_controller.rb",
-      "line": 51,
+      "file": "app/controllers/api/members_controller.rb",
+      "line": 42,
       "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
-      "code": "params.require(:member).permit(:name, :username, :email, :expires_at, :banned)",
+      "code": "params.require(:member).permit(:username, :name, :email, :pronouns, :banned, :expires_at, :extensions_attributes, :address_attributes => ([:line1, :line2, :city, :province, :code, :country]))",
       "render_path": null,
       "location": {
         "type": "method",
-        "class": "MembersController",
+        "class": "Api::MembersController",
         "method": "member_params"
       },
       "user_input": ":banned",
@@ -70,6 +81,6 @@
       "note": ""
     }
   ],
-  "updated": "2024-06-22 07:58:18 -0500",
+  "updated": "2024-07-05 10:53:24 -0500",
   "brakeman_version": "6.1.2"
 }
