@@ -18,7 +18,7 @@ class Organization::MembersController < Organization::BaseController
     if member.deceased?
       member.resurrect
     end
-    member.update!(member_params)
+    member.update!(member_params.merge!({extensions_attributes: mapped_extensions}))
     redirect_to organization_members_path
   end
 
@@ -36,5 +36,10 @@ class Organization::MembersController < Organization::BaseController
 
   def member_params
     params.require(:member).permit(:name, :username, :email, :expires_at, :banned, address_attributes: [:line1, :line2, :city, :province, :code, :country], extensions_attributes: {})
+  end
+
+  def mapped_extensions
+    attrs = member_params[:extensions_attributes]
+    attrs.keys.map { |e| {name: e, content: attrs[e]} }
   end
 end

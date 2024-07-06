@@ -17,3 +17,7 @@ test:
 production:
   <<: *default
   polling_interval: 0.5.seconds
+
+demo:
+  <<: *default
+  polling_interval: 0.5.seconds
