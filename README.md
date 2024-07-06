@@ -33,7 +33,7 @@ This program is free software: you can redistribute it and/or modify it under th
 
 I recommend that people use Railway to deploy United, as it has a free tier and an extremely easy setup process.
 
-[`<img src="https://railway.app/button.svg" height="32" alt="Deploy on Railway">`](https://railway.app/template/eqEBYm?referralCode=_0Cj0x)
+[<img src="https://railway.app/button.svg" height="32" alt="Deploy on Railway">](https://railway.app/template/eqEBYm?referralCode=_0Cj0x)
 
 Here's a video of me spinning up a United instance in less than 10 minutes on Railway:
 
@@ -46,8 +46,8 @@ Here's a video of me spinning up a United instance in less than 10 minutes on Ra
 If you don't want to use Railway, here are some other options for cloud deployments:
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/reesericci/heroku-united)
-[`<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render" style="border-radius: 6px;">`](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
-[`<img src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io">`](https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io)
+[<img src="https://render.com/images/deploy-to-render-button.svg" height="32" alt="Deploy to Render" style="border-radius: 6px;">](https://render.com/deploy?repo=https://github.com/reesericci/heroku-united)
+[<img src="https://fly.io/static/images/external/launch-on-flyio-button.svg" height="32" alt="Launch on Fly.io">](https://codeberg.org/reesericci/united/wiki/Deploying-to-Fly.io)
 
 ### Computer
 
