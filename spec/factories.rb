@@ -1,3 +1,5 @@
+require "demo_mode/factory_bot_ext"
+
 FactoryBot.define do
   factory :config do
     organization { "United!" }
@@ -5,7 +7,7 @@ FactoryBot.define do
     email { "united@example.com" }
     password { "united" }
     extensions { ["Example"] }
-    external_url { "united.local" }
+    external_url { "demo.united.obl.ong" }
     smtp {
       {
         server: "example.com",
@@ -19,9 +21,9 @@ FactoryBot.define do
   end
 
   factory :member do
-    name { "Fionah United" }
-    username { "fionahu" }
-    email { "fionah@united.local" }
+    sequence(:name) { "Person #{_1}" }
+    sequence(:username) { "person#{_1}" }
+    sequence(:email) { "person#{_1}@example.com" }
     expires_at { 1.year.from_now }
     keycode_imprint_attributes { {email: true} }
   end

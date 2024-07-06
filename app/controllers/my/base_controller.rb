@@ -11,4 +11,17 @@ class My::BaseController < ApplicationController
       My.member = request.env["warden"].user(:my)
     end
   end
+
+  # For demo mode
+  def current_user
+    request.env["warden"].user(:my)
+  end
+
+  def sign_out
+    request.env["warden"].logout(:my)
+  end
+
+  def sign_in(member)
+    request.env["warden"].set_user(member, scope: :my)
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_07_01_035407) do
+ActiveRecord::Schema[7.2].define(version: 2024_07_06_040026) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -106,6 +106,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_01_035407) do
     t.string "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "demo_mode_sessions", force: :cascade do |t|
+    t.string "persona_name", null: false
+    t.string "signinable_type"
+    t.string "signinable_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.string "variant", default: "default", null: false
+    t.string "signinable_password", null: false
+    t.index ["signinable_type", "signinable_id"], name: "index_demo_mode_sessions_on_signinable_type_and_signinable_id"
   end
 
   create_table "extensions", primary_key: ["name", "extensible_type", "extensible_id"], force: :cascade do |t|

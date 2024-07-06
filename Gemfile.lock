@@ -94,6 +94,16 @@ GIT
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
 
+GIT
+  remote: https://github.com/reesericci/demo_mode.git
+  revision: 5be8d89f0e26998de4aa7c60ae4bbaa7a87251fc
+  specs:
+    demo_mode (1.2.2)
+      cli-ui
+      rails (>= 6.1)
+      sprockets-rails
+      typedjs-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -147,6 +157,7 @@ GEM
     cgi (0.4.1)
     childprocess (5.0.0)
     chunky_png (1.4.0)
+    cli-ui (2.2.3)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     cose (1.3.0)
@@ -209,6 +220,13 @@ GEM
     launchy (3.0.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
+    letter_opener (1.10.0)
+      launchy (>= 2.2, < 4)
+    letter_opener_web (3.0.0)
+      actionmailer (>= 6.1)
+      letter_opener (~> 1.9)
+      railties (>= 6.1)
+      rexml
     lint_roller (1.1.0)
     litestream (0.10.4)
       logfmt (>= 0.0.10)
@@ -432,6 +450,13 @@ GEM
     spreadsheet_architect (5.0.0)
       caxlsx (>= 3.3.0, < 4)
       rodf (>= 1.0.0, < 2)
+    sprockets (4.2.1)
+      concurrent-ruby (~> 1.0)
+      rack (>= 2.2.4, < 4)
+    sprockets-rails (3.5.1)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      sprockets (>= 3.0.0)
     sqlite3 (2.0.1-aarch64-linux-gnu)
     sqlite3 (2.0.1-aarch64-linux-musl)
     sqlite3 (2.0.1-arm-linux-gnu)
@@ -471,6 +496,8 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    typedjs-rails (2.0.9)
+      railties (>= 3.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
@@ -528,6 +555,7 @@ DEPENDENCIES
   capybara
   capybara-screenshot (~> 1.0)
   debug
+  demo_mode (~> 1.2)!
   dockerfile-rails (>= 1.6)
   doorkeeper (~> 5.7)
   doorkeeper-openid_connect (~> 1.8)
@@ -536,6 +564,8 @@ DEPENDENCIES
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
+  letter_opener (~> 1.10)
+  letter_opener_web (~> 3.0)
   litestream (~> 0.10.4)
   local_time (~> 3.0)
   mission_control-jobs (~> 0.2.1)

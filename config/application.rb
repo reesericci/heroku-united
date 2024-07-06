@@ -24,8 +24,6 @@ module United
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.action_mailer.delivery_method = :smtp
-
     config.session_store :active_record_store, key: "_united_session", expire_after: 30.minutes
 
     config.cache_store = :solid_cache_store
@@ -34,6 +32,6 @@ module United
     config.active_job.queue_adapter = :solid_queue
     config.solid_queue.connects_to = {database: {writing: :queue, reading: :queue}}
 
-    config.mission_control.jobs.base_controller_class = "Organization::BaseController"
+    config.mission_control.jobs.base_controller_class = "ActionController::Base"
   end
 end

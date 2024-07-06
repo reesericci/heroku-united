@@ -1,5 +1,6 @@
 class My::MembershipsController < My::BaseController
   skip_before_action :ensure_authenticated, only: [:new, :create]
+  skip_before_action :demo_splash!, raise: false, only: [:new, :create]
 
   def new
     @extensions = Config.extensions

@@ -34,3 +34,5 @@ development:
 test:
   <<: *production
  
+demo:
+  <<: *production

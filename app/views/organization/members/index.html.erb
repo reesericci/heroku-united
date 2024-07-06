@@ -69,6 +69,13 @@
         border-color: var(--red-12) !important;
       }
     }
+
+    &:[open] {
+      summary {
+        border-bottom-right-raidus: 0;
+      }
+    }
+
     div {
       position: absolute;
       top: 29px;
@@ -94,3 +101,26 @@
     }
   }
 </style>
+
+<script type="module">
+  const shareBtn = document.querySelector("button#share")
+
+  if (!navigator.share) {
+    shareBtn.textContent = "Copy join link"
+  }
+
+  shareBtn.addEventListener("click", async (event) => {
+    if (navigator.share) {
+      // Use Web Share API
+      await navigator.share({
+        title: "Join <%= Config.organization %>",
+        text: "Become a member of <%= Config.organization %>!",
+        url: "<%= new_my_membership_url %>",
+      })
+    } else {
+      // Copy to clipboard if Web Share is unavailable
+      await navigator.clipboard.writeText("<%= new_my_membership_url %>");
+      alert("Copied join link to clipboard!")
+    }
+  })
+</script>

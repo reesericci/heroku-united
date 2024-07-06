@@ -131,3 +131,9 @@ gem "binding_of_caller", "~> 1.0"
 gem "simplecov_json_formatter", "~> 0.1.4"
 
 gem "breadcrumbs_on_rails", "~> 4.1"
+
+gem "demo_mode", "~> 1.2", git: "https://github.com/reesericci/demo_mode.git"
+
+gem "letter_opener_web", "~> 3.0"
+
+gem "letter_opener", "~> 1.10"

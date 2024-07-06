@@ -24,7 +24,11 @@ class Config < ApplicationRecord
     if oidc_key.blank?
       update!(oidc_key: OpenSSL::PKey::RSA.new(2048))
     end
-    Doorkeeper::OpenidConnect.configuration.instance_variable_set(:@signing_key, oidc_key)
+    begin
+      Doorkeeper::OpenidConnect.configuration.instance_variable_set(:@signing_key, oidc_key)
+    rescue Doorkeeper::OpenidConnect::Errors::MissingConfiguration
+      Rails.logger.info "config: openid connect not initialized yet, not setting @signing_key"
+    end
   end
 
   after_initialize do

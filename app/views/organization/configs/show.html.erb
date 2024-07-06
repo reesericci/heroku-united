@@ -1,6 +1,16 @@
 <%= render "nav" %>
 
-<h1>Configuration</h1>
+<h1 style="margin-bottom: 0.5rem;">Configuration</h1>
+<div class="subheading-buttons">
+  <% if Rails.application.config.action_mailer.delivery_method == :letter_opener %>
+    <%= link_to letter_opener_web_path do %>
+      <button class="subheading-button">View emails</button>
+    <% end %>
+    <%= link_to mission_control_jobs_path do %>
+      <button class="subheading-button">View jobs</button>
+    <% end %>
+  <% end %>
+</div>
 <%= turbo_stream_from Config.first %>
 <%= form_with model: Config.first, scope: :config, url: organization_config_path, method: :patch do |form| %>
   <div>

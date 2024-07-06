@@ -9,8 +9,12 @@
   <nav style="font-size: 24px; font-weight: 400; display: inline-flex; gap: 1rem; align-items: center;">
     <%= link_to "Home", organization_members_path, current?(organization_members_path) %>
     <%= link_to "Broadcasts", organization_broadcasts_path, current?(organization_broadcasts_path) %>
-    <%= link_to "API Keys", organization_api_keys_path, current?(organization_api_keys_path) %>
+    <%= link_to "API keys", organization_api_keys_path, current?(organization_api_keys_path) %>
     <%= link_to "Identity", oauth_applications_path, current?(oauth_applications_path) %>
     <%= link_to "Config", organization_config_path, current?(organization_config_path) %>
+    <%= link_to delete_organization_journey_path, style: "color: var(--red-10); display: inline-flex; gap: 0.25rem;" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" height="28px" viewBox="0 -960 960 960" style="fill: var(--red-10);" width="24px" fill="currentColor"><path d="M120-120v-720h360v80H200v560h280v80H120Zm520-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z" /></svg>
+    Log out
+    <% end %>
   </nav>
 </div>

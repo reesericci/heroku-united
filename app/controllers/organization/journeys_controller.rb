@@ -1,4 +1,6 @@
-class Organization::JourneysController < ApplicationController
+class Organization::JourneysController < Organization::BaseController
+  skip_before_action :ensure_authenticated
+
   def new
     flash[:back] = flash[:redirect_back]
   end
