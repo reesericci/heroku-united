@@ -1,3 +1,5 @@
+<%= render "breadcrumbs" unless current_page?(new_my_journey_path) %>
+
 <% content_for :content do %>
   <h1>Continue with <%= Config.organization %></h1>
   <%= yield %>

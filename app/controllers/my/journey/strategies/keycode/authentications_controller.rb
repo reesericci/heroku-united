@@ -1,4 +1,4 @@
-class My::Journey::Strategies::Keycode::AuthenticationsController < My::Journey::BaseController
+class My::Journey::Strategies::Keycode::AuthenticationsController < My::Journey::Strategies::BaseController
   def new
     if Journey.explorer.blank?
       redirect_to new_my_journey_path and return
@@ -8,6 +8,7 @@ class My::Journey::Strategies::Keycode::AuthenticationsController < My::Journey:
     KeycodeMailer.with(imprintor: Journey.explorer, code: code).new.deliver_later unless !Journey.explorer.keycode_imprint.email?
 
     @username = Journey.explorer.username
+    add_breadcrumb "Keycode", new_my_keycode_authentication_path
   end
 
   def create

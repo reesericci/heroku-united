@@ -1,4 +1,5 @@
-class My::JourneysController < ApplicationController
+class My::JourneysController < My::Journey::BaseController
+
   def new
     basecamp = Journey.basecamp
     Journey.reset

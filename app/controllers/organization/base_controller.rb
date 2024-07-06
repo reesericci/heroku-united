@@ -1,5 +1,6 @@
 class Organization::BaseController < ApplicationController
   before_action :ensure_authenticated
+  add_breadcrumb "Organization", :organization_members_path
 
   def ensure_authenticated
     if !request.env["warden"].authenticated?

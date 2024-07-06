@@ -1,6 +1,6 @@
 <%= render "nav" %>
 
-<h1>Edit Configuration</h1>
+<h1>Configuration</h1>
 <%= turbo_stream_from Config.first %>
 <%= form_with model: Config.first, scope: :config, url: organization_config_path, method: :patch do |form| %>
   <div>

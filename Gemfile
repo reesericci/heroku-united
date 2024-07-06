@@ -129,3 +129,5 @@ gem "session_attributes"
 gem "binding_of_caller", "~> 1.0"
 
 gem "simplecov_json_formatter", "~> 0.1.4"
+
+gem "breadcrumbs_on_rails", "~> 4.1"

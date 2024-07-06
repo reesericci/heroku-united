@@ -1,4 +1,4 @@
-class My::Journey::StrategiesController < My::Journey::BaseController
+class My::Journey::StrategiesController < My::Journey::Strategies::BaseController
   def index
     @strategies = [{
       name: "Keycode",

@@ -6,7 +6,7 @@
     <button class="subheading-button">Member login</button>
   <% end %>
   <%= link_to organization_members_path do %>
-    <button class="subheading-button">Administrator login</button>
+    <button class="subheading-button">Organization login</button>
   <% end %>
 </div>
 <%= form_with scope: :member, url: my_membership_path, method: :post do |form| %>

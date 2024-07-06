@@ -10,6 +10,7 @@ class Organization::MembersController < Organization::BaseController
 
   def show
     @member = Member.include_deceased.find_by(username: params[:username])
+    add_breadcrumb @member.username, organization_member_path(params[:username])
   end
 
   def update

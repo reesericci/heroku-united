@@ -1,9 +1,11 @@
-class My::Journey::Strategies::Passkey::AuthenticationsController < My::Journey::BaseController
+class My::Journey::Strategies::Passkey::AuthenticationsController < My::Journey::Strategies::BaseController
   def new
     @options = Journey.explorer.keyring.relying_party.options_for_authentication
 
     Passkey::Ceremony.reset
     Passkey::Ceremony.challenge = @options.challenge
+
+    add_breadcrumb "Passkey", :new_my_keycode_authentication_path
   end
 
   def create

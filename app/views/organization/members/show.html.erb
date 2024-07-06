@@ -1,4 +1,4 @@
-<a href="<%= organization_members_path %>"><h2>← Back to Home</h2></a>
+<%= render "breadcrumbs" %>
 <h1><%= @member.name %></h1>
 <%= turbo_stream_from @member %>
 <%= form_with model: @member, url: organization_member_path, scope: :member do |form| %>
@@ -49,7 +49,7 @@
     <% Config.extensions.each do |e| %>
       <div>
         <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
-        <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e).content %>
+        <%= extensions_form.text_field e, value: @member.extensions.find_by(name: e).content %>
       </div>
     <% end %>
   <% end %>
