@@ -7,6 +7,8 @@
 
 :root {
   color-scheme: light dark;
+  accent-color: var(--red-10);
+  scrollbar-color: var(--red-10);
 }
 
 html {
