@@ -14,15 +14,6 @@ class Config < ApplicationRecord
     self.email = email.downcase
   end
 
-  class << self
-    Config.connection
-    Config.column_names.each do |k|
-      delegate k, to: :first, allow_nil: true
-    end
-
-    delegate :cache_key_with_version, to: :first, allow_nil: true
-  end
-
   validate do |c|
     if !Array.wrap(c.extensions).try(:all?, ->(e) { e.is_a? Symbol })
       errors.add :extensions, :invalid_type, message: "does not decode to an Array of Symbols"
@@ -51,15 +42,24 @@ class Config < ApplicationRecord
     (extensions || []).each do |e|
       hash[e] = e.to_s
     end
-    Extension.enum :name, hash, instance_methods: false, validate: {allow_nil: true}
+    Extension.enum :name, hash, instance_methods: false, validate: {allow_nil: true} unless try(:extensions).blank?
   end
 
   def self.extensions_enum
     hash = {}
-    (extensions || []).each do |e|
+    (try(:extensions) || []).each do |e|
       hash[e] = e.to_s
     end
     hash
+  end
+
+  class << self
+    Config.connection
+    Config.column_names.each do |k|
+      delegate k, to: :first, allow_nil: true
+    end
+
+    delegate :cache_key_with_version, to: :first, allow_nil: true
   end
 
   private

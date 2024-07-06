@@ -16,7 +16,7 @@ RSpec.describe "a new member", type: :feature do
     fill_in "Province", with: "Texas"
     fill_in "Postal Code", with: "12345"
     select "United States", from: "Country"
-    Extension.names.keys.each do |e|
+    Extension.try(:names).keys.each do |e|
       fill_in ActiveSupport::Inflector.humanize(e.to_s), with: "Some data"
     end
 

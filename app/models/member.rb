@@ -24,7 +24,7 @@ class Member < ApplicationRecord
       ["Code", address&.code],
       ["Country", address&.country.to_s]
     ] +
-      (Extension.names || {}).keys.map { |e| [(e.present? ? ActiveSupport::Inflector.humanize(e) : ""), extensions.find_by(name: e)&.content] } +
+      Extension.try(:names).keys.map { |e| [(e.present? ? ActiveSupport::Inflector.humanize(e) : ""), extensions.find_by(name: e)&.content] } +
       [:expires_at, :created_at, :updated_at, :banned]
   end
 
@@ -51,7 +51,12 @@ class Member < ApplicationRecord
 
   self.condition = "membership"
 
-  self.renew_location = "#{Config.external_url}/my"
+  self.renew_location = "#{
+  begin
+    Config.external_url
+  rescue
+    "united.local"
+  end}/my"
 
   self.expiry_disabled = -> { Config.membership_length < 0 }
 
