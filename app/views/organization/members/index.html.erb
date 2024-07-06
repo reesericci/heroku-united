@@ -70,15 +70,9 @@
       }
     }
 
-    &:[open] {
-      summary {
-        border-bottom-right-raidus: 0;
-      }
-    }
-
     div {
       position: absolute;
-      top: 29px;
+      top: 30px;
       background: var(--red-11);
       color: white;
       border-radius: 4px;
@@ -98,6 +92,12 @@
           background-color: var(--red-12);
         }
       }
+    }
+  }
+
+  details[open] {
+    summary {
+      border-bottom-right-radius: 0;
     }
   }
 </style>
