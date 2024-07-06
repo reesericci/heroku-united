@@ -14,9 +14,13 @@ end
 
 if Rails.env.demo?
   Rails.application.config.after_initialize do
-    Config.delete_all
-    Config.create!(FactoryBot.attributes_for(:config))
-    Member.delete_all
-    ActiveRecord::SessionStore::Session.destroy_all
+    if ActiveRecord::Base.connection.table_exists?(Config.table_name) &&
+        ActiveRecord::Base.connection.table_exists?(ActiveRecord::SessionStore::Session.table_name) &&
+        ActiveRecord::Base.connection.table_exists?(Member.table_name)
+      Config.delete_all
+      Config.create!(FactoryBot.attributes_for(:config))
+      Member.delete_all
+      ActiveRecord::SessionStore::Session.destroy_all
+    end
   end
 end
