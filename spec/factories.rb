@@ -5,9 +5,9 @@ FactoryBot.define do
     organization { "United!" }
     membership_length { 365 }
     email { "united@example.com" }
-    password { "united" }
+    password { "correct-horse-battery-staple" }
     extensions { ["Example"] }
-    external_url { "https://demo.united.obl.ong" }
+    external_url { Rails.env.demo? ? (ENV["DEMO_EXTERNAL_URL"] || "https://demo.united.obl.ong") : "http://localhost:3000" }
     smtp {
       {
         server: "example.com",
