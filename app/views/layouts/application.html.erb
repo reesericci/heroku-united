@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= content_for(:title) || Config.organization || "United" %></title>
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= javascript_include_tag "viewport-min-width.js" %>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="turbo-refresh-method" content="morph">
@@ -37,7 +37,7 @@
         </output>
       <% end %>
 
-      <a href="https://codeberg.org/reesericci/united" target="_blank"><p>This site is powered by <span style="text-decoration: underline">United</span> — free and open membership software for collective organizations</p></a>
+      <a href="https://codeberg.org/reesericci/united" target="_blank"><p style="word-break: break-word; overflow-wrap: break-word;">This site is powered by <span style="text-decoration: underline">United</span> — free and open membership software for collective organizations</p></a>
     </div>
   </body>
 </html>
