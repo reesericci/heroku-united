@@ -21,9 +21,7 @@ if Rails.env.demo?
 
         password { "correct-horse-battery-staple" }
 
-        icon do
-          image_tag("demo_mode/icon--user.png")
-        end
+        icon "demo_mode/icon--user.png"
       end
     end
   end

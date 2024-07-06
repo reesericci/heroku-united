@@ -14,7 +14,5 @@ DemoMode.add_persona do
     redirect_to "/organization"
   end
 
-  icon do
-    image_tag("demo_mode/icon--user.png")
-  end
+  icon "demo_mode/icon--tophat.png"
 end
