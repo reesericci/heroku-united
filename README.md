@@ -14,6 +14,8 @@
 
 United is free and open membership software for collective organizations, allowing robust tracking of membership, expirations, email broadcast tools, providing single-sign-on for your members, and more.
 
+<a class="ui basic labeled button" href="https:///demo.united.obl.ong">Open demo! ↗</a>
+
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 <img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-light.png" width="30%" alt="Screenshot of the United dashboard in light mode"></img><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-members-dark.png" alt="Screenshot of the United dashboard in dark mode" width="30%"></img><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/join.png" width="30%"></img><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/my-renew-light.png" alt="Screenshot of the United member my requiring a renewal in light mode" width="30%"></img><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/my-dark.png" alt="Screenshot of the United member my in dark mode" width="30%"></img><img src="https://codeberg.org/reesericci/united/media/branch/main/pictures/admin-broadcasts-light.png" alt="Screenshot of the United broadcasts dashboard in light mode"
@@ -21,7 +23,10 @@ This program is free software: you can redistribute it and/or modify it under th
 
 ## Demo
 
-A fully functional demo is available at [demo.united.obl.ong](https://demo.united.obl.ong)! All data resets every 30 minutes on the hour and at the 30-minute mark.
+A fully functional demo is available at [demo.united.obl.ong](https://demo.united.obl.ong)! 
+
+> [!WARNING]
+> All data resets every 30 minutes on the hour and at the 30-minute mark.
 
 <a class="ui basic labeled button" href="https:///demo.united.obl.ong">Open demo! ↗</a>
 
