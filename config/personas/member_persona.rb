@@ -25,10 +25,9 @@ DemoMode.add_persona do
   #
   # Specify a block to render your own icon:
   # ========================================
-  # icon do
-  #   # Any view helpers are available in this context.
-  #   image_tag('images/dancing-penguin.gif')
-  # end
+  icon do
+    image_tag("demo_mode/icon--user.png")
+  end
 
   # Define "variants" with the `variant` keyword:
   # =============================================

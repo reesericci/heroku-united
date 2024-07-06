@@ -13,4 +13,8 @@ DemoMode.add_persona do
     request.env["warden"].set_user(@session.signinable)
     redirect_to "/organization"
   end
+
+  icon do
+    image_tag("demo_mode/icon--user.png")
+  end
 end

@@ -20,6 +20,10 @@ if Rails.env.demo?
         app_base_controller_name "ApplicationController"
 
         password { "correct-horse-battery-staple" }
+
+        icon do
+          image_tag("demo_mode/icon--user.png")
+        end
       end
     end
   end

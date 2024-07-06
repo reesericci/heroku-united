@@ -7,7 +7,7 @@ FactoryBot.define do
     email { "united@example.com" }
     password { "united" }
     extensions { ["Example"] }
-    external_url { "demo.united.obl.ong" }
+    external_url { "https://demo.united.obl.ong" }
     smtp {
       {
         server: "example.com",
