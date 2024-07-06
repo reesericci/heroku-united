@@ -8,7 +8,8 @@ Rails.application.configure do
   config.assets.compile = false
   config.assets.unknown_asset_fallback = false
   config.assets.digest = true
-  config.force_ssl = false
+  config.assume_ssl = true
+  config.force_ssl = true
   config.action_dispatch.show_exceptions = false
 
   # Recommended development/test-like behaviors:

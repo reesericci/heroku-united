@@ -17,7 +17,6 @@ if Rails.env.demo?
     Config.delete_all
     Config.create!(FactoryBot.attributes_for(:config))
     Member.delete_all
+    ActiveRecord::SessionStore::Session.destroy_all
   end
-
-  ActiveRecord::SessionStore::Session.destroy_all
 end
