@@ -1,34 +1,38 @@
 <%= render "breadcrumbs" %>
 
-<h1 style="margin-bottom: 8px">Member Cemetery</h1>
+<header>
+  <h1 style="margin-bottom: 8px">Cemetery</h1>
+</header>
 
 <%= turbo_stream_from "members" %>
-<table>
-  <thead>
-    <th>Name</th>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Expires on</th>
-    <th>Member since</th>
-    <th style="width: 3.5cqmax">Status</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @members.each do |m| %>
-      <%= turbo_stream_from m %>
-      <tr>
-        <td><%= m.name %></td>
-        <td><%= m.username %></td>  
-        <td><%= m.email %></td>
-        <td><%= local_relative_time(m.expires_at, type: "time-or-date") %></td>
-        <td><%= local_relative_time(m.created_at, type: "time-or-date") %></td>
-        <td><span class="<%= m.status %>-chip"><%= m.status %></span></td>
-        <td>
-          <%= link_to organization_member_path(m) do %>
-            <button>Edit</button>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<main id="main">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Expires on</th>
+      <th>Member since</th>
+      <th style="width: 3.5cqmax">Status</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @members.each do |m| %>
+        <%= turbo_stream_from m %>
+        <tr>
+          <td><%= m.name %></td>
+          <td><%= m.username %></td>  
+          <td><%= m.email %></td>
+          <td><%= local_relative_time(m.expires_at, type: "time-or-date") %></td>
+          <td><%= local_relative_time(m.created_at, type: "time-or-date") %></td>
+          <td><span class="<%= m.status %>-chip"><%= m.status %></span></td>
+          <td>
+            <%= link_to organization_member_path(m) do %>
+              <button>Edit</button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>

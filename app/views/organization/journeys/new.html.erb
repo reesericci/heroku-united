@@ -1,14 +1,19 @@
-<h1>Login to <%= Config.organization %></h1>
-<%= form_with scope: :journey, url: organization_journey_path, method: :post do |form| %>
-  <div>
-    <%= form.label :email, "Email" %>
-    <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
-  </div>
+<header>
+  <h1>Login to <%= Config.organization %></h1>
+</header>
 
-  <div>
-    <%= form.label :password, "Password" %>
-    <%= form.password_field :password, placeholder: "password123" %>
-  </div>
+<main id="main">
+  <%= form_with scope: :journey, url: organization_journey_path, method: :post do |form| %>
+    <div>
+      <%= form.label :email, "Email" %>
+      <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
+    </div>
 
-  <%= form.submit "Login →" %>
-<% end %>
+    <div>
+      <%= form.label :password, "Password" %>
+      <%= form.password_field :password, placeholder: "password123" %>
+    </div>
+
+    <%= form.submit "Login →" %>
+  <% end %>
+</main>

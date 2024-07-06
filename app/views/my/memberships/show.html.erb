@@ -1,119 +1,123 @@
-<h1 style="margin-bottom: 1rem"><%= My.name %></h1>
-<div class="subheading-buttons">
-  <%= link_to delete_my_journey_path do %>
-      <button class="subheading-button">Log out</button>
-  <% end %>
-</div>
+<header>
+  <h1 style="margin-bottom: 1rem"><%= My.name %></h1>
+  <nav aria-label="Actions" class="subheading-buttons">
+    <%= link_to delete_my_journey_path do %>
+        <button class="subheading-button">Log out</button>
+    <% end %>
+  </nav>
+</header>
 
 <%= turbo_stream_from My %>
-<%= form_with model: My, scope: :member, url: my_membership_path, method: :patch do |form| %>
-  <% if My&.renewable? then %>
-    <div class="notice">
-      <h2>It's time to renew your membership!</h2>
-      <p><%= My.expired? ? "Your membership expired" : "If you don't renew, your membership will expire" %> <b><%= local_relative_time(My.expires_at, type: "weekday-or-date") %>.</b></p>
-      <br>
-      <%= form.button "Renew", formaction: my_membership_renewals_path, formmethod: "post" %>
-    </div>
-  <% end %>
-  <div>
-    <%= form.label :name, "Full name" %>
-    <%= form.text_field :name, placeholder: "Fionah United" %>
-  </div>
-  <div>
-    <%= form.label :name, "Username" %>
-    <%= form.text_field :username, placeholder: "fionahu" %>
-  </div>
-  <div>
-    <%= form.label :email, "Email" %>
-    <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
-  </div>
-  <%= form.fields_for :extensions_attributes do |extensions_form| %>
-    <% Config.extensions.each do |e| %>
-      <div>
-        <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
-        <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e)&.content %>
+<main id="main">
+  <%= form_with model: My, scope: :member, url: my_membership_path, method: :patch do |form| %>
+    <% if My&.renewable? then %>
+      <div class="notice">
+        <h2>It's time to renew your membership!</h2>
+        <p><%= My.expired? ? "Your membership expired" : "If you don't renew, your membership will expire" %> <b><%= local_relative_time(My.expires_at, type: "weekday-or-date") %>.</b></p>
+        <br>
+        <%= form.button "Renew", formaction: my_membership_renewals_path, formmethod: "post" %>
       </div>
     <% end %>
-  <% end %>
-  <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
-  <%= form.fields_for :address, My.address || Address.new(addressable_id: My, addressable_type: Member) do |address_form| %>
     <div>
-      <%= address_form.label :line1, "Number and Street" %>
-      <%= address_form.text_field :line1 %>
+      <%= form.label :name, "Full name" %>
+      <%= form.text_field :name, placeholder: "Fionah United" %>
     </div>
     <div>
-      <%= address_form.label :line2, "Line 2" %>
-      <%= address_form.text_field :line2 %>
+      <%= form.label :name, "Username" %>
+      <%= form.text_field :username, placeholder: "fionahu" %>
     </div>
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-      <div style="max-width: 50%;">
-        <%= address_form.label :city %>
-        <%= address_form.text_field :city %>
-      </div>
-      <div style="max-width: 50%;">
-        <%= address_form.label :province %>
-        <%= address_form.text_field :province %>
-      </div>
+    <div>
+      <%= form.label :email, "Email" %>
+      <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
     </div>
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-      <div style="width: 50%">
-        <%= address_form.label :code, "Postal Code" %>
-        <%= address_form.text_field :code %>
-      </div>
-      <div style="width: 50%">
-        <%= address_form.label :country %>
-        <%= address_form.select :country, Domesticable::Country.all.prepend(nil) %>
-      </div>
-    </div>
-  <% end %>
-  <div style="height: 100%; width: 100%;" data-controller="signature">
-    <%= form.label :signature, "Signature" %>
-    <%= form.hidden_field :signature, data: {"signature-target": "field"} %>
-    <div style="position: relative; width: 100%;">
-      <canvas class="signature" data-signature-target="canvas">
-      </canvas>
-      <div style="display: flex; flex-direction: row; gap: 0.5rem; position: absolute; top: 0.5rem; right: 0.5rem;">
-          <button data-action="signature#undo:prevent">Undo</button>
-          <button data-action="signature#clear:prevent">Clear</button>
-      </div>
-    </div>
-  </div>
-  <h3 style="margin: 0; margin-top: 0.5rem;">Authentication</h3>
-  <div>
-    <label>Passkeys <a style="text-decoration: underline; color: var(--green-8)" href="https://www.eff.org/deeplinks/2023/10/what-passkey">(what are these?)</a></label>
-    <%= turbo_frame_tag (My.keyring || My.create_keyring).id, src: my_passkeys_path, style: "width: 100%;" %>
-  </div>
-  <br>
-  <div>
-    <label>TOTP (Authenticator App) base - hover or tap to view</label>
-    <%= form.button "Rotate base", formaction: my_imprint_rotations_path, formmethod: "post" %>
-    <br>
-    <div class="blur">
-      <% cache My.keycode_imprint do %>
-        <%= raw qr_code(My.keycode_imprint.uri(My.username)) %>
-        <%= text_field_tag :base, My.keycode_imprint.base, { disabled: true, autocomplete: "off" } %>
+    <%= form.fields_for :extensions_attributes do |extensions_form| %>
+      <% Config.extensions.each do |e| %>
+        <div>
+          <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
+          <%= extensions_form.text_field e, value: My.member.extensions.find_by(name: e)&.content %>
+        </div>
       <% end %>
+    <% end %>
+    <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
+    <%= form.fields_for :address, My.address || Address.new(addressable_id: My, addressable_type: Member) do |address_form| %>
+      <div>
+        <%= address_form.label :line1, "Number and Street" %>
+        <%= address_form.text_field :line1 %>
+      </div>
+      <div>
+        <%= address_form.label :line2, "Line 2" %>
+        <%= address_form.text_field :line2 %>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="max-width: 50%;">
+          <%= address_form.label :city %>
+          <%= address_form.text_field :city %>
+        </div>
+        <div style="max-width: 50%;">
+          <%= address_form.label :province %>
+          <%= address_form.text_field :province %>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="width: 50%">
+          <%= address_form.label :code, "Postal Code" %>
+          <%= address_form.text_field :code %>
+        </div>
+        <div style="width: 50%">
+          <%= address_form.label :country %>
+          <%= address_form.select :country, Domesticable::Country.all.prepend(nil) %>
+        </div>
+      </div>
+    <% end %>
+    <div style="height: 100%; width: 100%;" data-controller="signature">
+      <%= form.label :signature, "Signature" %>
+      <%= form.hidden_field :signature, data: {"signature-target": "field"} %>
+      <div style="position: relative; width: 100%;">
+        <canvas class="signature" data-signature-target="canvas">
+        </canvas>
+        <div style="display: flex; flex-direction: row; gap: 0.5rem; position: absolute; top: 0.5rem; right: 0.5rem;">
+            <button data-action="signature#undo:prevent">Undo</button>
+            <button data-action="signature#clear:prevent">Clear</button>
+        </div>
+      </div>
     </div>
-  </div>
-  <%= form.fields_for :keycode_imprint do |imprint_form| %>
+    <h3 style="margin: 0; margin-top: 0.5rem;">Authentication</h3>
     <div>
-      <%= imprint_form.label :email, "Email login codes" %>
-      <%= imprint_form.check_box :email %>
+      <label>Passkeys <a style="text-decoration: underline; color: var(--green-8)" href="https://www.eff.org/deeplinks/2023/10/what-passkey">(what are these?)</a></label>
+      <%= turbo_frame_tag (My.keyring || My.create_keyring).id, src: my_passkeys_path, style: "width: 100%;" %>
     </div>
-    <%= imprint_form.hidden_field :base, value: My.keycode_imprint.base %>
+    <br>
+    <div>
+      <label>TOTP (Authenticator App) base - hover or tap to view</label>
+      <%= form.button "Rotate base", formaction: my_imprint_rotations_path, formmethod: "post" %>
+      <br>
+      <div class="blur">
+        <% cache My.keycode_imprint do %>
+          <%= raw qr_code(My.keycode_imprint.uri(My.username)) %>
+          <%= text_field_tag :base, My.keycode_imprint.base, { disabled: true, autocomplete: "off" } %>
+        <% end %>
+      </div>
+    </div>
+    <%= form.fields_for :keycode_imprint do |imprint_form| %>
+      <div>
+        <%= imprint_form.label :email, "Email login codes" %>
+        <%= imprint_form.check_box :email %>
+      </div>
+      <%= imprint_form.hidden_field :base, value: My.keycode_imprint.base %>
+    <% end %>
+    <h3 style="margin: 0; margin-top: 0.5rem;">Other Details</h3>
+    <div>
+      <%= form.label :expires_at, "Expires on" %>
+      <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year, disabled: true %>
+    </div>
+    <div>
+      <%= form.label :banned, "Banned?" %>
+      <%= form.check_box :banned, disabled: true %>
+    </div>
+    <%= form.submit %>
+    <%= form.submit "Delete Membership", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete your membership?" } %>
   <% end %>
-  <h3 style="margin: 0; margin-top: 0.5rem;">Other Details</h3>
-  <div>
-    <%= form.label :expires_at, "Expires on" %>
-    <%= form.date_field :expires_at, placeholder: DateTime.now + 1.year, disabled: true %>
-  </div>
-  <div>
-    <%= form.label :banned, "Banned?" %>
-    <%= form.check_box :banned, disabled: true %>
-  </div>
-  <%= form.submit %>
-  <%= form.submit "Delete Membership", class: "delete", formmethod: :delete, data: { turbo_confirm: "Are you sure you want to delete your membership?" } %>
-<% end %>
+</main>
 
 <style>
   div.blur {

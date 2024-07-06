@@ -1,46 +1,54 @@
 <%= render "nav" %>
 
-<h1 style="margin-bottom: 8px">API Keys</h1>
-<div class="subheading-buttons">
-  <a type="button" class="subheading-button" href="<%= rswag_ui_path %>" target="_blank">Open docs</a>
-</div>
+<header>
+  <h1 style="margin-bottom: 8px">API Keys</h1>
+  <nav aria-label="Actions" class="subheading-buttons">
+    <a type="button" class="subheading-button" href="<%= rswag_ui_path %>" target="_blank">Open docs</a>
+  </nav>
+</header>
 
 <%= turbo_stream_from "api_keys" %>
 
-<h3>New key</h3>
+<main id="main">
+  <section aria-label="New key">
+    <h2>New key</h2>
 
-<%= form_with model: Api::Key, url: organization_api_keys_path do |form| %>
-  <div>
-    <%= form.label :name, "Name" %>
-    <%= form.text_field :name, { placeholder: "Obl.ong", "aria-label": "Name", value: nil } %>
-  </div>
+    <%= form_with model: Api::Key, url: organization_api_keys_path do |form| %>
+      <div>
+        <%= form.label :name, "Name" %>
+        <%= form.text_field :name, { placeholder: "Obl.ong", "aria-label": "Name", value: nil } %>
+      </div>
 
-  <%= form.submit "Create" %>
-<% end %>
+      <%= form.submit "Create" %>
+    <% end %>
+  </section>
 
-<h3>Your keys</h3>
+  <section aria-label="Your keys">
+    <h2>Your keys</h2>
 
-<div style="display: flex; gap: 2rem; flex-direction:column;">
-  <% Api::Key.all.reverse.each do |k| %>
-    <div style="max-width: 500px; display: flex; flex-direction: column; gap: 1rem; background: var(--sand-1); border: 1px solid var(--sand-8); border-radius: 3px; padding: 1.5rem;">
-      <h3 style="margin: 0;"><%= k.name %></h3>
-      <p style="margin: 0; line-height: 175%;">
-      ID: <b><%= k.id %></b>
-      <br>
-      Created at: <b><%= local_time_ago(k.created_at) %></b>
-      </p>
-      <% if flash["#{k.id}_api_key"].present? %>
-        <div class="alert" style="padding: 1.25rem 0.75rem 0.75rem;background: var(--amber-3);border: 2px solid var(--amber-6);border-radius: 3px;">
-          <p style="margin: 0;">
-            <i>This will only be shown once for security!</i><br><br>
-            Key: <b style="word-wrap: break-word"><%= flash["#{k.id}_api_key"] %></b>
-          </p> 
+    <div style="display: flex; gap: 2rem; flex-direction:column;">
+      <% Api::Key.all.reverse.each do |k| %>
+        <div style="max-width: 500px; display: flex; flex-direction: column; gap: 1rem; background: var(--sand-1); border: 1px solid var(--sand-8); border-radius: 3px; padding: 1.5rem;">
+          <h3 style="margin: 0;"><%= k.name %></h3>
+          <p style="margin: 0; line-height: 175%;">
+          ID: <b><%= k.id %></b>
+          <br>
+          Created at: <b><%= local_time_ago(k.created_at) %></b>
+          </p>
+          <% if flash["#{k.id}_api_key"].present? %>
+            <div class="alert" style="padding: 1.25rem 0.75rem 0.75rem;background: var(--amber-3);border: 2px solid var(--amber-6);border-radius: 3px;">
+              <p style="margin: 0;">
+                <i>This will only be shown once for security!</i><br><br>
+                Key: <b style="word-wrap: break-word"><%= flash["#{k.id}_api_key"] %></b>
+              </p> 
+            </div>
+          <% end %>
+
+          <%= form_with model: k, url: organization_api_key_path(k), method: :delete do |form| %>
+            <%= form.submit "Delete", class: "delete", data: { turbo_confirm: "Are you sure you want to delete the #{k.name} API key?" } %>
+          <% end %>
         </div>
       <% end %>
-
-      <%= form_with model: k, url: organization_api_key_path(k), method: :delete do |form| %>
-        <%= form.submit "Delete", class: "delete", data: { turbo_confirm: "Are you sure you want to delete the #{k.name} API key?" } %>
-      <% end %>
     </div>
-  <% end %>
-</div>
+  </section>
+</main>

@@ -1,8 +1,10 @@
-<%= form_with scope: :keycode, url: my_keycode_authentications_path, method: :post do |form| %>
-  <div>
-    <%= form.label :code, "Enter your login code" %>
-    <%= form.number_field :code, placeholder: "123456", step: 1 %>
-  </div>
+<main id="main">
+  <%= form_with scope: :keycode, url: my_keycode_authentications_path, method: :post do |form| %>
+    <div>
+      <%= form.label :code, "Enter your login code" %>
+      <%= form.number_field :code, placeholder: "123456", step: 1 %>
+    </div>
 
-  <%= form.submit "Continue →" %>
-<% end %>
+    <%= form.submit "Continue →" %>
+  <% end %>
+</main>

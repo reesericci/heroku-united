@@ -1,8 +1,10 @@
-<%= form_with scope: :member, url: my_journey_path, method: :post do |form| %>
-  <div>
-    <%= form.label :username, "Username" %>
-    <%= form.text_field :username, placeholder: "fionahu" %>
-  </div>
+<main id="main">
+  <%= form_with scope: :member, url: my_journey_path, method: :post do |form| %>
+    <div>
+      <%= form.label :username, "Username" %>
+      <%= form.text_field :username, placeholder: "fionahu" %>
+    </div>
 
-  <%= form.submit "Continue →" %>
-<% end %>
+    <%= form.submit "Continue →" %>
+  <% end %>
+</main>

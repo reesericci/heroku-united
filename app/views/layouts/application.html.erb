@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title><%= content_for(:title) || Config.organization || "United" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,6 +20,10 @@
   </head>
 
   <body>
+    <a class="skip-to-content-link" href="#main">
+      Skip to content
+    </a>
+
     <%= content_for?(:content) ? yield(:content) : yield %>
 
     <div class="bottom-container">
@@ -37,7 +41,13 @@
         </output>
       <% end %>
 
-      <a href="https://codeberg.org/reesericci/united" target="_blank"><p style="word-break: break-word; overflow-wrap: break-word;">This site is powered by <span style="text-decoration: underline">United</span> — free and open membership software for collective organizations</p></a>
+      <footer>
+        <a href="https://codeberg.org/reesericci/united" target="_blank" style="text-decoration: underline">
+          <p style="word-break: break-word; overflow-wrap: break-word;">
+            This site is powered by <b>United</b> — free and open membership software for collective organizations
+          </p>
+        </a>
+      </footer>
     </div>
   </body>
 </html>

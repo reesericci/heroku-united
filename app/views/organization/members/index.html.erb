@@ -1,55 +1,59 @@
 <%= render "nav" %>
 
-<h1 style="margin-bottom: 8px">Members</h1>
-<div class="subheading-buttons">
-  <button id="share" class="subheading-button">Share join link</button>
-  <%= link_to organization_cemetery_path do %>
-    <button class="subheading-button">Visit cemetery</button>
-  <% end %>
-  <div style="display: inline-flex; gap: 0;border-radius: 4px;box-sizing: border-box;position: relative;">
-    <%= link_to organization_export_path(:csv), data: { turbo: false } do %>
-      <button class="subheading-button" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
-        Export
-      </button>
+<header>
+  <h1 style="margin-bottom: 8px">Members</h1>
+  <nav aria-label="Actions" class="subheading-buttons">
+    <button id="share" class="subheading-button">Share join link</button>
+    <%= link_to organization_cemetery_path do %>
+      <button class="subheading-button">Visit cemetery</button>
     <% end %>
-    <details class="dropdown" style="display: inline-flex;">
-      <summary class="subheading-button">↓</summary>
-      <div>
-        <%= link_to "OpenSlides", organization_export_path(:open_slides), data: { turbo: false } %>
-      </div>
-    </details>
-  </div>
-</div>
+    <div style="display: inline-flex; gap: 0;border-radius: 4px;box-sizing: border-box;position: relative;">
+      <%= link_to organization_export_path(:csv), data: { turbo: false } do %>
+        <button class="subheading-button" style="border-top-right-radius: 0;border-bottom-right-radius: 0;">
+          Export
+        </button>
+      <% end %>
+      <details class="dropdown" style="display: inline-flex;">
+        <summary class="subheading-button">↓</summary>
+        <nav aria-label="Export formats">
+          <%= link_to "OpenSlides", organization_export_path(:open_slides), data: { turbo: false } %>
+        </div>
+      </details>
+    </div>
+  </nav>
+</header>
 <%= turbo_stream_from "members" %>
-<table>
-  <thead>
-    <th>Name</th>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Expires on</th>
-    <th>Member since</th>
-    <th>Status</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @members.each do |m| %>
-      <%= turbo_stream_from m %>
-      <tr>
-        <td><%= m.name %></td>
-        <td><%= m.username %></td>  
-        <td><%= m.email %></td>
-        <td><%= local_relative_time(m.expires_at, type: "time-or-date") %></td>
-        <td><%= local_relative_time(m.created_at, type: "time-or-date") %></td>
-        <td><span class="<%= m.status %>-chip"><%= m.status %></span></td>
-        <td>
-          <%= link_to organization_member_path(m) do %>
-            <button>Edit</button>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<main id="main">
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Expires on</th>
+      <th>Member since</th>
+      <th>Status</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @members.each do |m| %>
+        <%= turbo_stream_from m %>
+        <tr>
+          <td><%= m.name %></td>
+          <td><%= m.username %></td>  
+          <td><%= m.email %></td>
+          <td><%= local_relative_time(m.expires_at, type: "time-or-date") %></td>
+          <td><%= local_relative_time(m.created_at, type: "time-or-date") %></td>
+          <td><span class="<%= m.status %>-chip"><%= m.status %></span></td>
+          <td>
+            <%= link_to organization_member_path(m) do %>
+              <button>Edit</button>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</main>
 
 <style>
   details {
@@ -70,7 +74,7 @@
       }
     }
 
-    div {
+    nav {
       position: absolute;
       top: 30px;
       background: var(--red-11);

@@ -1,8 +1,8 @@
-<div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: center; padding-top: 1rem;border: 1px solid var(--sand-8);border-radius: 3px;width: 100%;padding-bottom: 1rem;background: var(--sand-1); width:600px;">
+<main id="main">
   <%= image_tag "passkey.svg", alt: "Passkey Logo", width: "40px" %>
   <h4 style="margin: 0">Authenticating Passkey...</h4>
   <p style="margin: 0">Click <a id="here" style="text-decoration: underline; color: var(--green-8)">here</a> if a popup doesn't appear</p>
-</div>
+</main>
 
 <%= form_with url: my_passkey_authentications_path, method: :post, scope: :journey, id: "journey_form" do |form| %>
   <%= form.hidden_field :credential %>
@@ -26,3 +26,19 @@
     document.getElementById("here").addEventListener("click", () => createCredential())
   });
 </script>
+
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    padding-top: 1rem;
+    border: 1px solid var(--sand-8);
+    border-radius: 3px;
+    width: 100%;
+    padding-bottom: 1rem;
+    background: var(--sand-1);
+    width:600px;
+  }
+</style>

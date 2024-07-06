@@ -1,90 +1,94 @@
 <%= render "nav" %>
 
-<h1 style="margin-bottom: 0.5rem;">Configuration</h1>
-<div class="subheading-buttons">
-  <% if Rails.application.config.action_mailer.delivery_method == :letter_opener %>
-    <%= link_to try(:letter_opener_web_path) do %>
-      <button class="subheading-button">View emails</button>
+<header>
+  <h1 style="margin-bottom: 0.5rem;">Configuration</h1>
+  <nav aria-label="Actions" class="subheading-buttons">
+    <% if Rails.application.config.action_mailer.delivery_method == :letter_opener %>
+      <%= link_to try(:letter_opener_web_path) do %>
+        <button class="subheading-button">View emails</button>
+      <% end %>
+      <%= link_to mission_control_jobs_path do %>
+        <button class="subheading-button">View jobs</button>
+      <% end %>
     <% end %>
-    <%= link_to mission_control_jobs_path do %>
-      <button class="subheading-button">View jobs</button>
-    <% end %>
-  <% end %>
-</div>
+  </nav>
+</header>
 <%= turbo_stream_from Config.first %>
-<%= form_with model: Config.first, scope: :config, url: organization_config_path, method: :patch do |form| %>
-  <div>
-    <%= form.label :organization, "Organization name" %>
-    <%= form.text_field :organization, placeholder: "United Workers" %>
-  </div>
-  <div>
-    <%= form.label :external_url, "External URL" %>
-    <%= form.url_field :external_url, placeholder: "https://united.obl.ong" %>
-  </div>
-  <div>
-    <%= form.label :membership_length, "Membership length (in days, -1 disables expiry)" %>
-    <%= form.number_field :membership_length, placeholder: "365" %>
-  </div>
-  <div>
-    <%= form.label :email, "Your email" %>
-    <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
-  </div>
-  <div>
-    <%= form.label :password, "Your password" %>
-    <%= form.password_field :password, placeholder: "password123" %>
-  </div>
+<main id="main">
+  <%= form_with model: Config.first, scope: :config, url: organization_config_path, method: :patch do |form| %>
+    <div>
+      <%= form.label :organization, "Organization name" %>
+      <%= form.text_field :organization, placeholder: "United Workers" %>
+    </div>
+    <div>
+      <%= form.label :external_url, "External URL" %>
+      <%= form.url_field :external_url, placeholder: "https://united.obl.ong" %>
+    </div>
+    <div>
+      <%= form.label :membership_length, "Membership length (in days, -1 disables expiry)" %>
+      <%= form.number_field :membership_length, placeholder: "365" %>
+    </div>
+    <div>
+      <%= form.label :email, "Your email" %>
+      <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
+    </div>
+    <div>
+      <%= form.label :password, "Your password" %>
+      <%= form.password_field :password, placeholder: "password123" %>
+    </div>
 
-  <br>
-  <h3 style="margin: 0">Email server (SMTP) information</h3>
+    <br>
+    <h2 style="margin: 0">Email server (SMTP) information</h2>
 
-  <%= form.fields_for :smtp do |smtp_form| %>
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-      <div style="flex-grow: 1">
-        <%= smtp_form.label :server, "Server" %>
-        <%= smtp_form.text_field :server, placeholder: "smtp.gmail.com", value: Config.first.smtp[:server], style: "display: flex;" %>
+    <%= form.fields_for :smtp do |smtp_form| %>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="flex-grow: 1">
+          <%= smtp_form.label :server, "Server" %>
+          <%= smtp_form.text_field :server, placeholder: "smtp.gmail.com", value: Config.first.smtp[:server], style: "display: flex;" %>
+        </div>
+
+        <div>
+          <%= smtp_form.label :port, "Port" %>
+          <%= smtp_form.number_field :port, value: Config.first.smtp[:port], placeholder: "587", style: "display: flex;" %>
+        </div>
       </div>
 
       <div>
-        <%= smtp_form.label :port, "Port" %>
-        <%= smtp_form.number_field :port, value: Config.first.smtp[:port], placeholder: "587", style: "display: flex;" %>
+        <%= smtp_form.label :username, "Username" %>
+        <%= smtp_form.text_field :username, value: Config.first.smtp[:username], placeholder: "fionahu" %>
       </div>
-    </div>
 
-    <div>
-      <%= smtp_form.label :username, "Username" %>
-      <%= smtp_form.text_field :username, value: Config.first.smtp[:username], placeholder: "fionahu" %>
-    </div>
-
-    <div>
-      <%= smtp_form.label :password, "Password" %>
-      <%= smtp_form.password_field :password, value: Config.first.smtp[:password], placeholder: "password123" %>
-    </div>
-
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
       <div>
-        <%= smtp_form.label :box, "Box" %>
-        <%= smtp_form.text_field :box, value: Config.first.smtp[:box], placeholder: "united", style: "display: flex;min-width: 0;" %>
+        <%= smtp_form.label :password, "Password" %>
+        <%= smtp_form.password_field :password, value: Config.first.smtp[:password], placeholder: "password123" %>
       </div>
-      <p style="margin-top: 30px;margin-bottom: 0;">@</p>
-      <div style="flex-grow: 1">
-        <%= smtp_form.label :domain, "Domain" %>
-        <%= smtp_form.text_field :domain, value: Config.first.smtp[:domain], placeholder: "obl.ong", style: "display: flex;min-width: 0;" %>
+
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div>
+          <%= smtp_form.label :box, "Box" %>
+          <%= smtp_form.text_field :box, value: Config.first.smtp[:box], placeholder: "united", style: "display: flex;min-width: 0;" %>
+        </div>
+        <p style="margin-top: 30px;margin-bottom: 0;">@</p>
+        <div style="flex-grow: 1">
+          <%= smtp_form.label :domain, "Domain" %>
+          <%= smtp_form.text_field :domain, value: Config.first.smtp[:domain], placeholder: "obl.ong", style: "display: flex;min-width: 0;" %>
+        </div>
       </div>
-    </div>
-  <% end %>
-
-  <br>
-  <h3 style="margin: 0">Member Fields</h3>
-  <p style="margin: 0">This section allows you to add custom fields for your members to fill out. <br><br>You can only add 3 new fields at a time; after updating, 3 more fields will appear.</p>
-
-  <%= form.fields :extensions do |f| %>
-    <% Config.first[:extensions].each do |e| %>
-      <%= f.text_field nil, id: nil, value: ActiveSupport::Inflector.humanize(e) %> 
     <% end %>
-    <%= f.text_field nil, id: nil %>
-    <%= f.text_field nil, id: nil %>
-    <%= f.text_field nil, id: nil %>
-  <% end %>
 
-  <%= form.submit %>
-<% end %>
+    <br>
+    <h2 style="margin: 0">Member Fields</h2>
+    <p style="margin: 0">This section allows you to add custom fields for your members to fill out. <br><br>You can only add 3 new fields at a time; after updating, 3 more fields will appear.</p>
+
+    <%= form.fields :extensions do |f| %>
+      <% Config.first[:extensions].each do |e| %>
+        <%= f.text_field nil, id: nil, value: ActiveSupport::Inflector.humanize(e), title: "Member Field" %>
+      <% end %>
+      <%= f.text_field nil, id: nil, title: "Member Field" %>
+      <%= f.text_field nil, id: nil, title: "Member Field" %>
+      <%= f.text_field nil, id: nil, title: "Member Field" %>
+    <% end %>
+
+    <%= form.submit %>
+  <% end %>
+</main>

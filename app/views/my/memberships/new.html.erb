@@ -1,80 +1,85 @@
 <% content_for :title do "Join #{Config.organization}" end %>
 
-<h1 style="margin-bottom: 1rem;">Join <%= Config.organization %></h1>
-<div class="subheading-buttons">
-  <%= link_to my_membership_path do %>
-    <button class="subheading-button">Member login</button>
-  <% end %>
-  <%= link_to organization_members_path do %>
-    <button class="subheading-button">Organization login</button>
-  <% end %>
-</div>
-<%= form_with scope: :member, url: my_membership_path, method: :post do |form| %>
-  <div>
-    <%= form.label :name, "Full name" %>
-    <%= form.text_field :name, placeholder: "Fionah United" %>
-  </div>
-  <div>
-    <%= form.label :username, "Username" %>
-    <%= form.text_field :username, placeholder: "fionahu" %>
-  </div>
-  <div>
-    <%= form.label :email, "Email" %>
-    <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
-  </div>
-  <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
-  <%= form.fields_for :address_attributes do |address_form| %>
+<header>
+  <h1 style="margin-bottom: 1rem;">Join <%= Config.organization %></h1>
+  <nav aria-label="Actions" class="subheading-buttons">
+    <%= link_to my_membership_path do %>
+      <button class="subheading-button">Member login</button>
+    <% end %>
+    <%= link_to organization_members_path do %>
+      <button class="subheading-button">Organization login</button>
+    <% end %>
+  </nav>
+</header>
+
+<main id="main">
+  <%= form_with scope: :member, url: my_membership_path, method: :post do |form| %>
     <div>
-      <%= address_form.label :line1, "Number and Street" %>
-      <%= address_form.text_field :line1 %>
+      <%= form.label :name, "Full name" %>
+      <%= form.text_field :name, placeholder: "Fionah United" %>
     </div>
     <div>
-      <%= address_form.label :line2, "Line 2" %>
-      <%= address_form.text_field :line2 %>
+      <%= form.label :username, "Username" %>
+      <%= form.text_field :username, placeholder: "fionahu" %>
     </div>
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-      <div style="width: 50%">
-        <%= address_form.label :city %>
-        <%= address_form.text_field :city %>
-      </div>
-      <div style="width: 50%">
-        <%= address_form.label :province %>
-        <%= address_form.text_field :province %>
-      </div>
+    <div>
+      <%= form.label :email, "Email" %>
+      <%= form.email_field :email, placeholder: "fionahu@obl.ong" %>
     </div>
-    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-      <div style="width: 50%">
-        <%= address_form.label :code, "Postal Code" %>
-        <%= address_form.text_field :code %>
-      </div>
-      <div style="width: 50%">
-        <%= address_form.label :country %>
-        <%= address_form.select :country, Domesticable::Country.all %>
-      </div>
-    </div>
-  <% end %>
-  <%= form.fields_for :extensions_attributes do |extensions_form| %>
-    <% (@extensions || {}).each do |e| %>
+    <h3 style="margin: 0; margin-top: 0.5rem;">Postal Address</h3>
+    <%= form.fields_for :address_attributes do |address_form| %>
       <div>
-        <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
-        <%= extensions_form.text_field e %>
+        <%= address_form.label :line1, "Number and Street" %>
+        <%= address_form.text_field :line1 %>
+      </div>
+      <div>
+        <%= address_form.label :line2, "Line 2" %>
+        <%= address_form.text_field :line2 %>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="width: 50%">
+          <%= address_form.label :city %>
+          <%= address_form.text_field :city %>
+        </div>
+        <div style="width: 50%">
+          <%= address_form.label :province %>
+          <%= address_form.text_field :province %>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div style="width: 50%">
+          <%= address_form.label :code, "Postal Code" %>
+          <%= address_form.text_field :code %>
+        </div>
+        <div style="width: 50%">
+          <%= address_form.label :country %>
+          <%= address_form.select :country, Domesticable::Country.all %>
+        </div>
       </div>
     <% end %>
-  <% end %>
-  <div style="height: 100%; width: 100%;">
-    <%= form.label :signature, "Signature" %>
-    <%= form.hidden_field :signature %>
-    <div style="position: relative; width: 100%;">
-      <canvas class="signature">
-      </canvas>
-      <div style="display: flex; flex-direction: row; gap: 0.5rem; position: absolute; top: 0.5rem; right: 0.5rem;">
-          <button id="undo">Undo</button>
-          <button id="clear">Clear</button>
+    <%= form.fields_for :extensions_attributes do |extensions_form| %>
+      <% (@extensions || {}).each do |e| %>
+        <div>
+          <%= extensions_form.label e, ActiveSupport::Inflector.humanize(e.to_s) %>
+          <%= extensions_form.text_field e %>
+        </div>
+      <% end %>
+    <% end %>
+    <div style="height: 100%; width: 100%;">
+      <%= form.label :signature, "Signature" %>
+      <%= form.hidden_field :signature %>
+      <div style="position: relative; width: 100%;">
+        <canvas class="signature">
+        </canvas>
+        <div style="display: flex; flex-direction: row; gap: 0.5rem; position: absolute; top: 0.5rem; right: 0.5rem;">
+            <button id="undo">Undo</button>
+            <button id="clear">Clear</button>
+        </div>
       </div>
     </div>
-  </div>
-  <%= form.submit  "Join!" %>
-<% end %>
+    <%= form.submit  "Join!" %>
+  <% end %>
+</main>
 
 <script>
   import("signature_pad").then((mod) => {

@@ -1,18 +1,20 @@
-<h2>How would you like to authenticate?</h2>
+<header>
+  <h2>How would you like to authenticate?</h2>
+</header>
 
-<section>
+<main role="menu" id="main" aria-label="Strategies">
   <% @strategies.each do |strategy| %>
-    <%= link_to strategy[:path] do %>
+    <%= link_to strategy[:path], html: { role: "menuitem" } do %>
       <button>
         <%= image_tag strategy[:icon], alt: "#{strategy[:name]} icon", width: "40px" %>
         <%= strategy[:name] %>
       </button>
     <% end %>
   <% end %>
-</section>
+</main>
 
 <style>
-  section {
+  main {
     display: flex;
     gap: 1rem;
     width: 350px;
