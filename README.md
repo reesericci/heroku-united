@@ -34,6 +34,8 @@ A fully functional demo is available at [demo.united.obl.ong](https://demo.unite
 
 > [!NOTE]
 > United requires an external email (SMTP) server to send login codes & information to members. We recommend using [Postmark](https://postmarkapp.com) or another **transactional email** service for this.
+>
+> For instructions on how to get the SMTP **token** for a Postmark server, click [here](https://postmarkapp.com/support/article/1207-how-to-create-and-send-through-message-streams#sendingsmtp). Be sure to use a "Broadcast" message stream for compliance.
 
 > [!WARNING]
 > Do not use Gmail or similar personal mail services for United.
