@@ -24,6 +24,12 @@
 </header>
 <%= turbo_stream_from "members" %>
 <main id="main">
+  <% if Clearance.any? %>
+    <% @clearance_count = Clearance.count %>
+    <%= link_to organization_petitions_path do %>
+    <button style="margin-bottom: 1rem;">Review <%= @clearance_count %> new member<%= @clearance_count > 1 ? "s" : nil %></button>
+    <% end %>
+  <% end %>
   <table>
     <thead>
       <th>Name</th>

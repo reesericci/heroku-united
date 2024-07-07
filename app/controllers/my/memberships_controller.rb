@@ -16,10 +16,19 @@ class My::MembershipsController < My::BaseController
       return
     end
 
+    if Config.clearing
+      m.build_clearance_petition
+    end
+
     m.save!
 
     # TODO: make this a callback instead
-    My::MembershipMailer.with(member: m).created.deliver_later
+    if m.petitioning?
+      My::MembershipMailer.with(member: m).petitioned.deliver_later
+      flash[:error] = "You won't be able to log in until your request to join is approved."
+    else
+      My::MembershipMailer.with(member: m).created.deliver_later
+    end
 
     redirect_to my_membership_path
   end
@@ -55,7 +64,7 @@ class My::MembershipsController < My::BaseController
   end
 
   def mapped_extensions
-    attrs = member_params[:extensions_attributes]
+    attrs = member_params[:extensions_attributes] || {}
     attrs.keys.map { |e| {name: e, content: attrs[e]} }
   end
 end

@@ -9,22 +9,28 @@ class Organization::MembersController < Organization::BaseController
   end
 
   def show
-    @member = Member.include_deceased.find_by(username: params[:username])
+    @member = Member.include_deceased.include_petitioners.find_by(username: params[:username])
     add_breadcrumb @member.username, organization_member_path(params[:username])
   end
 
   def update
-    member = Member.include_deceased.find_by(username: params[:username])
+    member = Member.include_deceased.include_petitioners.find_by(username: params[:username])
     if member.deceased?
       member.resurrect
+    end
+    if member.petitioning?
+      member.approve!
     end
     member.update!(member_params.merge!({extensions_attributes: mapped_extensions}))
     redirect_to organization_members_path
   end
 
   def destroy
-    member = Member.include_deceased.find_by(username: params[:username])
-    if member.deceased?
+    member = Member.include_deceased.include_petitioners.find_by(username: params[:username])
+    if member.petitioning?
+      member.reject!
+      member.cremate!
+    elsif member.deceased?
       member.cremate!
     else
       member.decease
@@ -39,7 +45,7 @@ class Organization::MembersController < Organization::BaseController
   end
 
   def mapped_extensions
-    attrs = member_params[:extensions_attributes]
+    attrs = member_params[:extensions_attributes] || {}
     attrs.keys.map { |e| {name: e, content: attrs[e]} }
   end
 end

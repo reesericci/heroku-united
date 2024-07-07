@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     end
 
     get "/cemetery", to: "cemeteries#index"
+    get "/petitions", to: "petitions#index"
 
     resources :api_keys, only: [:index, :create, :destroy]
 

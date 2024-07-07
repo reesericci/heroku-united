@@ -28,6 +28,10 @@
       <%= form.label :membership_length, "Membership length (in days, -1 disables expiry)" %>
       <%= form.number_field :membership_length, placeholder: "365" %>
     </div>
+    <div>
+      <%= form.label :clearing, "Review memberships after sign-up" %>
+      <%= form.check_box :clearing %>
+    </div>
     <br>
     <h2 style="margin: 0; margin-top: 0.5rem;">Authentication</h2>
     <div>

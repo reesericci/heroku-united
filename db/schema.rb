@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_07_06_040026) do
+ActiveRecord::Schema[7.2].define(version: 2024_07_07_022552) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -83,6 +83,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_06_040026) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "clearance_petitions", force: :cascade do |t|
+    t.string "petitioner_id"
+    t.string "petitioner_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "configurations", force: :cascade do |t|
     t.string "organization", null: false
     t.integer "membership_length", null: false
@@ -99,6 +106,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_07_06_040026) do
     t.boolean "payable", default: false, null: false
     t.bigint "dues_amount_as_cents"
     t.string "dues_currency"
+    t.boolean "clearing", default: false, null: false
   end
 
   create_table "couriers", force: :cascade do |t|

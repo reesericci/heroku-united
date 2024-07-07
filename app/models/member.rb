@@ -6,6 +6,7 @@ class Member < ApplicationRecord
   include Extensibility
   include Verifiable
   include My::Keyable
+  include Petitioner
 
   include SpreadsheetArchitect
 
@@ -77,6 +78,8 @@ class Member < ApplicationRecord
   def status
     if deceased?
       "deceased"
+    elsif petitioning?
+      "petitioning"
     elsif banned?
       "banned"
     elsif expired?
