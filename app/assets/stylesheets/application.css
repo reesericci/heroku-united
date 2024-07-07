@@ -11,6 +11,14 @@
   scrollbar-color: var(--red-10) var(--sand-1);
 }
 
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
 *:focus {
   outline: none;
 }

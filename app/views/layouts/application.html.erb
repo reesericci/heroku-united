@@ -17,6 +17,7 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "actiontext" %>
     <%= javascript_importmap_tags %>
+    <script src="https://unpkg.com/@colinaut/theme-multi-switch/dist/theme-multi-switch.js"></script>
   </head>
 
   <body>
@@ -49,5 +50,7 @@
         </a>
       </footer>
     </div>
+
+    <theme-switch style="position: fixed;bottom: 1rem;right: 1rem;"></theme-switch>
   </body>
 </html>
