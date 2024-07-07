@@ -28,6 +28,8 @@
       <%= form.label :membership_length, "Membership length (in days, -1 disables expiry)" %>
       <%= form.number_field :membership_length, placeholder: "365" %>
     </div>
+    <br>
+    <h2 style="margin: 0; margin-top: 0.5rem;">Authentication</h2>
     <div>
       <%= form.label :email, "Your email" %>
       <%= form.text_field :email, placeholder: "fionahu@obl.ong" %>
@@ -36,7 +38,11 @@
       <%= form.label :password, "Your password" %>
       <%= form.password_field :password, placeholder: "password123" %>
     </div>
-
+    <br>
+    <div>
+      <label>Passkeys <a style="text-decoration: underline; color: var(--green-8)" href="https://www.eff.org/deeplinks/2023/10/what-passkey">(what are these?)</a></label>
+      <%= turbo_frame_tag (Config.keyring || Config.create_keyring).id, src: organization_passkeys_path, style: "width: 100%;" %>
+    </div>
     <br>
     <h2 style="margin: 0">Email server (SMTP) information</h2>
 
@@ -75,7 +81,6 @@
         </div>
       </div>
     <% end %>
-
     <br>
     <h2 style="margin: 0">Member Fields</h2>
     <p style="margin: 0">This section allows you to add custom fields for your members to fill out. <br><br>You can only add 3 new fields at a time; after updating, 3 more fields will appear.</p>

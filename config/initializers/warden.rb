@@ -21,6 +21,7 @@ end
 Rails.application.config.to_prepare do
   # Organization login strategies
   Warden::Strategies.add(:organization_password, Organization::PasswordStrategy)
+  Warden::Strategies.add(:organization_passkey, Organization::PasskeyStrategy)
 
   # My login strategies
   Warden::Strategies.add(:my_keycode, My::KeycodeStrategy)

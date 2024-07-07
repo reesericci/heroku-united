@@ -1,4 +1,6 @@
 class Config < ApplicationRecord
+  include Organization::Keyable
+
   before_create :check_for_existing
   before_destroy :check_for_existing
   self.table_name = "configurations"

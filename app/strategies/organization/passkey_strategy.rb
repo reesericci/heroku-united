@@ -1,4 +1,4 @@
-class My::PasskeyStrategy < Warden::Strategies::Base
+class Organization::PasskeyStrategy < Warden::Strategies::Base
   def valid?
     journey_params.permitted?
   end
@@ -13,7 +13,7 @@ class My::PasskeyStrategy < Warden::Strategies::Base
 
     passkey.update!(sign_count: credential.sign_count)
 
-    raise "not a Member!" unless Journey.explorer.is_a? Member
+    raise "not a Config!" unless Journey.explorer.is_a? Config
 
     success!(passkey.keyring.keyable)
   rescue

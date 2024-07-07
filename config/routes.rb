@@ -35,6 +35,18 @@ Rails.application.routes.draw do
 
     resource :journey, only: [:new, :create] do
       collection do
+        resources :strategies, only: [:index], shallow: true, as: "journey_strategies", module: :journey do
+          collection do
+            scope module: :strategies do
+              namespace :password do
+                resources :authentications, only: [:new, :create]
+              end
+              namespace :passkey do
+                resources :authentications, only: [:new, :create]
+              end
+            end
+          end
+        end
         get "/delete", to: "journeys#delete"
       end
     end
@@ -42,6 +54,9 @@ Rails.application.routes.draw do
     get "/cemetery", to: "cemeteries#index"
 
     resources :api_keys, only: [:index, :create, :destroy]
+
+    # TODO: shallow nest inside of Config
+    resources :passkeys, only: [:index, :new, :create, :destroy]
   end
 
   namespace :api do

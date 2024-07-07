@@ -4,7 +4,7 @@ class Organization::PasswordStrategy < Warden::Strategies::Base
   end
 
   def authenticate!
-    c = Config.find_by(email: journey_params[:email].downcase)&.authenticate(journey_params[:password])
+    c = Journey.explorer&.authenticate(journey_params[:password])
     if c == false || c.nil?
       fail!("Could not log in")
     else
@@ -15,6 +15,6 @@ class Organization::PasswordStrategy < Warden::Strategies::Base
   private
 
   def journey_params
-    ActionController::Parameters.new(params).require(:journey).permit(:email, :password)
+    ActionController::Parameters.new(params).require(:journey).permit(:password)
   end
 end
