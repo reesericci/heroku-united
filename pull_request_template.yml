@@ -1,0 +1,28 @@
+name: United Contribution
+about: Submit your contribution to the United project!
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Firstly, thank you for contributing to United!
+  - type: textarea
+    id: issue
+    attributes:
+      label: What issue does close?
+      description: 
+      placeholder: Fixes email validation (closes #0)
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: How did you build the solution?
+      description: Give a high-level architectural overview of your patch so I can process the changes :).
+    validations:
+      required: true
+  - type: input
+    id: sfc
+    attributes:
+      label: Please link to your copyright assignment at the Software Freedom Conservancy that covers these changes.
+      description: We require all contributors to turn over their copyright to the SFC to ensure the software remains entirely under a copyleft license and is enforceable. To assign your copyright, visit https://sfconservancy.org/assignment/. If you are submitting changes jointly, please list copyright assignments for each partner here.
+  
