@@ -9,7 +9,7 @@ body:
     id: issue
     attributes:
       label: What issue does this close?
-      placeholder: Fixes email validation (closes #0)
+      placeholder: Fixes email validation (closes \#0)
     validations:
       required: true
   - type: textarea
