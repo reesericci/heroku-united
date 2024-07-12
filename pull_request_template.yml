@@ -8,8 +8,7 @@ body:
   - type: textarea
     id: issue
     attributes:
-      label: What issue does close?
-      description: 
+      label: What issue does this close?
       placeholder: Fixes email validation (closes #0)
     validations:
       required: true
