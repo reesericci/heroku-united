@@ -37,6 +37,6 @@ module United
     config.mission_control.jobs.base_controller_class = "ActionController::Base"
     
     config.middleware.use DiscoveriesMiddleware
-    config.middleware.move_after Warden::Manager, DiscoveriesMiddleware
+    config.middleware.move_before Warden::Manager, DiscoveriesMiddleware
   end
 end
