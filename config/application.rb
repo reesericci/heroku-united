@@ -2,6 +2,8 @@ require_relative "boot"
 
 require "rails/all"
 
+require_relative "../app/middlewares/discoveries_middleware"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -33,5 +35,8 @@ module United
     config.solid_queue.connects_to = {database: {writing: :queue, reading: :queue}}
 
     config.mission_control.jobs.base_controller_class = "ActionController::Base"
+    
+    config.middleware.use DiscoveriesMiddleware
+    config.middleware.move_after Warden::Manager, DiscoveriesMiddleware
   end
 end

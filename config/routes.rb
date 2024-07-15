@@ -61,10 +61,14 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :members, param: :username, except: [:new, :edit, :delete]
+    resources :members, param: :username, except: [:new, :edit, :delete] do
+      member do
+        resource :actor, only: :show, module: :member, as: :member_actor, controller: :actors
+      end
+    end
     resources :broadcasts, except: [:new, :edit, :delete, :update]
   end
-
+  
   namespace :my do
     root to: redirect("/my/membership")
 

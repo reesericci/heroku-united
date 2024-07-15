@@ -59,6 +59,10 @@ module Domesticable
     def to_sym
       @name.tr(",", "_").tr(" ", "_").gsub("__", "_").downcase.to_sym
     end
+    
+    def name
+      @name
+    end
 
     def self.all
       @@all_str.map do |c|
