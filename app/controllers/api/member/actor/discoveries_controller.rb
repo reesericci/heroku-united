@@ -1,4 +1,5 @@
 class Api::Member::Actor::DiscoveriesController < Api::BaseController
+  skip_before_action :ensure_authenticated
   def new
     if !params[:resource]&.present?
       render plain: "No resource provided", status: 400
