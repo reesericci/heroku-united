@@ -28,7 +28,6 @@ class Api::Member::Actor::DiscoveriesController < Api::BaseController
       render plain: "Unable to find user", status: 400
       return
     end
+    render formats: :json, content_type: "application/jrd+json"
   end
-  
-  render formats: :json, content_type: "application/jrd+json"
 end
