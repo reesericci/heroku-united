@@ -32,6 +32,7 @@ end
 
 json.type "Actor"
 json.id api_member_actor_url(@member.username)
+json.webfinger "acct:#{@member.username}@#{URI(Config.external_url).host}"
 
 json.preferredUsername @member.username
 

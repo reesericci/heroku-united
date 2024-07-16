@@ -29,4 +29,6 @@ class Api::Member::Actor::DiscoveriesController < Api::BaseController
       return
     end
   end
+  
+  render formats: :json, content_type: "application/jrd+json"
 end
