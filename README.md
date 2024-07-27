@@ -4,7 +4,7 @@
 
 ![Release](https://img.shields.io/gitea/v/release/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org&color=brightgreen)
 ![Last Commit](https://img.shields.io/gitea/last-commit/reesericci/united?gitea_url=https%3A%2F%2Fcodeberg.org)
-![License](https://img.shields.io/badge/license-AGPL--3.0--or--later-brightgreen)
+![Copyleft - AGPL-v3.0-or-later](https://img.shields.io/badge/%F0%9F%84%AF_copyleft-AGPL--v3.0--or--later-black)
 ![Contributions Encouraged](https://img.shields.io/badge/contributions-encouraged-brightgreen)
 [![SODAP compliant](https://img.shields.io/badge/sodap-compliant-pink?labelColor=%232E063B&color=%23E100BD)](https://codeberg.org/reesericci/sodap)
 ![Code Coverage](https://codeberg.org/reesericci/united/media/branch/main/coverage/coverage_badge_total.svg)
